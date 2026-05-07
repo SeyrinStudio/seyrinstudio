@@ -161,19 +161,17 @@
   .hero-desc strong { color:var(--accent); font-weight:400; }
 
   /* Scroll bar + label */
-  .hero-scroll-wrap {
-    position: relative;
-    z-index: 1;
+ .hero-scroll-wrap {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 3.5rem;
+
+    z-index: 2;
+
     display: flex;
     align-items: center;
     gap: 0.75rem;
-
-    overflow-y: auto;
-    direction: rtl;
-  }
- .hero-scroll-wrap > * {
-    direction: ltr;
- }
+}
  
   .scroll-label { 
     font-size:0.65rem; 
