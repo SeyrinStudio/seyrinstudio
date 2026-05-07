@@ -493,13 +493,24 @@ footer {
   <nav>
     <a href="#" class="nav-left">Seyrin Studio</a>
    <div class="nav-center">
-    <a href="#portfolio" class="nav-link active">Projets</a>
+    <a href="#portfolio" class="nav-link">Projets</a>
     <a href="#about" class="nav-link">À propos</a>
    </div>
    <div class="nav-right">
     <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta">Me contacter</a>
    </div>
   </nav>
+
+ <script>
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.forEach(item => item.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+</script>
   
 <section class="hero">
   <div class="hero-glow"></div>
