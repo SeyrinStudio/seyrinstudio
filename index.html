@@ -458,6 +458,42 @@ footer {
   .portfolio-card.left-2{transform:translateX(-188px) scale(.72);} 
   .portfolio-card.right-2{transform:translateX(188px) scale(.72);} 
 }
+
+/* ── SKILLS STYLING ── */
+.skill-ring {
+  --size: 120px;
+  --thickness: 10px;
+  --value: 85;
+  width: var(--size);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(closest-side, #0f172a 78%, transparent 79% 100%),
+    conic-gradient(#6c63ff calc(var(--value) * 1%), rgba(255,255,255,.15) 0);
+  position: relative;
+}
+
+.skill-ring__inner {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+}
+
+.skill-ring__inner img {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+}
+
+.skill-ring span {
+  position: absolute;
+  bottom: -28px;
+  font-size: .8rem;
+  color: var(--muted);
+}
 </style>
 </head>
 
@@ -554,6 +590,14 @@ footer {
         <p>Je donne une identité forte au produit sans sacrifier la clarté.</p>
       </div>
     </div>
+   
+   <div class="skill-ring" style="--value: 85;">
+    <div class="skill-ring__inner">
+    <img src="figma-logo.svg" alt="Figma">
+    </div>
+    <span>85%</span>
+   </div>
+   
   </div>
 </section>
   
