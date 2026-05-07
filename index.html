@@ -110,7 +110,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 11rem 3.5rem 4rem;
+    padding: 9rem 3.5rem 4rem;
     position: relative;
     overflow: hidden;
   }
@@ -161,15 +161,12 @@
 
   /* Scroll bar + label */
  .hero-scroll-wrap {
-    position: absolute;
-    bottom: 2.5rem;
-    left: 3.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 
-    z-index: 2;
-
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
+  padding-left: 3.5rem;
+  margin-bottom: 3rem;
 }
  
   .scroll-label { 
@@ -459,13 +456,12 @@
       Je transforme des problèmes complexes en interfaces claires.
     </p>
   </div>
-
-  <!-- Scroll indicator -->
+</section>
+ <!-- Scroll indicator -->
   <div class="hero-scroll-wrap">
     <span class="scroll-label">Seyrin Studio</span>
     <div class="scroll-bar"></div>
   </div>
-</section>
 
   <!-- Portfolio directement visible -->
  <section id="portfolio" class="section">
