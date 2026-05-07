@@ -55,14 +55,34 @@ nav {
 .nav-center { 
   display:flex; gap:0.25rem; 
 }
+
 .nav-link { 
+ position: relative;
   font-size:0.78rem; 
   color:var(--muted); 
   text-decoration:none; 
   padding:0.35rem 0.9rem; 
   border-radius:100px; 
-  transition:color .18s, background .18s; 
+  transition:color .18s, background .18s;
 }
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -6px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: var(--text);
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.nav-link.active::after {
+  width: 22px;
+}
+ 
 .nav-link:hover { 
   color:var(--text); 
   background:rgba(255,255,255,0.06); 
@@ -473,7 +493,7 @@ footer {
   <nav>
     <a href="#" class="nav-left">Seyrin Studio</a>
    <div class="nav-center">
-    <a href="#portfolio" class="nav-link">Projets</a>
+    <a href="#portfolio" class="nav-link active">Projets</a>
     <a href="#about" class="nav-link">À propos</a>
    </div>
    <div class="nav-right">
