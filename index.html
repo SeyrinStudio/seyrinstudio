@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Designer</title>
+<title>Seyrin Studio</title>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,7 +39,7 @@ nav {
   align-items: center;
   padding: 0 2.5rem;
   height: 60px;
-  background: rgba(7,9,26,0.88);
+  background: rgba(16,30,48,0.88);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid var(--border);
 }
@@ -46,8 +47,12 @@ nav {
 .nav-left {
   font-size: 0.75rem;
   letter-spacing: 0.05em;
-  color: var(--muted);
+  color: var(--text);
+  text-decoration: none;
+  transition: color 0.18s;
 }
+
+.nav-left:hover { color: var(--accent); }
 
 .nav-center {
   display: flex;
@@ -99,8 +104,8 @@ nav {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   background:
-    radial-gradient(ellipse 60% 55% at 72% 38%, rgba(61,107,255,0.13) 0%, transparent 70%),
-    radial-gradient(ellipse 40% 30% at 20% 70%, rgba(61,107,255,0.06) 0%, transparent 60%);
+    radial-gradient(ellipse 60% 55% at 72% 38%, rgba(43,117,207,0.1) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 30% at 20% 70%, rgba(43,117,207,0.05) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -122,7 +127,7 @@ nav {
   letter-spacing: -0.02em;
 }
 
-.hero-title .italic { font-style: italic; color: rgba(245,245,240,0.38); }
+.hero-title .italic { font-style: italic; color: var(--accent); }
 
 .hero-bottom {
   display: flex;
@@ -139,7 +144,7 @@ nav {
   line-height: 1.85;
 }
 
-.hero-desc strong { color: var(--text); font-weight: 400; }
+.hero-desc strong { color: var(--accent); font-weight: 400; }
 
 .hero-scroll {
   display: flex;
@@ -213,7 +218,7 @@ nav {
   letter-spacing: -0.01em;
 }
 
-.about-intro .muted { color: var(--muted); }
+.about-intro .muted { color: var(--accent); }
 
 .about-grid {
   display: grid;
@@ -230,7 +235,7 @@ nav {
   margin-bottom: 1rem;
 }
 
-.about-col p strong { color: var(--text); font-weight: 400; }
+.about-col p strong { color: var(--accent); font-weight: 400; }
 
 .skills {
   display: flex;
@@ -249,7 +254,7 @@ nav {
   transition: border-color 0.15s, color 0.15s;
 }
 
-.skill:hover { border-color: rgba(61,107,255,0.5); color: var(--text); }
+.skill:hover { border-color: rgba(43,207,173,0.5); color: var(--accent); }
 
 /* ── PROJECTS ── */
 .project-item {
@@ -291,7 +296,7 @@ nav {
 
 .proj-year {
   font-size: 0.68rem;
-  color: rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.35);
 }
 
 .proj-title {
@@ -355,7 +360,7 @@ footer {
 
 <!-- NAV -->
 <nav>
-  <span class="nav-left">Product Designer</span>
+  <a href="#" class="nav-left">Seyrin Studio</a>
   <div class="nav-center">
     <a href="#about" class="nav-link">À propos</a>
     <a href="#projects" class="nav-link">Projets</a>
@@ -376,7 +381,7 @@ footer {
   </h1>
   <div class="hero-bottom">
     <p class="hero-desc">
-      <strong>Product Designer</strong> spécialisée en UX Research, design système et stratégie produit. Je transforme des problèmes complexes en interfaces claires.
+      <strong>Product Designer</strong> spécialisé en UX Research, design système et stratégie produit. Je transforme des problèmes complexes en interfaces claires.
     </p>
     <div class="hero-scroll">
       <span class="scroll-label">Scroll</span>
@@ -390,7 +395,7 @@ footer {
   <div class="section">
     <div class="s-label">À propos</div>
     <p class="about-intro">
-      Je conçois des produits numériques depuis <span class="muted">2 ans</span>, à l'intersection de la recherche utilisateur, <span class="muted">du design système</span> et de la stratégie produit.
+      Je conçois des produits numériques depuis <span class="muted">X ans</span>, à l'intersection de la recherche utilisateur, <span class="muted">du design système</span> et de la stratégie produit.
     </p>
     <div class="about-grid">
       <div class="about-col">
@@ -398,7 +403,7 @@ footer {
         <p>Mon approche : <strong>comprendre d'abord, concevoir ensuite.</strong> Chaque décision s'appuie sur la recherche et les métriques.</p>
       </div>
       <div class="about-col">
-        <p style="font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(245,245,240,0.25);margin-bottom:1rem">Compétences</p>
+        <p style="font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.4);margin-bottom:1rem">Compétences</p>
         <div class="skills">
           <span class="skill">Figma</span>
           <span class="skill">UX Research</span>
@@ -468,7 +473,7 @@ footer {
 </section>
 
 <footer>
-  <span class="footer-text">© 2026 — Product Designer · Paris</span>
+  <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
   <div class="footer-links">
     <a href="#" class="footer-link">LinkedIn</a>
     <a href="#" class="footer-link">Dribbble</a>
