@@ -44,10 +44,13 @@ nav {
   border-bottom:1px solid var(--border); 
 }
 .nav-left { 
-  font-size:0.75rem; 
-  letter-spacing:0.05em; 
+  font-family: 'League Gothic', sans-serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color:var(--text); 
   text-decoration:none; 
+  transition: color 0.18s;
 }
 .nav-left:hover { 
   color:var(--accent); 
@@ -57,8 +60,11 @@ nav {
 }
 
 .nav-link { 
- position: relative;
-  font-size:0.78rem; 
+  position: relative;
+  font-family: 'League Gothic', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color:var(--muted); 
   text-decoration:none; 
   padding:0.35rem 0.9rem; 
@@ -90,26 +96,23 @@ nav {
 .nav-right {
   display:flex; 
   justify-content:flex-end; 
-           }
+}
 .nav-cta { 
-  font-size:0.75rem; 
-  letter-spacing:0.04em; 
+  font-family: 'League Gothic', sans-serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   color:var(--text); 
   text-decoration:none; 
   padding:0.4rem 1.1rem; 
   border:1px solid rgba(255,255,255,0.2); 
   border-radius:100px; 
+  transition: border-color 0.18s, background 0.18s, color 0.18s;
 }
 .nav-cta:hover { 
   border-color:rgba(255,255,255,0.45); 
   background:rgba(255,255,255,0.05); 
-
-.nav-link,
-.nav-left,
-.nav-cta {
-  font-family: 'League Gothic', sans-serif;
 }
-               }
 
 /* ── HERO ── */
 .hero { 
@@ -436,64 +439,27 @@ footer {
 }
     
 @media (max-width:900px){ 
-  .hero{
-    padding:0 2rem 2rem;
-  } 
-  nav{
-    padding:0 1.5rem;
-  } 
-  .hero-bottom,.about-grid,footer{
-    display:grid; 
-    grid-template-columns:1fr; 
-    gap:1.5rem;
-  }
+  .hero{padding:0 2rem 2rem;} 
+  nav{padding:0 1.5rem;} 
+  .hero-bottom,.about-grid,footer{display:grid; grid-template-columns:1fr; gap:1.5rem;}
 }
     
 @media (max-width:640px){ 
-  nav{
-    grid-template-columns:1fr; 
-    gap:0.75rem; 
-    height:auto; 
-    padding:0.85rem 1rem;
-  } 
-  .nav-left,.nav-center,.nav-right{
-    justify-self:start;
-  } 
-  .hero{
-    padding:0 1.25rem 1.5rem;
-  } 
-  .section{
-    padding:5rem 1.25rem; 
-  } 
-  .portfolio-stage{
-    min-height:360px;
-  } 
-  .portfolio-track{
-    height:292px;
-  } 
-  .portfolio-card{
-    width:88px;
-    height:188px;
-  } 
-  .portfolio-card.center{
-    width:152px;height:252px;
-  } 
-  .portfolio-card.left-1{
-    transform:translateX(-112px) scale(.9);
-  } 
-  .portfolio-card.right-1{
-    transform:translateX(112px) scale(.9);
-  } 
-  .portfolio-card.left-2{
-    transform:translateX(-188px) scale(.72);
-  } 
-  .portfolio-card.right-2{
-    transform:translateX(188px) scale(.72);
-  } 
+  nav{grid-template-columns:1fr; gap:0.75rem; height:auto; padding:0.85rem 1rem;} 
+  .nav-left,.nav-center,.nav-right{justify-self:start;} 
+  .hero{padding:0 1.25rem 1.5rem;} 
+  .section{padding:5rem 1.25rem;} 
+  .portfolio-stage{min-height:360px;} 
+  .portfolio-track{height:292px;} 
+  .portfolio-card{width:88px;height:188px;} 
+  .portfolio-card.center{width:152px;height:252px;} 
+  .portfolio-card.left-1{transform:translateX(-112px) scale(.9);} 
+  .portfolio-card.right-1{transform:translateX(112px) scale(.9);} 
+  .portfolio-card.left-2{transform:translateX(-188px) scale(.72);} 
+  .portfolio-card.right-2{transform:translateX(188px) scale(.72);} 
 }
 </style>
 </head>
-
 
 <body>
   <nav>
@@ -509,7 +475,6 @@ footer {
 
  <script>
   const navLinks = document.querySelectorAll('.nav-link');
-
   navLinks.forEach(link => {
     link.addEventListener('click', () => {
       navLinks.forEach(item => item.classList.remove('active'));
@@ -527,38 +492,25 @@ footer {
     <p class="hero-desc"><strong>Product Designer</strong> spécialisée en UX Research, <br>design système et stratégie produit. 
     Je transforme des problèmes complexes en interfaces claires.</p>
     <div class="hero-scroll"><span class="scroll-label">Seyrin Studio</span>
-      <div class="scroll-bar">
-      </div>
+      <div class="scroll-bar"></div>
     </div>
   </div>
  
- <section id ="portfolio" class="portfolio-nav">
+ <section id="portfolio" class="portfolio-nav">
   <div class="section">
     <div class="s-label">Portfolio</div>
   <div class="portfolio-stage">
     <div class="portfolio-track" id="portfolioTrack">
-      <a 
-       class="portfolio-card" 
-       href="project-01.html" 
-       data-label="Portfolio 01" 
-       data-title="Conception A à Z" 
-       data-text="Création d'une application mobile de A à Z, incluant une enquête terrain et analyse de marché.">
-       <video 
-        class="portfolio-video" 
-        autoplay
-        muted 
-        loop 
-        playsinline
-        preload="metadata">
-        <source src="Exemple design portfolio.mp4" 
-        type="video/mp4">
+      <a class="portfolio-card" href="project-01.html" data-label="Portfolio 01" data-title="Conception A à Z" data-text="Création d'une application mobile de A à Z, incluant une enquête terrain et analyse de marché.">
+       <video class="portfolio-video" autoplay muted loop playsinline preload="metadata">
+        <source src="Exemple design portfolio.mp4" type="video/mp4">
         Votre navigateur ne supporte pas la vidéo.
        </video>
       </a>
-      <a class="portfolio-card" href="project-02.html" data-label="Portfolio 02" data-title="Projet site internet" data-text="Créatino du site pour présenter mon portfolio."><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80" alt="Aperçu du portfolio 2" loading="lazy" width="700" height="1400"></a>
+      <a class="portfolio-card" href="project-02.html" data-label="Portfolio 02" data-title="Projet site internet" data-text="Création du site pour présenter mon portfolio."><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=700&q=80" alt="Aperçu du portfolio 2" loading="lazy" width="700" height="1400"></a>
       <a class="portfolio-card" href="project-03.html" data-label="Portfolio 03" data-title="Interface analytics pour outil RH" data-text="Dashboard complexe rendu plus lisible et actionnable pour des profils non-techniques."><img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80" alt="Aperçu du portfolio 3" loading="lazy" width="900" height="1500"></a>
-      <a class="portfolio-card" href="project-04.html" data-label="Portfolio 04" data-title="Expérience mobile immersive" data-text="Hiérarchie d’écrans, premiers points d’entrée et narration produit."><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=700&q=80" alt="Aperçu du portfolio 4" loading="lazy" width="700" height="1400"></a>
-      <a class="portfolio-card" href="project-05.html" data-label="Portfolio 05" data-title="Recherche et stratégie d’expérience" data-text="De la compréhension des usages à une interface plus claire et plus utile."><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80" alt="Aperçu du portfolio 5" loading="lazy" width="700" height="1400"></a>
+      <a class="portfolio-card" href="project-04.html" data-label="Portfolio 04" data-title="Expérience mobile immersive" data-text="Hiérarchie d'écrans, premiers points d'entrée et narration produit."><img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=700&q=80" alt="Aperçu du portfolio 4" loading="lazy" width="700" height="1400"></a>
+      <a class="portfolio-card" href="project-05.html" data-label="Portfolio 05" data-title="Recherche et stratégie d'expérience" data-text="De la compréhension des usages à une interface plus claire et plus utile."><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80" alt="Aperçu du portfolio 5" loading="lazy" width="700" height="1400"></a>
     </div>
   <div class="portfolio-dots" id="portfolioDots">
     <button class="active" type="button"></button>
@@ -586,19 +538,16 @@ footer {
         <h3>UX Research</h3>
         <p>Je transforme les retours terrain en décisions produit claires et actionnables.</p>
       </div>
-      
       <div class="about-stat">
         <div class="about-stat-icon">◻</div>
         <h3>Design système</h3>
         <p>Je construis des interfaces cohérentes, lisibles et faciles à faire évoluer.</p>
       </div>
-      
       <div class="about-stat">
         <div class="about-stat-icon">◎</div>
         <h3>Stratégie produit</h3>
         <p>Je relie les enjeux métier, les besoins utilisateurs et les priorités d'équipe.</p>
       </div>
-      
       <div class="about-stat">
         <div class="about-stat-icon">✿</div>
         <h3>Expérience visuelle</h3>
@@ -613,21 +562,23 @@ footer {
     <div class="s-label">Témoignages clients</div>
     <a class="project-item" href="#"><span class="proj-index">01</span>
       <div class="proj-body">
-        <div class="proj-meta"><span class="proj-type">Application mobile · UX Research</span><span class="proj-year">2024</span>
-        </div>
-        <div class="proj-title">Refonte de l'onboarding d'une fintech B2C <span class="proj-arrow">↗</span>
-        </div><p class="proj-desc">Réduction du taux d'abandon de 54% grâce à une restructuration complète du parcours d'inscription utilisateur.</p>
-      </div></a>
+        <div class="proj-meta"><span class="proj-type">Application mobile · UX Research</span><span class="proj-year">2024</span></div>
+        <div class="proj-title">Refonte de l'onboarding d'une fintech B2C <span class="proj-arrow">↗</span></div>
+        <p class="proj-desc">Réduction du taux d'abandon de 54% grâce à une restructuration complète du parcours d'inscription utilisateur.</p>
+      </div>
+    </a>
   </div>
 </section>
   
 <footer>
   <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
-  <div 
-    class="footer-links">
+  <div class="footer-links">
     <a href="#" class="footer-link">LinkedIn</a>
     <a href="#" class="footer-link">Dribbble</a>
-    <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a></div></footer>
+    <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a>
+  </div>
+</footer>
+
 <script>
 const portfolioCards = Array.from(document.querySelectorAll('.portfolio-card'));
 const portfolioDots = Array.from(document.querySelectorAll('#portfolioDots button'));
