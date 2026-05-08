@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projet 01 — Site web · Portfolio</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg:#0F172A;
+  --border:rgba(255,255,255,0.08);
+  --text:#FFFFFF;
+  --muted:#E2E8F0;
+  --accent:#6C63FF;
+  --disk-color: rgba(108,99,255,0.18);
+  --disk-stroke: rgba(108,99,255,0.35);
+}
+
+html { scroll-behavior:smooth; }
+
+body {
+  margin:0;
+  font-family:'Inter',sans-serif;
+  font-weight:300;
+  line-height:1.6;
+  min-height:100vh;
+  color:var(--text);
+  background:
+    radial-gradient(circle at 76% 18%, rgba(46,102,255,.18), transparent 28%),
+    radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%),
+    linear-gradient(180deg, #0a1223 0%, #09111f 100%);
+  overflow-x:hidden;
+}
+
+a { color:inherit; text-decoration:none; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; padding:0 2.5rem; height:60px;
+  background:rgba(16,30,48,0.88); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-left { font-family:'League Gothic',sans-serif; font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); transition:color 0.18s; }
+.nav-left:hover { color:var(--accent); }
+.nav-center { display:flex; gap:0.25rem; }
+.nav-link { position:relative; font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; }
+.nav-link:hover { color:var(--text); background:rgba(255,255,255,0.06); }
+.nav-right { display:flex; justify-content:flex-end; }
+.nav-cta { font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text); padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color 0.18s, background 0.18s; }
+.nav-cta:hover { border-color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.05); }
+
+/* ── BACK LINK ── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.55;
+  transition: opacity 0.18s, color 0.18s;
+  margin-bottom: 2rem;
+}
+.back-link:hover { opacity: 1; color: var(--accent); }
+
+/* ── PAGE LAYOUT ── */
+.page-wrap {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding-top: 60px;
+}
+
+/* Colonne gauche — contenu */
+.content-col {
+  padding: 5rem 3rem 5rem 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+/* Colonne droite — disque */
+.disk-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── LABELS DE SECTION ── */
+.s-label {
+  font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:1.25rem;
+  display:flex; align-items:center; gap:0.8rem;
+}
+.s-label::before { content:''; width:20px; height:1px; background:var(--accent); flex-shrink:0; }
+
+/* ── SLIDE CONTENT ── */
+.slides-wrap {
+  position: relative;
+  overflow: hidden;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.slides-inner {
+  display: flex;
+  flex-direction: column;
+}
+
+.slide {
+  display: none;
+  flex-direction: column;
+  gap: 1.5rem;
+  animation: fadeSlide 0.5s ease both;
+}
+
+.slide.active { display: flex; }
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.slide-eyebrow {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+.slide-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.slide-title .hl { font-style: italic; color: var(--accent); }
+
+.slide-text {
+  font-size: 0.9rem;
+  color: var(--muted);
+  line-height: 1.85;
+  max-width: 480px;
+  opacity: 0.8;
+}
+
+/* Grille d'images */
+.slide-imgs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.slide-img {
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+}
+.slide-img img, .slide-img video {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.slide-img.tall { grid-row: span 2; aspect-ratio: 3/4; }
+
+/* Tags */
+.slide-tags { display:flex; gap:0.4rem; flex-wrap:wrap; }
+.tag { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); padding:0.25rem 0.7rem; border:1px solid rgba(108,99,255,0.28); border-radius:100px; }
+
+/* Stats / métriques */
+.slide-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.stat-box {
+  padding: 1.25rem 1rem;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
+}
+.stat-val { font-family:'Instrument Serif',serif; font-size:1.8rem; font-weight:400; color:var(--accent); line-height:1; margin-bottom:0.35rem; }
+.stat-label { font-size:0.72rem; color:var(--muted); opacity:0.6; line-height:1.4; }
+
+/* ── NAVIGATION bas ── */
+.slide-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 2.5rem;
+}
+.nav-arrow {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  display: grid; place-items: center;
+  font-size: 1rem;
+  transition: border-color 0.18s, color 0.18s, background 0.18s;
+}
+.nav-arrow:hover { border-color: rgba(255,255,255,0.3); color: var(--text); background: rgba(255,255,255,0.05); }
+.slide-counter {
+  font-family:'Instrument Serif',serif;
+  font-style:italic;
+  font-size: 0.92rem;
+  color: rgba(255,255,255,0.35);
+}
+.slide-counter span { color: var(--accent); }
+
+/* ══════════════════════════════════════
+   ── DISQUE ROTATIF ──
+══════════════════════════════════════ */
+.disk-scene {
+  position: relative;
+  width: 480px;
+  height: 480px;
+}
+
+/* Le SVG du disque — il tourne */
+.disk-svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.75s cubic-bezier(.16,1,.3,1);
+  transform-origin: center center;
+  filter: drop-shadow(0 0 40px rgba(108,99,255,0.25));
+}
+
+/* Segments du disque */
+.seg {
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+.seg:hover .seg-fill { opacity: 0.85; }
+.seg-fill {
+  transition: opacity 0.3s, fill 0.3s;
+}
+.seg.active .seg-fill { fill: rgba(108,99,255,0.55); }
+.seg:not(.active) .seg-fill { fill: rgba(108,99,255,0.14); }
+
+/* Label dans chaque segment */
+.seg-text {
+  font-family: 'League Gothic', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  fill: rgba(255,255,255,0.5);
+  transition: fill 0.3s;
+  pointer-events: none;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+.seg.active .seg-text { fill: rgba(255,255,255,0.95); }
+
+/* Cercle central */
+.disk-center-circle {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(108,99,255,0.3) 0%, rgba(108,99,255,0.08) 70%);
+  border: 1px solid rgba(108,99,255,0.4);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 0.2rem;
+  backdrop-filter: blur(8px);
+  pointer-events: none;
+}
+.center-num {
+  font-family: 'Instrument Serif', serif;
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--accent);
+  line-height: 1;
+}
+.center-total {
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.35);
+}
+
+/* Halo animé */
+.disk-halo {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 520px; height: 520px;
+  border-radius: 50%;
+  border: 1px solid rgba(108,99,255,0.08);
+  animation: haloBreath 4s ease-in-out infinite;
+  pointer-events: none;
+}
+.disk-halo-2 {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 560px; height: 560px;
+  border-radius: 50%;
+  border: 1px solid rgba(108,99,255,0.04);
+  animation: haloBreath 4s ease-in-out infinite 1s;
+  pointer-events: none;
+}
+@keyframes haloBreath {
+  0%, 100% { opacity: 0.4; transform: translate(-50%,-50%) scale(1); }
+  50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.02); }
+}
+
+/* ── FOOTER ── */
+footer { border-top:1px solid var(--border); padding:2rem 3.5rem; display:flex; justify-content:space-between; align-items:center; }
+.footer-text,.footer-link { font-size:0.72rem; color:var(--muted); text-decoration:none; }
+.footer-links { display:flex; gap:1.5rem; }
+.footer-link:hover { color:var(--text); }
+
+@media (max-width:900px) {
+  .page-wrap { grid-template-columns:1fr; }
+  .disk-col { height:380px; order:-1; padding-top:2rem; }
+  .disk-scene { width:320px; height:320px; }
+  .disk-halo { width:360px; height:360px; }
+  .disk-halo-2 { width:400px; height:400px; }
+  .disk-center-circle { width:90px; height:90px; }
+  .content-col { padding:2rem 1.5rem 4rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-left">Seyrin Studio</a>
+  <div class="nav-center">
+    <a href="index.html#portfolio" class="nav-link">Projets</a>
+    <a href="index.html#about" class="nav-link">À propos</a>
+  </div>
+  <div class="nav-right">
+    <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta">Me contacter</a>
+  </div>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- ── COLONNE GAUCHE : contenu ── -->
+  <div class="content-col">
+    <a href="index.html#portfolio" class="back-link">← Retour aux projets</a>
+    <div class="s-label" id="sectionLabel">Contexte</div>
+
+    <div class="slides-wrap">
+      <div class="slides-inner" id="slidesInner">
+
+        <!-- Slide 0 : Contexte -->
+        <div class="slide active" data-index="0">
+          <div class="slide-eyebrow">Slide 01 · Contexte</div>
+          <h1 class="slide-title">Site web · <span class="hl">Portfolio</span></h1>
+          <div class="slide-tags">
+            <span class="tag">UI Design</span>
+            <span class="tag">Web</span>
+            <span class="tag">Motion</span>
+          </div>
+          <p class="slide-text">Conception d'un portfolio format site internet pour présenter différents projets avec une navigation fluide et une identité visuelle forte. L'objectif : donner envie d'aller plus loin à chaque scroll.</p>
+        </div>
+
+        <!-- Slide 1 : Problème -->
+        <div class="slide" data-index="1">
+          <div class="slide-eyebrow">Slide 02 · Problème</div>
+          <h2 class="slide-title">Le défi <span class="hl">identitaire</span></h2>
+          <p class="slide-text">Sans identité visuelle définie au départ, le challenge était de créer un système cohérent from scratch — typographie, couleurs, animations — qui reflète un positionnement haut de gamme sans tomber dans les clichés.</p>
+          <div class="slide-stats">
+            <div class="stat-box">
+              <div class="stat-val">0</div>
+              <div class="stat-label">Charte graphique existante au départ</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">3</div>
+              <div class="stat-label">Itérations majeures de direction artistique</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">100%</div>
+              <div class="stat-label">Code HTML/CSS from scratch</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 2 : Approche -->
+        <div class="slide" data-index="2">
+          <div class="slide-eyebrow">Slide 03 · Approche</div>
+          <h2 class="slide-title">Concevoir <span class="hl">par couches</span></h2>
+          <p class="slide-text">D'abord la structure — nav, sections, hiérarchie. Puis l'identité — typographie éditoriale, bleu royal, micro-animations. Enfin les interactions — carrousels, scroll vertical, disque rotatif.</p>
+          <div class="slide-imgs">
+            <div class="slide-img">
+              <video autoplay muted loop playsinline>
+                <source src="Exemple design portfolio.mp4" type="video/mp4">
+              </video>
+            </div>
+            <div class="slide-img">
+              <img src="Portfolio-02.png" alt="Wireframe" loading="lazy">
+            </div>
+          </div>
+        </div>
+
+        <!-- Slide 3 : Résultat -->
+        <div class="slide" data-index="3">
+          <div class="slide-eyebrow">Slide 04 · Résultat</div>
+          <h2 class="slide-title">Un site qui <span class="hl">raconte</span></h2>
+          <p class="slide-text">Le portfolio final propose une expérience de navigation non-linéaire, des animations distinctives et une identité mémorable. Chaque section a sa propre mécanique d'interaction.</p>
+          <div class="slide-stats">
+            <div class="stat-box">
+              <div class="stat-val">5</div>
+              <div class="stat-label">Sections avec interactions distinctes</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">3</div>
+              <div class="stat-label">Types de carrousels différents</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">↗</div>
+              <div class="stat-label">Hébergé sur GitHub Pages</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="slide-nav">
+      <button class="nav-arrow" id="prevBtn">←</button>
+      <button class="nav-arrow" id="nextBtn">→</button>
+      <div class="slide-counter"><span id="curNum">1</span> / <span id="totalNum">4</span></div>
+    </div>
+  </div>
+
+  <!-- ── COLONNE DROITE : disque ── -->
+  <div class="disk-col">
+    <div class="disk-halo"></div>
+    <div class="disk-halo-2"></div>
+
+    <div class="disk-scene">
+      <!-- SVG généré par JS -->
+      <svg class="disk-svg" id="diskSvg" viewBox="-1 -1 2 2" xmlns="http://www.w3.org/2000/svg">
+        <!-- Les segments sont injectés par JS -->
+      </svg>
+
+      <!-- Cercle central -->
+      <div class="disk-center-circle">
+        <div class="center-num" id="centerNum">1</div>
+        <div class="center-total" id="centerTotal">/ 4</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
+  <div class="footer-links">
+    <a href="#" class="footer-link">LinkedIn</a>
+    <a href="#" class="footer-link">Dribbble</a>
+    <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════
+   CONFIGURATION DES SLIDES
+   → Modifie labels pour personnaliser les segments du disque
+══════════════════════════════════════ */
+const SLIDES_CONFIG = [
+  { label: 'Contexte',  sectionLabel: 'Contexte' },
+  { label: 'Problème',  sectionLabel: 'Le problème' },
+  { label: 'Approche',  sectionLabel: 'L\'approche' },
+  { label: 'Résultat',  sectionLabel: 'Résultat' },
+];
+
+const N = SLIDES_CONFIG.length;
+const diskSvg  = document.getElementById('diskSvg');
+const slides   = Array.from(document.querySelectorAll('.slide'));
+const prevBtn  = document.getElementById('prevBtn');
+const nextBtn  = document.getElementById('nextBtn');
+const curNumEl = document.getElementById('curNum');
+const totalNumEl = document.getElementById('totalNum');
+const centerNumEl = document.getElementById('centerNum');
+const centerTotalEl = document.getElementById('centerTotal');
+const sectionLabelEl = document.getElementById('sectionLabel');
+
+totalNumEl.textContent = N;
+centerTotalEl.textContent = `/ ${N}`;
+
+let current = 0;
+let diskRotation = 0; // degrés accumulés
+
+/* ── Génère les segments SVG ── */
+function buildDisk() {
+  diskSvg.innerHTML = '';
+
+  const R    = 0.92;  /* rayon extérieur */
+  const r    = 0.28;  /* rayon intérieur (trou) */
+  const gap  = 0.025; /* espace entre segments en radians */
+
+  for (let i = 0; i < N; i++) {
+    const startAngle = (2 * Math.PI * i / N) - Math.PI / 2 + gap;
+    const endAngle   = (2 * Math.PI * (i + 1) / N) - Math.PI / 2 - gap;
+
+    /* Points du path */
+    const x1 = Math.cos(startAngle), y1 = Math.sin(startAngle);
+    const x2 = Math.cos(endAngle),   y2 = Math.sin(endAngle);
+    const x3 = r * Math.cos(endAngle),   y3 = r * Math.sin(endAngle);
+    const x4 = r * Math.cos(startAngle), y4 = r * Math.sin(startAngle);
+
+    const largeArc = (endAngle - startAngle > Math.PI) ? 1 : 0;
+
+    const d = [
+      `M ${x1 * R} ${y1 * R}`,
+      `A ${R} ${R} 0 ${largeArc} 1 ${x2 * R} ${y2 * R}`,
+      `L ${x3} ${y3}`,
+      `A ${r} ${r} 0 ${largeArc} 0 ${x4} ${y4}`,
+      'Z'
+    ].join(' ');
+
+    /* Groupe segment */
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('class', 'seg' + (i === 0 ? ' active' : ''));
+    g.dataset.index = i;
+
+    /* Path */
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d);
+    path.setAttribute('class', 'seg-fill');
+    path.setAttribute('stroke', 'rgba(108,99,255,0.3)');
+    path.setAttribute('stroke-width', '0.012');
+
+    /* Texte au milieu du segment */
+    const midAngle = (startAngle + endAngle) / 2;
+    const textR    = (R + r) / 2;
+    const tx = textR * Math.cos(midAngle);
+    const ty = textR * Math.sin(midAngle);
+
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', tx);
+    text.setAttribute('y', ty);
+    text.setAttribute('class', 'seg-text');
+
+    /* Rotation du texte pour rester lisible */
+    const angleDeg = (midAngle * 180 / Math.PI) + 90;
+    text.setAttribute('transform', `rotate(${angleDeg}, ${tx}, ${ty})`);
+    text.textContent = SLIDES_CONFIG[i].label;
+
+    g.appendChild(path);
+    g.appendChild(text);
+
+    /* Clic sur segment */
+    g.addEventListener('click', () => goTo(i));
+
+    diskSvg.appendChild(g);
+  }
+}
+
+/* ── Rotation vers un slide ── */
+function goTo(i) {
+  const prev = current;
+  current = ((i % N) + N) % N;
+
+  /* Calcul de la rotation : on tourne le disque pour amener le segment actif en haut */
+  /* Chaque segment = 360/N degrés */
+  const segDeg = 360 / N;
+  /* Différence de position */
+  let diff = current - prev;
+  /* Prendre le chemin le plus court */
+  if (diff > N / 2)  diff -= N;
+  if (diff < -N / 2) diff += N;
+  diskRotation -= diff * segDeg;
+
+  diskSvg.style.transform = `rotate(${diskRotation}deg)`;
+
+  /* Mise à jour des classes actives */
+  document.querySelectorAll('.seg').forEach((seg, j) => {
+    seg.classList.toggle('active', j === current);
+  });
+
+  /* Mise à jour du contenu */
+  slides.forEach((s, j) => s.classList.toggle('active', j === current));
+
+  /* Mise à jour des compteurs */
+  curNumEl.textContent = current + 1;
+  centerNumEl.textContent = current + 1;
+  sectionLabelEl.textContent = SLIDES_CONFIG[current].sectionLabel;
+}
+
+/* ── Boutons ── */
+prevBtn.addEventListener('click', () => goTo(current - 1));
+nextBtn.addEventListener('click', () => goTo(current + 1));
+
+/* ── Swipe touch ── */
+let touchX0 = 0;
+document.addEventListener('touchstart', e => { touchX0 = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend',   e => {
+  const dx = touchX0 - e.changedTouches[0].clientX;
+  if (dx >  50) goTo(current + 1);
+  if (dx < -50) goTo(current - 1);
+}, {passive:true});
+
+/* ── Molette ── */
+let wheelLock = false;
+document.addEventListener('wheel', e => {
+  if (wheelLock) return;
+  wheelLock = true;
+  goTo(current + (e.deltaY > 0 ? 1 : -1));
+  setTimeout(() => { wheelLock = false; }, 800);
+}, {passive:true});
+
+/* ── Init ── */
+buildDisk();
+sectionLabelEl.textContent = SLIDES_CONFIG[0].sectionLabel;
+</script>
+
+</body>
+</html>
