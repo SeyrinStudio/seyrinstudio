@@ -170,7 +170,7 @@
     opacity: 1;
   }
 
-  /* Dots à droite */
+  /* Dots à droite
   .about-dots {
     position: absolute;
     right: 0;
@@ -193,7 +193,42 @@
   .about-dots button.active {
     background: #fff;
     transform: scale(1.3);
-  }
+  }*/
+
+ /*Titre à la place du dots*/
+ .about-tabs {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.about-tab {
+  border: 0;
+  background: transparent;
+  color: rgba(255,255,255,0.35);
+  font-family: 'League Gothic', sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-align: right;
+  cursor: pointer;
+  padding: 0.2rem 0;
+  transition: color 0.2s, transform 0.2s;
+}
+
+.about-tab.active {
+  color: #fff;
+  transform: translateX(-4px);
+}
+
+.about-tab:hover {
+  color: var(--accent);
+}
 
   /* ── Contenus des slides ── */
 
@@ -544,12 +579,12 @@
       </div>
 
       <!-- Dots à droite -->
-      <div class="about-dots" id="aboutDots">
-        <button class="active" type="button"></button>
-        <button type="button"></button>
-        <button type="button"></button>
-        <button type="button"></button>
-        <button type="button"></button>
+      <div class="about-tabs" id="aboutTabs" role="tablist" aria-label="Navigation À propos">
+       <button type="button" class="about-tab active" data-index="0" role="tab" aria-selected="true">Qui je suis</button>
+       <button type="button" class="about-tab" data-index="1" role="tab" aria-selected="false">Ce que je construis</button>
+       <button type="button" class="about-tab" data-index="2" role="tab" aria-selected="false">Mon approche</button>
+       <button type="button" class="about-tab" data-index="3" role="tab" aria-selected="false">Mes outils</button>
+       <button type="button" class="about-tab" data-index="4" role="tab" aria-selected="false">Ce que j’apporte</button>
       </div>
 
     </div>
@@ -655,7 +690,7 @@ pCards.forEach((c, i) => {
 renderPortfolio(pIdx);
 
 /* ── About vertical carousel ── */
-const aSlides  = Array.from(document.querySelectorAll('.about-slide'));
+/*const aSlides  = Array.from(document.querySelectorAll('.about-slide'));
 const aDots    = Array.from(document.querySelectorAll('#aboutDots button'));
 const aTrack   = document.getElementById('aboutTrack');
 const aCarousel = document.getElementById('aboutCarousel');
@@ -670,7 +705,28 @@ function goAbout(i) {
   aDots.forEach((d, j) => d.classList.toggle('active', j === aIdx));
 }
 
-aDots.forEach((d, i) => d.addEventListener('click', () => goAbout(i)));
+aDots.forEach((d, i) => d.addEventListener('click', () => goAbout(i)));  */
+const aSlides = Array.from(document.querySelectorAll('.about-slide'));
+const aTabs = Array.from(document.querySelectorAll('#aboutTabs .about-tab'));
+const aTrack = document.getElementById('aboutTrack');
+const aCarousel = document.getElementById('aboutCarousel');
+const SLIDE_H = 520;
+let aIdx = 0;
+const aTotal = aSlides.length;
+
+function goAbout(i) {
+  aIdx = Math.max(0, Math.min(i, aTotal - 1));
+  aTrack.style.transform = `translateY(-${aIdx * SLIDE_H}px)`;
+  aSlides.forEach((s, j) => s.classList.toggle('active-slide', j === aIdx));
+  aTabs.forEach((t, j) => {
+    const active = j === aIdx;
+    t.classList.toggle('active', active);
+    t.setAttribute('aria-selected', active ? 'true' : 'false');
+    t.tabIndex = active ? 0 : -1;
+  });
+}
+
+aTabs.forEach((tab, i) => tab.addEventListener('click', () => goAbout(i)));
 
 /* Molette sur le carousel uniquement */
 aCarousel.addEventListener('wheel', e => {
