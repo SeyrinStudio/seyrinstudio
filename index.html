@@ -212,11 +212,11 @@
     content:""; position:absolute; inset:0; 
     background:linear-gradient(180deg, rgba(255,255,255,.14), transparent 18%, transparent 74%, rgba(5,9,19,.34)); 
   }
-  .portfolio-card.center { width:300px; height:460px; transform:translateX(0) rotate(0deg) scale(1); opacity:1; z-index:5; filter:none; box-shadow:0 30px 70px rgba(0,0,0,.34); }
-  .portfolio-card.left-1 { transform:translateX(-260px) rotate(8deg) scale(.92); z-index:4; opacity:.76; }
-  .portfolio-card.left-2 { transform:translateX(-440px) rotate(14deg) scale(.76); z-index:2; opacity:.34; filter:saturate(.8); }
-  .portfolio-card.right-1 { transform:translateX(260px) rotate(-8deg) scale(.92); z-index:4; opacity:.76; }
-  .portfolio-card.right-2 { transform:translateX(440px) rotate(-14deg) scale(.76); z-index:2; opacity:.34; filter:saturate(.8); }
+  .portfolio-card.center { width:300px; height:460px; transform:translateX(0) scale(1); opacity:1; z-index:5; filter:none; box-shadow:0 30px 70px rgba(0,0,0,.34); }
+  .portfolio-card.left-1 { transform:translateX(-260px) scale(.92) skewY(4deg); z-index:4; opacity:.76; }
+  .portfolio-card.left-2 { transform:translateX(-440px) scale(.76) skewY(6deg); z-index:2; opacity:.34; filter:saturate(.8); }
+  .portfolio-card.right-1 { transform:translateX(260px) scale(.92) skewY(-4deg); z-index:4; opacity:.76; }
+  .portfolio-card.right-2 { transform:translateX(440px) scale(.76) skewY(-6deg); z-index:2; opacity:.34; filter:saturate(.8); }
   .portfolio-card.is-hidden { opacity:0; pointer-events:none; }
   .portfolio-dots { position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
   .portfolio-dots button { width:7px; height:7px; border:0; border-radius:50%; padding:0; background:rgba(255,255,255,.24); cursor:pointer; }
