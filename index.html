@@ -374,7 +374,18 @@
     gap: 0;
     max-width: 540px;
   }
-  /* Outils */
+  .skill-row { display:grid; grid-template-columns:40px 1fr; align-items:center; gap:1rem; padding:0.8rem 0; border-bottom:1px solid var(--border); }
+  .skill-row:last-child { border-bottom:none; }
+  .skill-logo-s { width:36px; height:36px; border-radius:9px; background:var(--accent); display:grid; place-items:center; flex-shrink:0; }
+  .skill-logo-s img { width:20px; height:20px; object-fit:contain; filter:brightness(0) invert(1); }
+  .skill-info { display:flex; flex-direction:column; gap:0.25rem; }
+  .skill-name-row { display:flex; justify-content:space-between; align-items:baseline; }
+  .skill-name { font-size:0.8rem; color:var(--text); }
+  .skill-pct { font-size:0.65rem; color:var(--accent); }
+  .skill-bar-track { height:2px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden; }
+  .skill-bar-fill { height:100%; background:var(--accent); border-radius:2px; }
+ 
+  /* Outils 
   .skills-section-label {
     font-size: 0.68rem;
     letter-spacing: 0.22em;
@@ -416,7 +427,7 @@
   .skill-cell-name { font-size: 0.85rem; font-weight: 400; color: var(--text); letter-spacing: 0.01em; }
   .skill-cell-pct { font-size: 0.8rem; color: var(--accent); font-weight: 400; padding-left: calc(44px + 0.75rem); }
   .skill-bar-track { height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
-  .skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+  .skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }*/
 
   /* Slide 5 : Ce que j'apporte */
   .about-value-list { display:flex; flex-direction:column; gap:0; max-width:640px; }
