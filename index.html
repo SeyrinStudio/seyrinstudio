@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -188,7 +189,7 @@
     font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; 
     color:var(--blue); margin-bottom:2rem; 
     display:flex; align-items:center; gap:0.8rem; 
-   }
+  }
   .s-label::before { content:''; width:20px; height:1px; background:var(--blue); flex-shrink:0; }
   .portfolio-stage { 
     position:relative; min-height:580px; 
@@ -236,8 +237,6 @@
     margin-bottom: 3rem;
   }
   .about-intro .muted { color:var(--accent); }
-
-  /* 4 blocs côte à côte */
   .about-grid { 
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -253,7 +252,8 @@
   .about-stat h3 { margin:0 0 8px; font-size:0.88rem; font-weight:500; letter-spacing:-0.01em; }
   .about-stat p { margin:0; font-size:0.76rem; color:var(--muted); line-height:1.7; }
 
-  /* Outils — label au-dessus */
+  /* Outils */
+  .skills-divider { border-top: 1px solid var(--border); margin-top: 2rem; margin-bottom: 2rem; }
   .skills-section-label {
     font-size: 0.68rem;
     letter-spacing: 0.22em;
@@ -264,37 +264,12 @@
     align-items: center;
     gap: 0.8rem;
   }
-  .skills-section-label::before {
-    content: '';
-    width: 20px; height: 1px;
-    background: var(--blue);
-    flex-shrink: 0;
-  }
-
- .skills-divider {
-  border-top: 1px solid var(--border);
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.skills-section-label {
-  font-size: 0.68rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--blue);
-  margin-bottom: 1.25rem;
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-  /* Outils en ligne horizontale */
+  .skills-section-label::before { content: ''; width: 20px; height: 1px; background: var(--blue); flex-shrink: 0; }
   .skills-row {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     border-left: 1px solid var(--border);
   }
-
   .skill-cell {
     padding: 1.5rem 1.25rem;
     border-right: 1px solid var(--border);
@@ -302,13 +277,7 @@
     flex-direction: column;
     gap: 0.6rem;
   }
-
-  .skill-cell-top {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
+  .skill-cell-top { display: flex; align-items: center; gap: 0.75rem; }
   .skill-logo {
     width: 44px; height: 44px;
     border-radius: 12px;
@@ -318,65 +287,159 @@
     flex-shrink: 0;
     overflow: hidden;
   }
-  .skill-logo img {
-    width: 26px; height: 26px;
-    object-fit: contain;
-    filter: brightness(0) invert(1);
+  .skill-logo img { width: 26px; height: 26px; object-fit: contain; filter: brightness(0) invert(1); }
+  .skill-cell-name { font-size: 0.85rem; font-weight: 400; color: var(--text); letter-spacing: 0.01em; }
+  .skill-cell-pct { font-size: 0.8rem; color: var(--accent); font-weight: 400; padding-left: calc(44px + 0.75rem); }
+  .skill-bar-track { height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
+  .skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }
+
+  /* ── TÉMOIGNAGES CARROUSEL ── */
+  .testimonials-wrap {
+    position: relative;
   }
 
-  .skill-cell-name {
-    font-size: 0.85rem;
-    font-weight: 400;
-    color: var(--text);
-    letter-spacing: 0.01em;
-  }
-
-  .skill-cell-pct {
-    font-size: 0.8rem;
-    color: var(--accent);
-    font-weight: 400;
-    padding-left: calc(44px + 0.75rem);
-  }
-
-  .skill-bar-track {
-    height: 2px;
-    background: rgba(255,255,255,0.08);
-    border-radius: 2px;
+  /* Conteneur glissant */
+  .testimonials-track {
     overflow: hidden;
   }
-  .skill-bar-fill {
-    height: 100%;
+
+  .testimonials-inner {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(.16,1,.3,1);
+  }
+
+  /* Carte témoignage */
+  .testimonial-card {
+    min-width: 100%;
+    padding: 2.5rem;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,.08);
+    background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  .testimonial-quote {
+    font-size: 2.5rem;
+    color: var(--accent);
+    line-height: 1;
+    font-family: 'Instrument Serif', serif;
+  }
+
+  .testimonial-text {
+    font-family: 'Instrument Serif', serif;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    line-height: 1.55;
+    color: var(--text);
+    letter-spacing: -0.01em;
+    flex: 1;
+  }
+
+  .testimonial-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+  }
+
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .testimonial-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
     background: var(--accent);
-    border-radius: 2px;
+    display: grid;
+    place-items: center;
+    font-family: 'League Gothic', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    color: #fff;
+    flex-shrink: 0;
   }
 
-  /* ── TESTIMONIALS ── */
-  .project-item { 
-    display:grid; grid-template-columns:48px 1fr; gap:2.5rem; 
-    padding:2.75rem 0; border-bottom:1px solid var(--border); 
-    cursor:pointer; transition:opacity .2s; text-decoration:none; color:inherit; 
+  .testimonial-name {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--text);
   }
-  .project-item:first-child { border-top:1px solid var(--border); }
-  .project-item:hover { opacity:.72; }
-  .project-item:hover .proj-arrow { transform:translate(4px,-4px); }
-  .proj-index { font-size:0.72rem; color:var(--muted); padding-top:0.25rem; letter-spacing:0.05em; }
-  .proj-meta { display:flex; align-items:center; gap:1rem; margin-bottom:0.9rem; }
-  .proj-type { font-size:0.68rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); }
-  .proj-year { font-size:0.68rem; color:rgba(255,255,255,0.35); }
-  .proj-title { font-family:'Instrument Serif',serif; font-size:clamp(1.4rem,2.5vw,2rem); font-weight:400; line-height:1.2; margin-bottom:0.75rem; letter-spacing:-0.01em; display:flex; align-items:flex-start; justify-content:space-between; gap:1rem; }
-  .proj-arrow { font-size:1rem; color:var(--muted); flex-shrink:0; margin-top:0.2rem; transition:transform .2s; }
-  .proj-desc { font-size:0.82rem; color:var(--muted); line-height:1.8; max-width:520px; }
 
+  .testimonial-role {
+    font-size: 0.75rem;
+    color: var(--muted);
+    opacity: 0.6;
+    margin-top: 0.15rem;
+  }
+
+  .testimonial-tag {
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid rgba(108,99,255,0.3);
+    border-radius: 100px;
+  }
+
+  /* Navigation */
+  .testimonials-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+
+  .testimonials-dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .testimonials-dots button {
+    width: 7px; height: 7px;
+    border: 0; border-radius: 50%; padding: 0;
+    background: rgba(255,255,255,.24);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .testimonials-dots button.active { background: #fff; }
+
+  .testimonials-arrows {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .arrow-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    font-size: 1rem;
+    transition: border-color 0.18s, color 0.18s, background 0.18s;
+  }
+
+  .arrow-btn:hover {
+    border-color: rgba(255,255,255,0.3);
+    color: var(--text);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* ── FOOTER ── */
   footer { border-top:1px solid var(--border); padding:2rem 3.5rem; display:flex; justify-content:space-between; align-items:center; }
   .footer-text, .footer-link { font-size:0.72rem; color:var(--muted); text-decoration:none; }
   .footer-links { display:flex; gap:1.5rem; }
   .footer-link:hover { color:var(--text); }
 
-  @media (max-width:1024px){
-    .about-body { grid-template-columns: 1fr; }
-    .skills-col { flex-direction: row; flex-wrap: wrap; gap: 1rem; }
-    .skill-row { border-bottom: none; width: calc(50% - 0.5rem); padding: 0.5rem 0; }
-  }
   @media (max-width:900px){ 
     .hero { padding: 80px 2rem 0; }
     nav { padding:0 1.5rem; } 
@@ -389,14 +452,15 @@
     .hero { padding:70px 1.25rem 0; }
     .section { padding:5rem 1.25rem; } 
     .about-grid { grid-template-columns: 1fr; }
-    .portfolio-stage { min-height:320px; } 
-    .portfolio-track { height:260px; } 
-    .portfolio-card { width:82px; height:168px; } 
-    .portfolio-card.center { width:140px; height:230px; } 
-    .portfolio-card.left-1 { transform:translateX(-106px) scale(.9); } 
-    .portfolio-card.right-1 { transform:translateX(106px) scale(.9); } 
-    .portfolio-card.left-2 { transform:translateX(-176px) scale(.72); } 
-    .portfolio-card.right-2 { transform:translateX(176px) scale(.72); } 
+    .portfolio-stage { min-height:400px; } 
+    .portfolio-track { height:340px; } 
+    .portfolio-card { width:110px; height:220px; } 
+    .portfolio-card.center { width:185px; height:300px; } 
+    .portfolio-card.left-1 { transform:translateX(-140px) scale(.9); } 
+    .portfolio-card.right-1 { transform:translateX(140px) scale(.9); } 
+    .portfolio-card.left-2 { transform:translateX(-235px) scale(.72); } 
+    .portfolio-card.right-2 { transform:translateX(235px) scale(.72); }
+    .testimonial-card { padding: 1.75rem; }
   }
 </style>
 </head>
@@ -483,10 +547,7 @@
 <section id="about">
   <div class="section">
     <div class="s-label">À propos</div>
-
     <p class="about-intro">Je conçois des produits numériques depuis <span class="muted">2 ans</span>, à l'intersection de la recherche utilisateur, <span class="muted">du design système</span> et de la stratégie produit.</p>
-
-    <!-- 4 blocs côte à côte -->
     <div class="about-grid">
       <div class="about-stat">
         <div class="about-stat-icon">✦</div>
@@ -509,22 +570,17 @@
         <p>Je donne une identité forte au produit sans sacrifier la clarté.</p>
       </div>
     </div>
-
-    <!-- Outils en ligne horizontale -->
-   <div class="skills-divider"></div>
+    <div class="skills-divider"></div>
     <div class="skills-section-label">Outils</div>
     <div class="skills-row">
-
       <div class="skill-cell">
         <div class="skill-cell-top">
           <div class="skill-logo"><img src="logo-figma.png" alt="Figma"></div>
           <span class="skill-cell-name">Figma</span>
         </div>
         <div class="skill-cell-pct">45%</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div>
-        </div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div></div>
       </div>
-
       <div class="skill-cell">
         <div class="skill-cell-top">
           <div class="skill-logo"><img src="logo-ux.png" alt="UX Research"></div>
@@ -533,7 +589,6 @@
         <div class="skill-cell-pct">85%</div>
         <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
       </div>
-
       <div class="skill-cell">
         <div class="skill-cell-top">
           <div class="skill-logo"><img src="logo-notion.png" alt="Notion"></div>
@@ -542,7 +597,6 @@
         <div class="skill-cell-pct">95%</div>
         <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
       </div>
-
       <div class="skill-cell">
         <div class="skill-cell-top">
           <div class="skill-logo"><img src="logo-miro.png" alt="Miro"></div>
@@ -551,7 +605,6 @@
         <div class="skill-cell-pct">75%</div>
         <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
       </div>
-
       <div class="skill-cell">
         <div class="skill-cell-top">
           <div class="skill-logo"><img src="logo-canva.png" alt="Canva"></div>
@@ -560,9 +613,7 @@
         <div class="skill-cell-pct">98%</div>
         <div class="skill-bar-track"><div class="skill-bar-fill" style="width:98%"></div></div>
       </div>
-
     </div>
-
   </div>
 </section>
 
@@ -570,17 +621,93 @@
 <section id="testimonials" style="border-top: 1px solid var(--border);">
   <div class="section">
     <div class="s-label">Témoignages clients</div>
-    <a class="project-item" href="#">
-      <span class="proj-index">01</span>
-      <div class="proj-body">
-        <div class="proj-meta">
-          <span class="proj-type">Application mobile · UX Research</span>
-          <span class="proj-year">2024</span>
+
+    <div class="testimonials-wrap">
+      <div class="testimonials-track">
+        <div class="testimonials-inner" id="testimonialsInner">
+
+          <!-- Témoignage 1 -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Seyrin a su transformer un brief complexe en une interface limpide. Sa capacité à jongler entre les contraintes techniques et les besoins utilisateurs est remarquable. Le résultat a dépassé nos attentes.</p>
+            <div class="testimonial-footer">
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">ML</div>
+                <div>
+                  <div class="testimonial-name">Marie L.</div>
+                  <div class="testimonial-role">Head of Product · B2C</div>
+                </div>
+              </div>
+              <span class="testimonial-tag">UX Research</span>
+            </div>
+          </div>
+
+          <!-- Témoignage 2 -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Le design system livré par Seyrin a permis à nos 4 équipes de travailler de façon cohérente pour la première fois. Une organisation exemplaire et une vraie vision produit derrière chaque décision.</p>
+            <div class="testimonial-footer">
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">TR</div>
+                <div>
+                  <div class="testimonial-name">Thomas R.</div>
+                  <div class="testimonial-role">CTO · Scale-up SaaS</div>
+                </div>
+              </div>
+              <span class="testimonial-tag">Design Système</span>
+            </div>
+          </div>
+
+          <!-- Témoignage 3 -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Nous avions un dashboard illisible pour nos équipes RH. Seyrin a mené une recherche utilisateur approfondie et repensé toute l'architecture de l'information. L'adoption a été immédiate.</p>
+            <div class="testimonial-footer">
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">SC</div>
+                <div>
+                  <div class="testimonial-name">Sophie C.</div>
+                  <div class="testimonial-role">DRH </div>
+                </div>
+              </div>
+              <span class="testimonial-tag">Stratégie produit</span>
+            </div>
+          </div>
+
+          <!-- Témoignage 4 -->
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Une designer qui écoute vraiment. Seyrin a passé du temps sur le terrain avec nos utilisateurs avant de dessiner la moindre maquette. Le produit final reflète exactement leurs besoins.</p>
+            <div class="testimonial-footer">
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">AB</div>
+                <div>
+                  <div class="testimonial-name">Alexis B.</div>
+                  <div class="testimonial-role">CEO · Startup early-stage</div>
+                </div>
+              </div>
+              <span class="testimonial-tag">Expérience visuelle</span>
+            </div>
+          </div>
+
         </div>
-        <div class="proj-title">Refonte de l'onboarding d'une fintech B2C <span class="proj-arrow">↗</span></div>
-        <p class="proj-desc">Réduction du taux d'abandon de 54% grâce à une restructuration complète du parcours d'inscription utilisateur.</p>
       </div>
-    </a>
+
+      <!-- Navigation -->
+      <div class="testimonials-nav">
+        <div class="testimonials-dots" id="testimonialsDots">
+          <button class="active" type="button"></button>
+          <button type="button"></button>
+          <button type="button"></button>
+          <button type="button"></button>
+        </div>
+        <div class="testimonials-arrows">
+          <button class="arrow-btn" id="testimonialsprev" aria-label="Précédent">←</button>
+          <button class="arrow-btn" id="testimonialsnext" aria-label="Suivant">→</button>
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -594,6 +721,7 @@
 </footer>
 
 <script>
+/* ── Portfolio carousel ── */
 const portfolioCards = Array.from(document.querySelectorAll('.portfolio-card'));
 const portfolioDots = Array.from(document.querySelectorAll('#portfolioDots button'));
 const detail = document.getElementById('portfolioDetail');
@@ -617,7 +745,6 @@ function renderPortfolio(index) {
   detail.querySelector('.portfolio-title').textContent = activeCard.dataset.title;
   detail.querySelector('.portfolio-text').textContent = activeCard.dataset.text;
 }
-
 portfolioDots.forEach((dot, index) => dot.addEventListener('click', () => renderPortfolio(index)));
 portfolioCards.forEach((card, index) => {
   card.addEventListener('mouseenter', () => renderPortfolio(index));
@@ -628,8 +755,23 @@ window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft') renderPortfolio((activeIndex - 1 + portfolioCards.length) % portfolioCards.length);
   if (e.key === 'ArrowRight') renderPortfolio((activeIndex + 1) % portfolioCards.length);
 });
-
 renderPortfolio(activeIndex);
+
+/* ── Testimonials carousel ── */
+const inner = document.getElementById('testimonialsInner');
+const tDots = Array.from(document.querySelectorAll('#testimonialsDots button'));
+let tIndex = 0;
+const total = tDots.length;
+
+function goTo(index) {
+  tIndex = (index + total) % total;
+  inner.style.transform = `translateX(-${tIndex * 100}%)`;
+  tDots.forEach((d, i) => d.classList.toggle('active', i === tIndex));
+}
+
+document.getElementById('testimonialsprev').addEventListener('click', () => goTo(tIndex - 1));
+document.getElementById('testimonialsnext').addEventListener('click', () => goTo(tIndex + 1));
+tDots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
 </script>
 
 </body>
