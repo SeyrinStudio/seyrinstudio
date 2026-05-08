@@ -15,8 +15,6 @@
     --text:#FFFFFF;
     --muted:#E2E8F0;
     --accent:#6C63FF;
-    --disk-color: rgba(108,99,255,0.18);
-    --disk-stroke: rgba(108,99,255,0.35);
   }
 
   html { scroll-behavior:smooth; }
@@ -64,7 +62,6 @@
   .nav-center { display:flex; gap:0.25rem; }
 
   .nav-link {
-    position:relative;
     font-family:'League Gothic',sans-serif;
     font-size:1rem;
     letter-spacing:0.1em;
@@ -111,8 +108,6 @@
     position:relative;
     width:min(92vw, 980px);
     height:min(92vw, 980px);
-    max-width:980px;
-    max-height:980px;
   }
 
   .disk-svg {
@@ -166,6 +161,7 @@
     color:var(--accent);
     line-height:1;
   }
+
   .center-total {
     font-size:0.6rem;
     letter-spacing:0.12em;
@@ -177,7 +173,8 @@
     position:absolute;
     top:50%; left:50%;
     transform:translate(-50%, -50%);
-    width:110vw; height:110vw;
+    width:110vw;
+    height:110vw;
     max-width:1040px;
     max-height:1040px;
     border-radius:50%;
@@ -186,7 +183,8 @@
   }
 
   .disk-halo-2 {
-    width:118vw; height:118vw;
+    width:118vw;
+    height:118vw;
     max-width:1120px;
     max-height:1120px;
     border:1px solid rgba(108,99,255,0.04);
@@ -250,11 +248,7 @@
     flex-shrink:0;
   }
 
-  .slides-wrap {
-    position:relative;
-    overflow:hidden;
-  }
-
+  .slides-wrap { position:relative; overflow:hidden; }
   .slide { display:none; animation:fadeSlide 0.5s ease both; }
   .slide.active { display:block; }
 
@@ -279,6 +273,7 @@
     letter-spacing:-0.02em;
     margin-bottom:0.9rem;
   }
+
   .slide-title .hl { font-style:italic; color:var(--accent); }
 
   .slide-text {
@@ -287,6 +282,23 @@
     line-height:1.85;
     max-width:480px;
     opacity:0.82;
+  }
+
+  .slide-tags {
+    display:flex;
+    gap:0.4rem;
+    flex-wrap:wrap;
+    margin-bottom:0.9rem;
+  }
+
+  .tag {
+    font-size:0.65rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--accent);
+    padding:0.25rem 0.7rem;
+    border:1px solid rgba(108,99,255,0.28);
+    border-radius:100px;
   }
 
   .slide-imgs {
@@ -369,6 +381,7 @@
     font-size:0.92rem;
     color:rgba(255,255,255,0.35);
   }
+
   .slide-counter span { color:var(--accent); }
 
   footer {
@@ -561,7 +574,7 @@ function buildDisk() {
   diskSvg.innerHTML = '';
   const R = 0.92;
   const r = 0.28;
-  const gap = 0.025;
+  const gap = 0;
 
   for (let i = 0; i < N; i++) {
     const startAngle = (2 * Math.PI * i / N) - Math.PI / 2 + gap;
@@ -588,8 +601,8 @@ function buildDisk() {
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', d);
     path.setAttribute('class', 'seg-fill');
-    path.setAttribute('stroke', 'rgba(108,99,255,0.3)');
-    path.setAttribute('stroke-width', '0.012');
+    path.setAttribute('stroke', 'rgba(108,99,255,0.12)');
+    path.setAttribute('stroke-width', '0.004');
 
     const midAngle = (startAngle + endAngle) / 2;
     const textR = (R + r) / 2;
