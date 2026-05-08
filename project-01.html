@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Projet 01 — Site web · Portfolio</title>
-<link rel="icon" type="image/png" href="favicon.png">
-<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+/png" href="favicon.png">
+//fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
   :root {
-    --bg:#0F172A;
     --border:rgba(255,255,255,0.08);
     --text:#FFFFFF;
     --muted:#E2E8F0;
@@ -49,44 +48,19 @@
     border-bottom:1px solid var(--border);
   }
 
-  .nav-left {
-    font-family:'League Gothic',sans-serif;
-    font-size:1.1rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--text);
-    transition:color 0.18s;
-  }
-  .nav-left:hover { color:var(--accent); }
-
-  .nav-center { display:flex; gap:0.25rem; }
-
-  .nav-link {
-    font-family:'League Gothic',sans-serif;
-    font-size:1rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--muted);
-    padding:0.35rem 0.9rem;
-    border-radius:100px;
-    transition:color .18s, background .18s;
-  }
-  .nav-link:hover { color:var(--text); background:rgba(255,255,255,0.06); }
-
-  .nav-right { display:flex; justify-content:flex-end; }
-
+  .nav-left,
+  .nav-link,
   .nav-cta {
     font-family:'League Gothic',sans-serif;
-    font-size:1rem;
-    letter-spacing:0.1em;
     text-transform:uppercase;
-    color:var(--text);
-    padding:0.4rem 1.1rem;
-    border:1px solid rgba(255,255,255,0.2);
-    border-radius:100px;
-    transition:border-color 0.18s, background 0.18s;
+    letter-spacing:0.1em;
   }
-  .nav-cta:hover { border-color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.05); }
+
+  .nav-left { font-size:1.1rem; color:var(--text); }
+  .nav-center { display:flex; gap:0.25rem; }
+  .nav-link { font-size:1rem; color:var(--muted); padding:0.35rem 0.9rem; border-radius:100px; }
+  .nav-right { display:flex; justify-content:flex-end; }
+  .nav-cta { font-size:1rem; color:var(--text); padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; }
 
   .project-page {
     position:relative;
@@ -113,30 +87,37 @@
   .disk-svg {
     width:100%;
     height:100%;
-    transition:transform 0.75s cubic-bezier(.16,1,.3,1);
     transform-origin:center center;
+    transition:transform 0.75s cubic-bezier(.16,1,.3,1);
     filter:drop-shadow(0 0 40px rgba(108,99,255,0.25));
     pointer-events:auto;
     shape-rendering:geometricPrecision;
   }
 
-  .seg { cursor:pointer; transition:opacity 0.3s; }
-  .seg:hover .seg-fill { opacity:0.85; }
-  .seg-fill { transition:opacity 0.3s, fill 0.3s; }
-  .seg.active .seg-fill { fill:rgba(108,99,255,0.55); }
-  .seg:not(.active) .seg-fill { fill:rgba(108,99,255,0.14); }
+  .disk-ring {
+    fill:rgba(108,99,255,0.14);
+    stroke:rgba(108,99,255,0.12);
+    stroke-width:0.006;
+  }
 
-  .seg-text {
+  .disk-slice-line {
+    stroke:rgba(255,255,255,0.08);
+    stroke-width:0.006;
+    stroke-linecap:round;
+  }
+
+  .disk-label {
     font-family:'League Gothic',sans-serif;
-    font-size:11px;
+    font-size:0.08px;
     letter-spacing:0.14em;
     text-transform:uppercase;
-    fill:rgba(255,255,255,0.5);
-    pointer-events:none;
+    fill:rgba(255,255,255,0.55);
     text-anchor:middle;
     dominant-baseline:middle;
+    pointer-events:none;
   }
-  .seg.active .seg-text { fill:rgba(255,255,255,0.95); }
+
+  .disk-label.active { fill:rgba(255,255,255,0.95); }
 
   .disk-center-circle {
     position:absolute;
@@ -146,11 +127,8 @@
     border-radius:50%;
     background:radial-gradient(circle, rgba(108,99,255,0.3) 0%, rgba(108,99,255,0.08) 70%);
     border:1px solid rgba(108,99,255,0.4);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    gap:0.2rem;
+    display:grid;
+    place-items:center;
     backdrop-filter:blur(8px);
     pointer-events:none;
   }
@@ -161,40 +139,6 @@
     font-size:1.5rem;
     color:var(--accent);
     line-height:1;
-  }
-
-  .center-total {
-    font-size:0.6rem;
-    letter-spacing:0.12em;
-    text-transform:uppercase;
-    color:rgba(255,255,255,0.35);
-  }
-
-  .disk-halo {
-    position:absolute;
-    top:50%; left:50%;
-    transform:translate(-50%, -50%);
-    width:110vw;
-    height:110vw;
-    max-width:1040px;
-    max-height:1040px;
-    border-radius:50%;
-    border:1px solid rgba(108,99,255,0.08);
-    animation:haloBreath 4s ease-in-out infinite;
-  }
-
-  .disk-halo-2 {
-    width:118vw;
-    height:118vw;
-    max-width:1120px;
-    max-height:1120px;
-    border:1px solid rgba(108,99,255,0.04);
-    animation:haloBreath 4s ease-in-out infinite 1s;
-  }
-
-  @keyframes haloBreath {
-    0%, 100% { opacity:0.4; transform:translate(-50%,-50%) scale(1); }
-    50% { opacity:1; transform:translate(-50%,-50%) scale(1.02); }
   }
 
   .overlay {
@@ -217,192 +161,37 @@
     box-shadow:0 30px 80px rgba(0,0,0,0.22);
   }
 
-  .back-link {
-    display:inline-flex;
-    align-items:center;
-    gap:0.5rem;
-    font-size:0.72rem;
-    letter-spacing:0.14em;
-    text-transform:uppercase;
-    color:var(--muted);
-    opacity:0.65;
-    transition:opacity 0.18s, color 0.18s;
-    margin-bottom:1.25rem;
-  }
-  .back-link:hover { opacity:1; color:var(--accent); }
-
-  .s-label {
-    font-size:0.68rem;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    color:var(--accent);
-    margin-bottom:1rem;
-    display:flex;
-    align-items:center;
-    gap:0.8rem;
-  }
-  .s-label::before {
-    content:'';
-    width:20px;
-    height:1px;
-    background:var(--accent);
-    flex-shrink:0;
-  }
-
-  .slides-wrap { position:relative; overflow:hidden; }
-  .slide { display:none; animation:fadeSlide 0.5s ease both; }
+  .slide { display:none; }
   .slide.active { display:block; }
 
-  @keyframes fadeSlide {
-    from { opacity:0; transform:translateY(12px); }
-    to { opacity:1; transform:translateY(0); }
-  }
+  .back-link { display:inline-flex; gap:0.5rem; font-size:0.72rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--muted); opacity:0.65; margin-bottom:1.25rem; }
+  .s-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
 
-  .slide-eyebrow {
-    font-size:0.68rem;
-    letter-spacing:0.22em;
-    text-transform:uppercase;
-    color:rgba(255,255,255,0.35);
-    margin-bottom:0.85rem;
-  }
-
-  .slide-title {
-    font-family:'Instrument Serif',serif;
-    font-size:clamp(1.6rem, 3vw, 2.5rem);
-    font-weight:400;
-    line-height:1.15;
-    letter-spacing:-0.02em;
-    margin-bottom:0.9rem;
-  }
-
+  .slide-eyebrow { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:rgba(255,255,255,0.35); margin-bottom:0.85rem; }
+  .slide-title { font-family:'Instrument Serif',serif; font-size:clamp(1.6rem, 3vw, 2.5rem); font-weight:400; line-height:1.15; margin-bottom:0.9rem; }
   .slide-title .hl { font-style:italic; color:var(--accent); }
+  .slide-text { font-size:0.92rem; color:var(--muted); line-height:1.85; max-width:480px; opacity:0.82; }
 
-  .slide-text {
-    font-size:0.92rem;
-    color:var(--muted);
-    line-height:1.85;
-    max-width:480px;
-    opacity:0.82;
-  }
+  .slide-tags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.9rem; }
+  .tag { font-size:0.65rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); padding:0.25rem 0.7rem; border:1px solid rgba(108,99,255,0.28); border-radius:100px; }
 
-  .slide-tags {
-    display:flex;
-    gap:0.4rem;
-    flex-wrap:wrap;
-    margin-bottom:0.9rem;
-  }
+  .slide-stats { display:grid; grid-template-columns:repeat(3, 1fr); gap:0.8rem; margin-top:1rem; }
+  .stat-box { padding:1rem 0.9rem; border-radius:16px; border:1px solid var(--border); background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01)); }
+  .stat-val { font-family:'Instrument Serif',serif; font-size:1.6rem; color:var(--accent); line-height:1; margin-bottom:0.3rem; }
+  .stat-label { font-size:0.72rem; color:var(--muted); opacity:0.6; line-height:1.45; }
 
-  .tag {
-    font-size:0.65rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--accent);
-    padding:0.25rem 0.7rem;
-    border:1px solid rgba(108,99,255,0.28);
-    border-radius:100px;
-  }
+  .slide-imgs { display:grid; grid-template-columns:1fr 1fr; gap:0.75rem; margin-top:1rem; }
+  .slide-img { border-radius:12px; overflow:hidden; aspect-ratio:4/3; background:rgba(255,255,255,0.04); border:1px solid var(--border); }
+  .slide-img img, .slide-img video { width:100%; height:100%; object-fit:cover; display:block; }
 
-  .slide-imgs {
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:0.75rem;
-    margin-top:1rem;
-  }
-
-  .slide-img {
-    border-radius:12px;
-    overflow:hidden;
-    aspect-ratio:4/3;
-    background:rgba(255,255,255,0.04);
-    border:1px solid var(--border);
-  }
-
-  .slide-img img, .slide-img video {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-  }
-
-  .slide-stats {
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:0.8rem;
-    margin-top:1rem;
-  }
-
-  .stat-box {
-    padding:1rem 0.9rem;
-    border-radius:16px;
-    border:1px solid var(--border);
-    background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.01));
-  }
-
-  .stat-val {
-    font-family:'Instrument Serif',serif;
-    font-size:1.6rem;
-    font-weight:400;
-    color:var(--accent);
-    line-height:1;
-    margin-bottom:0.3rem;
-  }
-
-  .stat-label {
-    font-size:0.72rem;
-    color:var(--muted);
-    opacity:0.6;
-    line-height:1.45;
-  }
-
-  .slide-nav {
-    display:flex;
-    align-items:center;
-    gap:1rem;
-    margin-top:1.5rem;
-  }
-
-  .nav-arrow {
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    border:1px solid var(--border);
-    background:transparent;
-    color:var(--muted);
-    cursor:pointer;
-    display:grid;
-    place-items:center;
-    font-size:1rem;
-    transition:border-color 0.18s, color 0.18s, background 0.18s;
-  }
-  .nav-arrow:hover { border-color:rgba(255,255,255,0.3); color:var(--text); background:rgba(255,255,255,0.05); }
-
-  .slide-counter {
-    font-family:'Instrument Serif',serif;
-    font-style:italic;
-    font-size:0.92rem;
-    color:rgba(255,255,255,0.35);
-  }
-
+  .slide-nav { display:flex; align-items:center; gap:1rem; margin-top:1.5rem; }
+  .nav-arrow { width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; display:grid; place-items:center; }
+  .slide-counter { font-family:'Instrument Serif',serif; font-style:italic; font-size:0.92rem; color:rgba(255,255,255,0.35); }
   .slide-counter span { color:var(--accent); }
 
-  footer {
-    border-top:1px solid var(--border);
-    padding:1.5rem 3.5rem;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    position:relative;
-    z-index:3;
-  }
-
-  .footer-text, .footer-link {
-    font-size:0.72rem;
-    color:var(--muted);
-    text-decoration:none;
-  }
-
+  footer { border-top:1px solid var(--border); padding:1.5rem 3.5rem; display:flex; justify-content:space-between; align-items:center; position:relative; z-index:3; }
+  .footer-text, .footer-link { font-size:0.72rem; color:var(--muted); text-decoration:none; }
   .footer-links { display:flex; gap:1.5rem; }
-  .footer-link:hover { color:var(--text); }
 
   @media (max-width:900px) {
     nav { padding:0 1.25rem; }
@@ -422,7 +211,6 @@
     .overlay { min-height:auto; padding:1rem; }
     .overlay-card { padding:1.25rem; }
     .disk-scene { width:min(88vw, 360px); height:min(88vw, 360px); }
-    .disk-halo, .disk-halo-2 { width:105vw; height:105vw; }
     .disk-center-circle { width:72px; height:72px; }
     .slide-title { font-size:1.45rem; }
   }
@@ -442,14 +230,10 @@
 
 <main class="project-page">
   <div class="disk-layer">
-    <div class="disk-halo"></div>
-    <div class="disk-halo disk-halo-2"></div>
-
     <div class="disk-scene">
       <svg class="disk-svg" id="diskSvg" viewBox="-1 -1 2 2" xmlns="http://www.w3.org/2000/svg"></svg>
       <div class="disk-center-circle">
         <div class="center-num" id="centerNum">1</div>
-        <div class="center-total" id="centerTotal">/ 4</div>
       </div>
     </div>
   </div>
@@ -464,9 +248,7 @@
           <div class="slide-eyebrow">Slide 01 · Contexte</div>
           <h1 class="slide-title">Site web · <span class="hl">Portfolio</span></h1>
           <div class="slide-tags">
-            <span class="tag">UI Design</span>
-            <span class="tag">Web</span>
-            <span class="tag">Motion</span>
+            <span class="tag">UI Design</span><span class="tag">Web</span><span class="tag">Motion</span>
           </div>
           <p class="slide-text">Conception d'un portfolio format site internet pour présenter différents projets avec une navigation fluide et une identité visuelle forte. L'objectif : donner envie d'aller plus loin à chaque scroll.</p>
         </div>
@@ -476,18 +258,9 @@
           <h2 class="slide-title">Le défi <span class="hl">identitaire</span></h2>
           <p class="slide-text">Sans identité visuelle définie au départ, le challenge était de créer un système cohérent from scratch — typographie, couleurs, animations — qui reflète un positionnement haut de gamme sans tomber dans les clichés.</p>
           <div class="slide-stats">
-            <div class="stat-box">
-              <div class="stat-val">0</div>
-              <div class="stat-label">Charte graphique existante au départ</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-val">3</div>
-              <div class="stat-label">Itérations majeures de direction artistique</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-val">100%</div>
-              <div class="stat-label">Code HTML/CSS from scratch</div>
-            </div>
+            <div class="stat-box"><div class="stat-val">0</div><div class="stat-label">Charte graphique existante au départ</div></div>
+            <div class="stat-box"><div class="stat-val">3</div><div class="stat-label">Itérations majeures de direction artistique</div></div>
+            <div class="stat-box"><div class="stat-val">100%</div><div class="stat-label">Code HTML/CSS from scratch</div></div>
           </div>
         </div>
 
@@ -496,14 +269,8 @@
           <h2 class="slide-title">Concevoir <span class="hl">par couches</span></h2>
           <p class="slide-text">D'abord la structure — nav, sections, hiérarchie. Puis l'identité — typographie éditoriale, bleu royal, micro-animations. Enfin les interactions — carrousels, scroll vertical, disque rotatif.</p>
           <div class="slide-imgs">
-            <div class="slide-img">
-              <video autoplay muted loop playsinline>
-                <source src="Exemple design portfolio.mp4" type="video/mp4">
-              </video>
-            </div>
-            <div class="slide-img">
-              <img src="Portfolio-02.png" alt="Wireframe" loading="lazy">
-            </div>
+            <div class="slide-img"><video autoplay muted loop playsinline><source src="Exemple design portfolio.mp4" type="video/mp4"></video></div>
+            <div class="slide-img"><img src="Portfolio-02.png" alt="Wireframe" loading="lazy"></div>
           </div>
         </div>
 
@@ -511,20 +278,6 @@
           <div class="slide-eyebrow">Slide 04 · Résultat</div>
           <h2 class="slide-title">Un site qui <span class="hl">raconte</span></h2>
           <p class="slide-text">Le portfolio final propose une expérience de navigation non-linéaire, des animations distinctives et une identité mémorable. Chaque section a sa propre mécanique d'interaction.</p>
-          <div class="slide-stats">
-            <div class="stat-box">
-              <div class="stat-val">5</div>
-              <div class="stat-label">Sections avec interactions distinctes</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-val">3</div>
-              <div class="stat-label">Types de carrousels différents</div>
-            </div>
-            <div class="stat-box">
-              <div class="stat-val">↗</div>
-              <div class="stat-label">Hébergé sur GitHub Pages</div>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -553,7 +306,6 @@ const SLIDES_CONFIG = [
   { label: 'Approche', sectionLabel: 'L\'approche' },
   { label: 'Résultat', sectionLabel: 'Résultat' },
 ];
-
 const N = SLIDES_CONFIG.length;
 const diskSvg = document.getElementById('diskSvg');
 const slides = Array.from(document.querySelectorAll('.slide'));
@@ -562,12 +314,9 @@ const nextBtn = document.getElementById('nextBtn');
 const curNumEl = document.getElementById('curNum');
 const totalNumEl = document.getElementById('totalNum');
 const centerNumEl = document.getElementById('centerNum');
-const centerTotalEl = document.getElementById('centerTotal');
 const sectionLabelEl = document.getElementById('sectionLabel');
 
 totalNumEl.textContent = N;
-centerTotalEl.textContent = `/ ${N}`;
-
 let current = 0;
 let diskRotation = 0;
 
@@ -575,59 +324,48 @@ function buildDisk() {
   diskSvg.innerHTML = '';
   const R = 0.92;
   const r = 0.28;
-  const overlap = 0.03;
+  const lineR = 0.995;
+
+  const bg = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+  bg.setAttribute('cx', '0');
+  bg.setAttribute('cy', '0');
+  bg.setAttribute('r', R);
+  bg.setAttribute('class', 'disk-ring');
+  diskSvg.appendChild(bg);
 
   for (let i = 0; i < N; i++) {
-    const startAngle = (2 * Math.PI * i / N) - Math.PI / 2 - overlap;
-    const endAngle = (2 * Math.PI * (i + 1) / N) - Math.PI / 2 + overlap;
+    const angle = (2 * Math.PI * i / N) - Math.PI / 2;
+    const x1 = r * Math.cos(angle);
+    const y1 = r * Math.sin(angle);
+    const x2 = lineR * Math.cos(angle);
+    const y2 = lineR * Math.sin(angle);
 
-    const x1 = Math.cos(startAngle), y1 = Math.sin(startAngle);
-    const x2 = Math.cos(endAngle), y2 = Math.sin(endAngle);
-    const x3 = r * Math.cos(endAngle), y3 = r * Math.sin(endAngle);
-    const x4 = r * Math.cos(startAngle), y4 = r * Math.sin(startAngle);
-    const largeArc = (endAngle - startAngle > Math.PI) ? 1 : 0;
+    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+    line.setAttribute('x1', x1);
+    line.setAttribute('y1', y1);
+    line.setAttribute('x2', x2);
+    line.setAttribute('y2', y2);
+    line.setAttribute('class', 'disk-slice-line');
+    line.dataset.index = i;
+    line.addEventListener('click', () => goTo(i));
+    diskSvg.appendChild(line);
 
-    const d = [
-      `M ${x1 * R} ${y1 * R}`,
-      `A ${R} ${R} 0 ${largeArc} 1 ${x2 * R} ${y2 * R}`,
-      `L ${x3} ${y3}`,
-      `A ${r} ${r} 0 ${largeArc} 0 ${x4} ${y4}`,
-      'Z'
-    ].join(' ');
-
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-    g.setAttribute('class', 'seg' + (i === 0 ? ' active' : ''));
-    g.dataset.index = i;
-
-    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-    path.setAttribute('d', d);
-    path.setAttribute('class', 'seg-fill');
-    path.setAttribute('stroke', 'none');
-
-    const midAngle = (startAngle + endAngle) / 2;
-    const textR = (R + r) / 2;
-    const tx = textR * Math.cos(midAngle);
-    const ty = textR * Math.sin(midAngle);
+    const mid = angle + (Math.PI / N);
+    const tx = 0.63 * Math.cos(mid);
+    const ty = 0.63 * Math.sin(mid);
 
     const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     text.setAttribute('x', tx);
     text.setAttribute('y', ty);
-    text.setAttribute('class', 'seg-text');
-    const angleDeg = (midAngle * 180 / Math.PI) + 90;
-    text.setAttribute('transform', `rotate(${angleDeg}, ${tx}, ${ty})`);
+    text.setAttribute('class', 'disk-label' + (i === 0 ? ' active' : ''));
     text.textContent = SLIDES_CONFIG[i].label;
-
-    g.appendChild(path);
-    g.appendChild(text);
-    g.addEventListener('click', () => goTo(i));
-    diskSvg.appendChild(g);
+    diskSvg.appendChild(text);
   }
 }
 
 function goTo(i) {
   const prev = current;
   current = ((i % N) + N) % N;
-
   const segDeg = 360 / N;
   let diff = current - prev;
   if (diff > N / 2) diff -= N;
@@ -636,12 +374,8 @@ function goTo(i) {
   diskRotation -= diff * segDeg;
   diskSvg.style.transform = `rotate(${diskRotation}deg)`;
 
-  document.querySelectorAll('.seg').forEach((seg, j) => {
-    seg.classList.toggle('active', j === current);
-  });
-
   slides.forEach((s, j) => s.classList.toggle('active', j === current));
-
+  document.querySelectorAll('.disk-label').forEach((t, j) => t.classList.toggle('active', j === current));
   curNumEl.textContent = current + 1;
   centerNumEl.textContent = current + 1;
   sectionLabelEl.textContent = SLIDES_CONFIG[current].sectionLabel;
