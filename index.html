@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Seyrin Studio</title>
- <link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,7 +18,6 @@
     --muted:#E2E8F0; 
     --accent:#6C63FF;
     --blue:#6C63FF; 
-    --blue-soft:rgba(108,99,255,0.12); 
   }
 
   html { scroll-behavior:smooth; }
@@ -39,179 +39,48 @@
 
   /* ── NAV ── */
   nav { 
-    position:fixed; 
-    top:0; left:0; right:0; z-index:100; 
-    display:grid; 
-    grid-template-columns:1fr auto 1fr; 
-    align-items:center;
-    padding:0 2.5rem;
-    height:60px; 
-    background:rgba(16,30,48,0.88); 
-    backdrop-filter:blur(20px); 
+    position:fixed; top:0; left:0; right:0; z-index:100; 
+    display:grid; grid-template-columns:1fr auto 1fr; 
+    align-items:center; padding:0 2.5rem; height:60px; 
+    background:rgba(16,30,48,0.88); backdrop-filter:blur(20px); 
     border-bottom:1px solid var(--border); 
   }
-  .nav-left { 
-    font-family:'League Gothic', sans-serif;
-    font-size:1.1rem;
-    letter-spacing:0.08em;
-    text-transform:uppercase;
-    color:var(--text);
-    text-decoration:none; 
-    transition:color 0.18s;
-  }
+  .nav-left { font-family:'League Gothic',sans-serif; font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); text-decoration:none; transition:color 0.18s; }
   .nav-left:hover { color:var(--accent); }
   .nav-center { display:flex; gap:0.25rem; }
-  .nav-link { 
-    position:relative;
-    font-family:'League Gothic', sans-serif;
-    font-size:1rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--muted); 
-    text-decoration:none; 
-    padding:0.35rem 0.9rem; 
-    border-radius:100px; 
-    transition:color .18s, background .18s;
-  }
-  .nav-link::after {
-    content:"";
-    position:absolute;
-    left:50%; bottom:-6px;
-    transform:translateX(-50%);
-    width:0; height:2px;
-    background:var(--text);
-    border-radius:999px;
-    transition:width 0.25s ease;
-  }
+  .nav-link { position:relative; font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; }
+  .nav-link::after { content:""; position:absolute; left:50%; bottom:-6px; transform:translateX(-50%); width:0; height:2px; background:var(--text); border-radius:999px; transition:width 0.25s ease; }
   .nav-link.active::after { width:22px; }
   .nav-link:hover { color:var(--text); background:rgba(255,255,255,0.06); }
   .nav-right { display:flex; justify-content:flex-end; }
-  .nav-cta { 
-    font-family:'League Gothic', sans-serif;
-    font-size:1rem;
-    letter-spacing:0.1em;
-    text-transform:uppercase;
-    color:var(--text); 
-    text-decoration:none; 
-    padding:0.4rem 1.1rem; 
-    border:1px solid rgba(255,255,255,0.2); 
-    border-radius:100px; 
-    transition:border-color 0.18s, background 0.18s, color 0.18s;
-  }
+  .nav-cta { font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text); text-decoration:none; padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color 0.18s, background 0.18s, color 0.18s; }
   .nav-cta:hover { border-color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.05); }
 
   /* ── HERO ── */
-  .hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 11rem 2.5rem 2.5rem;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero-glow { 
-    position:absolute; inset:0; 
-    background:
-      radial-gradient(ellipse 60% 55% at 72% 38%, rgba(43,117,207,0.1) 0%, transparent 70%), 
-      radial-gradient(ellipse 40% 30% at 20% 70%, rgba(43,117,207,0.05) 0%, transparent 60%); 
-    pointer-events:none; 
-  }
-  .hero-intro {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-    max-width: 1000px;
-    position: relative;
-    z-index: 1;
-  }
-  .hero-eyebrow { 
-    font-size:0.72rem; 
-    letter-spacing:0.22em; 
-    text-transform:uppercase; 
-    color:var(--muted);
-  }
-  .hero-title { 
-    font-family:'Instrument Serif',serif; 
-    font-size:clamp(2.8rem,5.5vw,5rem); 
-    font-weight:400;
-    line-height:1.05; 
-    letter-spacing:-0.02em; 
-  }
+  .hero { display:flex; flex-direction:column; justify-content:center; padding:11rem 2.5rem 2.5rem; position:relative; overflow:hidden; }
+  .hero-glow { position:absolute; inset:0; background: radial-gradient(ellipse 60% 55% at 72% 38%, rgba(43,117,207,0.1) 0%, transparent 70%), radial-gradient(ellipse 40% 30% at 20% 70%, rgba(43,117,207,0.05) 0%, transparent 60%); pointer-events:none; }
+  .hero-intro { display:flex; flex-direction:column; gap:1.25rem; max-width:1000px; position:relative; z-index:1; }
+  .hero-eyebrow { font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); }
+  .hero-title { font-family:'Instrument Serif',serif; font-size:clamp(2.8rem,5.5vw,5rem); font-weight:400; line-height:1.05; letter-spacing:-0.02em; }
   .hero-title .italic { font-style:italic; color:var(--accent); }
-  .hero-desc { 
-    font-size:0.92rem; 
-    color:var(--muted); 
-    max-width:600px;
-    line-height:1.8; 
-    border-left: 2px solid rgba(108,99,255,0.4);
-    padding-left: 1rem;
-  }
+  .hero-desc { font-size:0.92rem; color:var(--muted); max-width:600px; line-height:1.8; border-left:2px solid rgba(108,99,255,0.4); padding-left:1rem; }
   .hero-desc strong { color:var(--accent); font-weight:400; }
 
-  /* Scroll bar */
-  .hero-scroll-wrap {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 0.75rem;
-    padding-right: 3.5rem;
-    margin-bottom: 3rem;
-  }
-  .scroll-label { 
-    font-size:0.65rem; 
-    letter-spacing:0.22em; 
-    text-transform:uppercase; 
-    color:var(--muted);
-    writing-mode:vertical-rl; 
-  }
-  .scroll-bar { 
-    width:1px; height:48px; 
-    background:var(--border); 
-    position:relative; 
-    overflow:hidden; 
-  }
-  .scroll-bar::after { 
-    content:''; 
-    position:absolute; 
-    top:-100%; left:0; 
-    width:1px; height:100%; 
-    background:var(--blue); 
-    animation:scrollDrop 2.2s ease-in-out infinite; 
-  }
-  @keyframes scrollDrop { 
-    0% { top:-100%; } 
-    100% { top:100%; } 
-  }
+  .hero-scroll-wrap { display:flex; justify-content:flex-end; align-items:center; gap:0.75rem; padding-right:3.5rem; margin-bottom:3rem; }
+  .scroll-label { font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); writing-mode:vertical-rl; }
+  .scroll-bar { width:1px; height:48px; background:var(--border); position:relative; overflow:hidden; }
+  .scroll-bar::after { content:''; position:absolute; top:-100%; left:0; width:1px; height:100%; background:var(--blue); animation:scrollDrop 2.2s ease-in-out infinite; }
+  @keyframes scrollDrop { 0%{top:-100%} 100%{top:100%} }
 
   /* ── PORTFOLIO ── */
-  .portfolio-section { position: relative; z-index: 1; }
-  .s-label { 
-    font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; 
-    color:var(--blue); margin-bottom:2rem; 
-    display:flex; align-items:center; gap:0.8rem; 
-  }
+  .portfolio-section { position:relative; z-index:1; }
+  .s-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--blue); margin-bottom:2rem; display:flex; align-items:center; gap:0.8rem; }
   .s-label::before { content:''; width:20px; height:1px; background:var(--blue); flex-shrink:0; }
-  .portfolio-stage { 
-    position:relative; min-height:580px; 
-    display:flex; align-items:center; justify-content:center; 
-    overflow:hidden; padding:0 0 56px; 
-  }
-  .portfolio-track { 
-    position:relative; width:min(100%, 1100px); height:500px; 
-    display:flex; align-items:center; justify-content:center; 
-  }
-  .portfolio-card { 
-    position:absolute; width:190px; height:360px; border-radius:22px; overflow:hidden; 
-    border:1px solid rgba(255,255,255,.12); box-shadow:0 24px 40px rgba(0,0,0,.28); 
-    background:#13203a; cursor:pointer; 
-    transition:transform .5s cubic-bezier(.16,1,.3,1), opacity .35s ease, filter .35s ease, box-shadow .35s ease; 
-    will-change:transform; 
-  }
-  .portfolio-card img, .portfolio-card video { width:100%; height:100%; object-fit:cover; }
-  .portfolio-card::after { 
-    content:""; position:absolute; inset:0; 
-    background:linear-gradient(180deg, rgba(255,255,255,.14), transparent 18%, transparent 74%, rgba(5,9,19,.34)); 
-  }
+  .portfolio-stage { position:relative; min-height:580px; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:0 0 56px; }
+  .portfolio-track { position:relative; width:min(100%, 1100px); height:500px; display:flex; align-items:center; justify-content:center; }
+  .portfolio-card { position:absolute; width:190px; height:360px; border-radius:22px; overflow:hidden; border:1px solid rgba(255,255,255,.12); box-shadow:0 24px 40px rgba(0,0,0,.28); background:#13203a; cursor:pointer; transition:transform .5s cubic-bezier(.16,1,.3,1), opacity .35s ease, filter .35s ease, box-shadow .35s ease; will-change:transform; }
+  .portfolio-card img,.portfolio-card video { width:100%; height:100%; object-fit:cover; }
+  .portfolio-card::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg, rgba(255,255,255,.14), transparent 18%, transparent 74%, rgba(5,9,19,.34)); }
   .portfolio-card.center { width:300px; height:460px; transform:translateX(0) scale(1); opacity:1; z-index:5; filter:none; box-shadow:0 30px 70px rgba(0,0,0,.34); }
   .portfolio-card.left-1 { transform:translateX(-260px) scale(.92) perspective(900px) rotateY(8deg); z-index:4; opacity:.76; }
   .portfolio-card.left-2 { transform:translateX(-440px) scale(.76) perspective(900px) rotateY(12deg); z-index:2; opacity:.34; filter:saturate(.8); }
@@ -226,10 +95,12 @@
   .portfolio-title { margin:0 0 8px; font-family:'Instrument Serif',serif; font-size:clamp(1.15rem,1rem + .7vw,1.55rem); font-weight:400; line-height:1.08; letter-spacing:-0.03em; }
   .portfolio-text { margin:0; color:var(--muted); font-size:0.88rem; }
 
-  /* ── SECTIONS ── */
   .section { max-width:980px; margin:0 auto; padding:8rem 2rem; }
 
-  /* ── ABOUT ── */
+  /* ══════════════════════════════════════
+     ── ABOUT — carousel vertical style portfolio ──
+  ══════════════════════════════════════ */
+
   .about-carousel {
     position: relative;
     /* Fenêtre : on voit l'actif + aperçu en haut/bas */
@@ -384,50 +255,6 @@
   .skill-pct { font-size:0.65rem; color:var(--accent); }
   .skill-bar-track { height:2px; background:rgba(255,255,255,0.08); border-radius:2px; overflow:hidden; }
   .skill-bar-fill { height:100%; background:var(--accent); border-radius:2px; }
- 
-  /* Outils 
-  .skills-section-label {
-    font-size: 0.68rem;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--blue);
-    margin-bottom: 1.25rem;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .skills-section-label::before { content: ''; width: 20px; height: 1px; background: var(--blue); flex-shrink: 0; }
-  .skills-row {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-}
-
-.skill-cell {
-  padding: 1.5rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.6rem;
-  border-right: 1px solid var(--border);
-}
-.skill-cell:last-child {
-  border-right: none;
-}
- 
-  .skill-cell-top { display: flex; align-items: center; gap: 0.75rem; }
-  .skill-logo {
-    width: 44px; height: 44px;
-    border-radius: 12px;
-    background: var(--accent);
-    display: grid;
-    place-items: center;
-    flex-shrink: 0;
-    overflow: hidden;
-  }
-  .skill-logo img { width: 26px; height: 26px; object-fit: contain; filter: brightness(0) invert(1); }
-  .skill-cell-name { font-size: 0.85rem; font-weight: 400; color: var(--text); letter-spacing: 0.01em; }
-  .skill-cell-pct { font-size: 0.8rem; color: var(--accent); font-weight: 400; padding-left: calc(44px + 0.75rem); }
-  .skill-bar-track { height: 2px; background: rgba(255,255,255,0.08); border-radius: 2px; overflow: hidden; }
-  .skill-bar-fill { height: 100%; background: var(--accent); border-radius: 2px; }*/
 
   /* Slide 5 : Ce que j'apporte */
   .about-value-list { display:flex; flex-direction:column; gap:0; max-width:640px; }
@@ -437,178 +264,53 @@
   .about-value-text strong { display:block; font-size:0.88rem; font-weight:500; color:var(--text); margin-bottom:0.2rem; }
   .about-value-text p { font-size:0.78rem; color:var(--muted); line-height:1.7; margin:0; }
 
-  /* ── TÉMOIGNAGES CARROUSEL ── */
-  .testimonials-wrap {
-    position: relative;
-  }
+  /* ── TÉMOIGNAGES ── */
+  .testimonials-wrap { position:relative; }
+  .testimonials-track { overflow:hidden; }
+  .testimonials-inner { display:flex; transition:transform 0.5s cubic-bezier(.16,1,.3,1); }
+  .testimonial-card { min-width:100%; padding:2.5rem; border-radius:24px; border:1px solid rgba(255,255,255,.08); background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015)); display:flex; flex-direction:column; gap:1.75rem; }
+  .testimonial-quote { font-size:2.5rem; color:var(--accent); line-height:1; font-family:'Instrument Serif',serif; }
+  .testimonial-text { font-family:'Instrument Serif',serif; font-size:clamp(1.1rem,2vw,1.4rem); font-weight:400; line-height:1.55; color:var(--text); letter-spacing:-0.01em; flex:1; }
+  .testimonial-footer { display:flex; align-items:center; justify-content:space-between; padding-top:1.5rem; border-top:1px solid var(--border); }
+  .testimonial-author { display:flex; align-items:center; gap:1rem; }
+  .testimonial-avatar { width:44px; height:44px; border-radius:50%; background:var(--accent); display:grid; place-items:center; font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.05em; color:#fff; flex-shrink:0; }
+  .testimonial-name { font-size:0.88rem; font-weight:500; color:var(--text); }
+  .testimonial-role { font-size:0.75rem; color:var(--muted); opacity:0.6; margin-top:0.15rem; }
+  .testimonial-tag { font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--accent); padding:0.3rem 0.8rem; border:1px solid rgba(108,99,255,0.3); border-radius:100px; }
+  .testimonials-nav { display:flex; align-items:center; justify-content:space-between; margin-top:2rem; }
+  .testimonials-dots { display:flex; gap:8px; }
+  .testimonials-dots button { width:7px; height:7px; border:0; border-radius:50%; padding:0; background:rgba(255,255,255,.24); cursor:pointer; transition:background 0.2s; }
+  .testimonials-dots button.active { background:#fff; }
+  .testimonials-arrows { display:flex; gap:0.75rem; }
+  .arrow-btn { width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; display:grid; place-items:center; font-size:1rem; transition:border-color 0.18s, color 0.18s, background 0.18s; }
+  .arrow-btn:hover { border-color:rgba(255,255,255,0.3); color:var(--text); background:rgba(255,255,255,0.05); }
 
-  /* Conteneur glissant */
-  .testimonials-track {
-    overflow: hidden;
-  }
-
-  .testimonials-inner {
-    display: flex;
-    transition: transform 0.5s cubic-bezier(.16,1,.3,1);
-  }
-
-  /* Carte témoignage */
-  .testimonial-card {
-    min-width: 100%;
-    padding: 2.5rem;
-    border-radius: 24px;
-    border: 1px solid rgba(255,255,255,.08);
-    background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.015));
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
-  }
-
-  .testimonial-quote {
-    font-size: 2.5rem;
-    color: var(--accent);
-    line-height: 1;
-    font-family: 'Instrument Serif', serif;
-  }
-
-  .testimonial-text {
-    font-family: 'Instrument Serif', serif;
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
-    font-weight: 400;
-    line-height: 1.55;
-    color: var(--text);
-    letter-spacing: -0.01em;
-    flex: 1;
-  }
-
-  .testimonial-footer {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-top: 1.5rem;
-    border-top: 1px solid var(--border);
-  }
-
-  .testimonial-author {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-  }
-
-  .testimonial-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: var(--accent);
-    display: grid;
-    place-items: center;
-    font-family: 'League Gothic', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.05em;
-    color: #fff;
-    flex-shrink: 0;
-  }
-
-  .testimonial-name {
-    font-size: 0.88rem;
-    font-weight: 500;
-    color: var(--text);
-  }
-
-  .testimonial-role {
-    font-size: 0.75rem;
-    color: var(--muted);
-    opacity: 0.6;
-    margin-top: 0.15rem;
-  }
-
-  .testimonial-tag {
-    font-size: 0.68rem;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--accent);
-    padding: 0.3rem 0.8rem;
-    border: 1px solid rgba(108,99,255,0.3);
-    border-radius: 100px;
-  }
-
-  /* Navigation */
-  .testimonials-nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-top: 2rem;
-  }
-
-  .testimonials-dots {
-    display: flex;
-    gap: 8px;
-  }
-
-  .testimonials-dots button {
-    width: 7px; height: 7px;
-    border: 0; border-radius: 50%; padding: 0;
-    background: rgba(255,255,255,.24);
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  .testimonials-dots button.active { background: #fff; }
-
-  .testimonials-arrows {
-    display: flex;
-    gap: 0.75rem;
-  }
-
-  .arrow-btn {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    border: 1px solid var(--border);
-    background: transparent;
-    color: var(--muted);
-    cursor: pointer;
-    display: grid;
-    place-items: center;
-    font-size: 1rem;
-    transition: border-color 0.18s, color 0.18s, background 0.18s;
-  }
-
-  .arrow-btn:hover {
-    border-color: rgba(255,255,255,0.3);
-    color: var(--text);
-    background: rgba(255,255,255,0.05);
-  }
-
-  /* ── FOOTER ── */
   footer { border-top:1px solid var(--border); padding:2rem 3.5rem; display:flex; justify-content:space-between; align-items:center; }
-  .footer-text, .footer-link { font-size:0.72rem; color:var(--muted); text-decoration:none; }
+  .footer-text,.footer-link { font-size:0.72rem; color:var(--muted); text-decoration:none; }
   .footer-links { display:flex; gap:1.5rem; }
   .footer-link:hover { color:var(--text); }
 
-  @media (max-width:900px){ 
-    .hero { padding: 80px 2rem 0; }
-    nav { padding:0 1.5rem; } 
-    .about-grid { grid-template-columns: 1fr 1fr; }
-    footer { flex-direction: column; gap: 1rem; padding: 2rem; }
+  @media (max-width:900px){
+    .hero { padding:80px 2rem 0; } nav { padding:0 1.5rem; }
+    .about-build-grid, .about-approach-grid { grid-template-columns:1fr 1fr; }
+    footer { flex-direction:column; gap:1rem; padding:2rem; }
   }
-  @media (max-width:640px){ 
-    nav { grid-template-columns:1fr; gap:0.75rem; height:auto; padding:0.85rem 1rem; } 
-    .nav-left,.nav-center,.nav-right { justify-self:start; } 
+  @media (max-width:640px){
+    nav { grid-template-columns:1fr; gap:0.75rem; height:auto; padding:0.85rem 1rem; }
+    .nav-left,.nav-center,.nav-right { justify-self:start; }
     .hero { padding:70px 1.25rem 0; }
-    .section { padding:5rem 1.25rem; } 
-    .about-grid { grid-template-columns: 1fr; }
-    .portfolio-stage { min-height:400px; } 
-    .portfolio-track { height:340px; } 
-    .portfolio-card { width:110px; height:220px; } 
-    .portfolio-card.center { width:185px; height:300px; } 
-    .portfolio-card.left-1 { transform:translateX(-140px) scale(.9); } 
-    .portfolio-card.right-1 { transform:translateX(140px) scale(.9); } 
-    .portfolio-card.left-2 { transform:translateX(-235px) scale(.72); } 
-    .portfolio-card.right-2 { transform:translateX(235px) scale(.72); }
-    .testimonial-card { padding: 1.75rem; }
+    .section { padding:5rem 1.25rem; }
+    .portfolio-stage { min-height:400px; } .portfolio-track { height:340px; }
+    .portfolio-card { width:110px; height:220px; } .portfolio-card.center { width:185px; height:300px; }
+    .portfolio-card.left-1 { transform:translateX(-140px) scale(.9); } .portfolio-card.right-1 { transform:translateX(140px) scale(.9); }
+    .portfolio-card.left-2 { transform:translateX(-235px) scale(.72); } .portfolio-card.right-2 { transform:translateX(235px) scale(.72); }
+    .testimonial-card { padding:1.75rem; }
+    .about-build-grid, .about-approach-grid { grid-template-columns:1fr; }
+    .about-carousel { height:480px; }
+    .about-slide { height:480px; padding:0 2rem 0 0; }
   }
 </style>
 </head>
-
 <body>
 
 <nav>
@@ -623,19 +325,19 @@
 </nav>
 
 <script>
-  const navLinks = document.querySelectorAll('.nav-link');
-  navLinks.forEach(link => {
+  document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      navLinks.forEach(item => item.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
       link.classList.add('active');
     });
   });
 </script>
 
+<!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-intro">
-    <div class="hero-eyebrow" style="margin-top: 8rem">Paris, France · Disponible</div>
+    <div class="hero-eyebrow" style="margin-top:8rem">Paris, France · Disponible</div>
     <h1 class="hero-title">Transformez l'<span class="italic">expérience</span><br>utilisateur en levier stratégique.</h1>
     <p class="hero-desc">
       <strong>Product Designer</strong> spécialisée en UX Research, design système et stratégie produit, je conçois des interfaces claires à partir de problématiques complexes.
@@ -643,7 +345,6 @@
   </div>
 </section>
 
-<!-- Scroll indicator -->
 <div class="hero-scroll-wrap">
   <span class="scroll-label">Seyrin Studio</span>
   <div class="scroll-bar"></div>
@@ -661,7 +362,7 @@
         <a class="portfolio-card" href="project-02.html" data-label="Portfolio 02" data-title="Expérience mobile immersive" data-text="Hiérarchie d'écrans, premiers points d'entrée et narration produit.">
           <img src="Portfolio-02.png" alt="Portfolio 2" loading="lazy">
         </a>
-        <a class="portfolio-card" href="project-03.html" data-label="Portfolio 03" data-title="Projet à impact · confidentiel" data-text="Un projet mené de A à Z pour transformer un besoin marché en solution produit tangible, à travers une enquête terrain, une analyse de marché et un prototype fonctionnel.">
+        <a class="portfolio-card" href="project-03.html" data-label="Portfolio 03" data-title="Projet à impact · confidentiel" data-text="Un projet mené de A à Z pour transformer un besoin marché en solution produit tangible.">
           <img src="Portfolio-03.png" alt="Portfolio 3" loading="lazy">
         </a>
         <a class="portfolio-card" href="project-04.html" data-label="Portfolio 04" data-title="Interface analytics pour outil RH" data-text="Dashboard complexe rendu plus lisible et actionnable pour des profils non-techniques.">
@@ -681,166 +382,223 @@
     </div>
     <div class="portfolio-detail" id="portfolioDetail">
       <span class="portfolio-label">Portfolio 03</span>
-      <h2 class="portfolio-title">Interface analytics pour outil RH</h2>
-      <p class="portfolio-text">Dashboard complexe rendu plus lisible et actionnable pour des profils non-techniques.</p>
+      <h2 class="portfolio-title">Projet à impact · confidentiel</h2>
+      <p class="portfolio-text">Un projet mené de A à Z pour transformer un besoin marché en solution produit tangible.</p>
     </div>
   </div>
 </section>
 
 <!-- À PROPOS -->
-<section id="about">
+<section id="about" style="border-top:1px solid var(--border)">
   <div class="section">
     <div class="s-label">À propos</div>
-    <p class="about-intro">Depuis <span class="muted">2 ans</span>, je conçois des interfaces utiles, 
-     <span class="muted">en adéquation</span> avec les besoins des utilisateurs et les évolutions du marché.
-     <b>Mon objectif :</b> Transformer des problèmes complexes en solutions concrètes, actionnables et fluides.
-    </p>
-    <div class="about-grid">
-      <div class="about-stat">
-        <div class="about-stat-icon">✦</div>
-        <h3>UX Research</h3>
-        <p>Je transforme les retours terrain en décisions produit claires et actionnables.</p>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-icon">◻</div>
-        <h3>Design système</h3>
-        <p>Je construis des interfaces cohérentes, lisibles et faciles à faire évoluer.</p>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-icon">◎</div>
-        <h3>Stratégie produit</h3>
-        <p>Je relie les enjeux métier, les besoins utilisateurs et les priorités d'équipe.</p>
-      </div>
-      <div class="about-stat">
-        <div class="about-stat-icon">✿</div>
-        <h3>Expérience visuelle</h3>
-        <p>Je donne une identité forte au produit sans sacrifier la clarté.</p>
-      </div>
-    </div>
-    <div class="skills-divider"></div>
-    <div class="skills-section-label">Outils</div>
-    <div class="skills-row">
-      <div class="skill-cell">
-        <div class="skill-cell-top">
-          <div class="skill-logo"><img src="logo-figma.png" alt="Figma"></div>
-          <span class="skill-cell-name">Figma</span>
+
+    <div style="position:relative">
+
+      <!-- Carousel vertical -->
+      <div class="about-carousel" id="aboutCarousel">
+        <div class="about-track" id="aboutTrack">
+
+          <!-- Slide 1 : Qui je suis -->
+          <div class="about-slide active-slide">
+            <div class="about-slide-header">Qui suis-je ?</div>
+            <p class="about-who">
+              Depuis <span class="hl">2 ans</span>, je conçois des interfaces utiles,
+              <span class="hl">en adéquation</span> avec les besoins des utilisateurs et les évolutions du marché.
+              <br><br>
+              <strong style="font-style:italic;font-weight:400">Mon objectif :</strong>
+              Transformer des problèmes complexes en solutions concrètes, actionnables et fluides.
+            </p>
+          </div>
+
+          <!-- Slide 2 : Ce que je construis -->
+          <div class="about-slide">
+            <div class="about-slide-header">Ce que je construis</div>
+            <div class="about-build-grid">
+              <div class="about-build-card">
+                <div class="about-build-icon">✦</div>
+                <h4>UX Research</h4>
+                <p>Je transforme les retours terrain en décisions produit claires et actionnables.</p>
+              </div>
+              <div class="about-build-card">
+                <div class="about-build-icon">◻</div>
+                <h4>Design système</h4>
+                <p>Je construis des interfaces cohérentes, lisibles et faciles à faire évoluer.</p>
+              </div>
+              <div class="about-build-card">
+                <div class="about-build-icon">◎</div>
+                <h4>Stratégie produit</h4>
+                <p>Je relie les enjeux métier, les besoins utilisateurs et les priorités d'équipe.</p>
+              </div>
+              <div class="about-build-card">
+                <div class="about-build-icon">✿</div>
+                <h4>Expérience visuelle</h4>
+                <p>Je donne une identité forte au produit sans sacrifier la clarté.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 3 : Mon approche -->
+          <div class="about-slide">
+            <div class="about-slide-header">Mon approche</div>
+            <div class="about-approach-grid">
+              <div class="about-stat">
+                <div class="about-stat-icon">01</div>
+                <h3>Comprendre d'abord</h3>
+                <p>Chaque projet commence par une immersion terrain : interviews, observation, analyse des données existantes.</p>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-icon">02</div>
+                <h3>Cadrer le problème</h3>
+                <p>Je formule des insights actionnables et aligne les équipes sur une vision partagée avant de dessiner.</p>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-icon">03</div>
+                <h3>Concevoir en itérant</h3>
+                <p>Prototypes rapides, tests utilisateurs, décisions fondées sur les retours — pas sur les intuitions.</p>
+              </div>
+              <div class="about-stat">
+                <div class="about-stat-icon">04</div>
+                <h3>Livrer & mesurer</h3>
+                <p>Specs précises, handoff soigné, suivi post-lancement pour itérer jusqu'à l'impact attendu.</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 4 : Mes outils -->
+          <div class="about-slide">
+            <div class="about-slide-header">Mes outils</div>
+            <div class="about-tools">
+              <div class="skill-row">
+                <div class="skill-logo-s"><img src="logo-figma.png" alt="Figma"></div>
+                <div class="skill-info">
+                  <div class="skill-name-row"><span class="skill-name">Figma</span><span class="skill-pct">45%</span></div>
+                  <div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div></div>
+                </div>
+              </div>
+              <div class="skill-row">
+                <div class="skill-logo-s"><img src="logo-ux.png" alt="UX Research"></div>
+                <div class="skill-info">
+                  <div class="skill-name-row"><span class="skill-name">UX Research</span><span class="skill-pct">85%</span></div>
+                  <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+                </div>
+              </div>
+              <div class="skill-row">
+                <div class="skill-logo-s"><img src="logo-notion.png" alt="Notion"></div>
+                <div class="skill-info">
+                  <div class="skill-name-row"><span class="skill-name">Notion</span><span class="skill-pct">95%</span></div>
+                  <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
+                </div>
+              </div>
+              <div class="skill-row">
+                <div class="skill-logo-s"><img src="logo-miro.png" alt="Miro"></div>
+                <div class="skill-info">
+                  <div class="skill-name-row"><span class="skill-name">Miro</span><span class="skill-pct">75%</span></div>
+                  <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
+                </div>
+              </div>
+              <div class="skill-row">
+                <div class="skill-logo-s"><img src="logo-canva.png" alt="Canva"></div>
+                <div class="skill-info">
+                  <div class="skill-name-row"><span class="skill-name">Canva</span><span class="skill-pct">98%</span></div>
+                  <div class="skill-bar-track"><div class="skill-bar-fill" style="width:98%"></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide 5 : Ce que j'apporte -->
+          <div class="about-slide">
+            <div class="about-slide-header">Ce que j'apporte</div>
+            <div class="about-value-list">
+              <div class="about-value-item">
+                <span class="about-value-num">01</span>
+                <div class="about-value-text">
+                  <strong>Clarté dans la complexité</strong>
+                  <p>Je décompose les problèmes difficiles en parcours simples et lisibles pour l'utilisateur final.</p>
+                </div>
+              </div>
+              <div class="about-value-item">
+                <span class="about-value-num">02</span>
+                <div class="about-value-text">
+                  <strong>Décisions fondées sur les données</strong>
+                  <p>Chaque choix de design s'appuie sur la recherche terrain et les métriques produit.</p>
+                </div>
+              </div>
+              <div class="about-value-item">
+                <span class="about-value-num">03</span>
+                <div class="about-value-text">
+                  <strong>Collaboration fluide avec le dev</strong>
+                  <p>Des specs précises, un handoff soigné et un accompagnement jusqu'en production.</p>
+                </div>
+              </div>
+              <div class="about-value-item">
+                <span class="about-value-num">04</span>
+                <div class="about-value-text">
+                  <strong>Impact mesurable</strong>
+                  <p>Je mesure l'effet de chaque livraison et j'itère jusqu'à atteindre les objectifs fixés.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
-        <div class="skill-cell-pct">45%</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div></div>
       </div>
-      <div class="skill-cell">
-        <div class="skill-cell-top">
-          <div class="skill-logo"><img src="logo-ux.png" alt="UX Research"></div>
-          <span class="skill-cell-name">UX Research</span>
-        </div>
-        <div class="skill-cell-pct">85%</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div>
+
+      <!-- Dots à droite -->
+      <div class="about-dots" id="aboutDots">
+        <button class="active" type="button"></button>
+        <button type="button"></button>
+        <button type="button"></button>
+        <button type="button"></button>
+        <button type="button"></button>
       </div>
-      <div class="skill-cell">
-        <div class="skill-cell-top">
-          <div class="skill-logo"><img src="logo-notion.png" alt="Notion"></div>
-          <span class="skill-cell-name">Notion</span>
-        </div>
-        <div class="skill-cell-pct">95%</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div>
-      </div>
-      <div class="skill-cell">
-        <div class="skill-cell-top">
-          <div class="skill-logo"><img src="logo-miro.png" alt="Miro"></div>
-          <span class="skill-cell-name">Miro</span>
-        </div>
-        <div class="skill-cell-pct">75%</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div>
-      </div>
-      <div class="skill-cell">
-        <div class="skill-cell-top">
-          <div class="skill-logo"><img src="logo-canva.png" alt="Canva"></div>
-          <span class="skill-cell-name">Canva</span>
-        </div>
-        <div class="skill-cell-pct">98%</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:98%"></div></div>
-      </div>
+
     </div>
   </div>
 </section>
 
 <!-- TÉMOIGNAGES -->
-<section id="testimonials" style="border-top: 1px solid var(--border);">
+<section id="testimonials" style="border-top:1px solid var(--border)">
   <div class="section">
     <div class="s-label">Témoignages clients</div>
-
     <div class="testimonials-wrap">
       <div class="testimonials-track">
         <div class="testimonials-inner" id="testimonialsInner">
-
-          <!-- Témoignage 1 -->
           <div class="testimonial-card">
             <div class="testimonial-quote">"</div>
             <p class="testimonial-text">Seyrin a su transformer un brief complexe en une interface limpide. Sa capacité à jongler entre les contraintes techniques et les besoins utilisateurs est remarquable. Le résultat a dépassé nos attentes.</p>
             <div class="testimonial-footer">
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">ML</div>
-                <div>
-                  <div class="testimonial-name">Marie L.</div>
-                  <div class="testimonial-role">Head of Product · B2C</div>
-                </div>
-              </div>
+              <div class="testimonial-author"><div class="testimonial-avatar">ML</div><div><div class="testimonial-name">Marie L.</div><div class="testimonial-role">Head of Product · B2C</div></div></div>
               <span class="testimonial-tag">UX Research</span>
             </div>
           </div>
-
-          <!-- Témoignage 2 -->
           <div class="testimonial-card">
             <div class="testimonial-quote">"</div>
             <p class="testimonial-text">Le design system livré par Seyrin a permis à nos 4 équipes de travailler de façon cohérente pour la première fois. Une organisation exemplaire et une vraie vision produit derrière chaque décision.</p>
             <div class="testimonial-footer">
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">TR</div>
-                <div>
-                  <div class="testimonial-name">Thomas R.</div>
-                  <div class="testimonial-role">CTO · Scale-up SaaS</div>
-                </div>
-              </div>
+              <div class="testimonial-author"><div class="testimonial-avatar">TR</div><div><div class="testimonial-name">Thomas R.</div><div class="testimonial-role">CTO · Scale-up SaaS</div></div></div>
               <span class="testimonial-tag">Design Système</span>
             </div>
           </div>
-
-          <!-- Témoignage 3 -->
           <div class="testimonial-card">
             <div class="testimonial-quote">"</div>
             <p class="testimonial-text">Nous avions un dashboard illisible pour nos équipes RH. Seyrin a mené une recherche utilisateur approfondie et repensé toute l'architecture de l'information. L'adoption a été immédiate.</p>
             <div class="testimonial-footer">
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">SC</div>
-                <div>
-                  <div class="testimonial-name">Sophie C.</div>
-                  <div class="testimonial-role">DRH </div>
-                </div>
-              </div>
+              <div class="testimonial-author"><div class="testimonial-avatar">SC</div><div><div class="testimonial-name">Sophie C.</div><div class="testimonial-role">DRH</div></div></div>
               <span class="testimonial-tag">Stratégie produit</span>
             </div>
           </div>
-
-          <!-- Témoignage 4 -->
           <div class="testimonial-card">
             <div class="testimonial-quote">"</div>
             <p class="testimonial-text">Une designer qui écoute vraiment. Seyrin a passé du temps sur le terrain avec nos utilisateurs avant de dessiner la moindre maquette. Le produit final reflète exactement leurs besoins.</p>
             <div class="testimonial-footer">
-              <div class="testimonial-author">
-                <div class="testimonial-avatar">AB</div>
-                <div>
-                  <div class="testimonial-name">Alexis B.</div>
-                  <div class="testimonial-role">CEO · Startup early-stage</div>
-                </div>
-              </div>
+              <div class="testimonial-author"><div class="testimonial-avatar">AB</div><div><div class="testimonial-name">Alexis B.</div><div class="testimonial-role">CEO · Startup early-stage</div></div></div>
               <span class="testimonial-tag">Expérience visuelle</span>
             </div>
           </div>
-
         </div>
       </div>
-
-      <!-- Navigation -->
       <div class="testimonials-nav">
         <div class="testimonials-dots" id="testimonialsDots">
           <button class="active" type="button"></button>
@@ -849,12 +607,11 @@
           <button type="button"></button>
         </div>
         <div class="testimonials-arrows">
-          <button class="arrow-btn" id="testimonialsprev" aria-label="Précédent">←</button>
-          <button class="arrow-btn" id="testimonialsnext" aria-label="Suivant">→</button>
+          <button class="arrow-btn" id="testimonialsprev">←</button>
+          <button class="arrow-btn" id="testimonialsnext">→</button>
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -868,57 +625,87 @@
 </footer>
 
 <script>
-/* ── Portfolio carousel ── */
-const portfolioCards = Array.from(document.querySelectorAll('.portfolio-card'));
-const portfolioDots = Array.from(document.querySelectorAll('#portfolioDots button'));
-const detail = document.getElementById('portfolioDetail');
-let activeIndex = 2;
+/* ── Portfolio ── */
+const pCards = Array.from(document.querySelectorAll('.portfolio-card'));
+const pDots  = Array.from(document.querySelectorAll('#portfolioDots button'));
+const pDetail = document.getElementById('portfolioDetail');
+let pIdx = 2;
 
-function renderPortfolio(index) {
-  activeIndex = index;
-  portfolioCards.forEach((card, i) => {
-    card.className = 'portfolio-card';
-    const offset = i - index;
-    if (offset === 0) card.classList.add('center');
-    else if (offset === -1) card.classList.add('left-1');
-    else if (offset === -2) card.classList.add('left-2');
-    else if (offset === 1) card.classList.add('right-1');
-    else if (offset === 2) card.classList.add('right-2');
-    else card.classList.add('is-hidden');
+function renderPortfolio(i) {
+  pIdx = i;
+  pCards.forEach((c, j) => {
+    c.className = 'portfolio-card';
+    const o = j - i;
+    if (o===0) c.classList.add('center');
+    else if (o===-1) c.classList.add('left-1');
+    else if (o===-2) c.classList.add('left-2');
+    else if (o===1)  c.classList.add('right-1');
+    else if (o===2)  c.classList.add('right-2');
+    else c.classList.add('is-hidden');
   });
-  portfolioDots.forEach((dot, i) => dot.classList.toggle('active', i === index));
-  const activeCard = portfolioCards[index];
-  detail.querySelector('.portfolio-label').textContent = activeCard.dataset.label;
-  detail.querySelector('.portfolio-title').textContent = activeCard.dataset.title;
-  detail.querySelector('.portfolio-text').textContent = activeCard.dataset.text;
+  pDots.forEach((d, j) => d.classList.toggle('active', j === i));
+  pDetail.querySelector('.portfolio-label').textContent = pCards[i].dataset.label;
+  pDetail.querySelector('.portfolio-title').textContent = pCards[i].dataset.title;
+  pDetail.querySelector('.portfolio-text').textContent  = pCards[i].dataset.text;
 }
-portfolioDots.forEach((dot, index) => dot.addEventListener('click', () => renderPortfolio(index)));
-portfolioCards.forEach((card, index) => {
-  card.addEventListener('mouseenter', () => renderPortfolio(index));
-  card.addEventListener('focus', () => renderPortfolio(index));
-  card.addEventListener('click', (e) => { if (index !== activeIndex) { e.preventDefault(); renderPortfolio(index); } });
+pDots.forEach((d, i) => d.addEventListener('click', () => renderPortfolio(i)));
+pCards.forEach((c, i) => {
+  c.addEventListener('mouseenter', () => renderPortfolio(i));
+  c.addEventListener('focus',      () => renderPortfolio(i));
+  c.addEventListener('click', e => { if (i !== pIdx) { e.preventDefault(); renderPortfolio(i); } });
 });
-window.addEventListener('keydown', (e) => {
-  if (e.key === 'ArrowLeft') renderPortfolio((activeIndex - 1 + portfolioCards.length) % portfolioCards.length);
-  if (e.key === 'ArrowRight') renderPortfolio((activeIndex + 1) % portfolioCards.length);
-});
-renderPortfolio(activeIndex);
+renderPortfolio(pIdx);
 
-/* ── Testimonials carousel ── */
-const inner = document.getElementById('testimonialsInner');
-const tDots = Array.from(document.querySelectorAll('#testimonialsDots button'));
-let tIndex = 0;
-const total = tDots.length;
+/* ── About vertical carousel ── */
+const aSlides  = Array.from(document.querySelectorAll('.about-slide'));
+const aDots    = Array.from(document.querySelectorAll('#aboutDots button'));
+const aTrack   = document.getElementById('aboutTrack');
+const aCarousel = document.getElementById('aboutCarousel');
+const SLIDE_H  = 520; // doit correspondre au CSS
+let aIdx = 0;
+const aTotal = aSlides.length;
 
-function goTo(index) {
-  tIndex = (index + total) % total;
-  inner.style.transform = `translateX(-${tIndex * 100}%)`;
-  tDots.forEach((d, i) => d.classList.toggle('active', i === tIndex));
+function goAbout(i) {
+  aIdx = Math.max(0, Math.min(i, aTotal - 1));
+  aTrack.style.transform = `translateY(-${aIdx * SLIDE_H}px)`;
+  aSlides.forEach((s, j) => s.classList.toggle('active-slide', j === aIdx));
+  aDots.forEach((d, j) => d.classList.toggle('active', j === aIdx));
 }
 
-document.getElementById('testimonialsprev').addEventListener('click', () => goTo(tIndex - 1));
-document.getElementById('testimonialsnext').addEventListener('click', () => goTo(tIndex + 1));
-tDots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+aDots.forEach((d, i) => d.addEventListener('click', () => goAbout(i)));
+
+/* Molette sur le carousel uniquement */
+aCarousel.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (e.deltaY > 20)  goAbout(aIdx + 1);
+  if (e.deltaY < -20) goAbout(aIdx - 1);
+}, { passive: false });
+
+/* Swipe touch */
+let touchY0 = 0;
+aCarousel.addEventListener('touchstart', e => { touchY0 = e.touches[0].clientY; }, { passive: true });
+aCarousel.addEventListener('touchend',   e => {
+  const dy = touchY0 - e.changedTouches[0].clientY;
+  if (dy >  40) goAbout(aIdx + 1);
+  if (dy < -40) goAbout(aIdx - 1);
+}, { passive: true });
+
+goAbout(0);
+
+/* ── Testimonials ── */
+const tInner = document.getElementById('testimonialsInner');
+const tDots  = Array.from(document.querySelectorAll('#testimonialsDots button'));
+let tIdx = 0;
+const tTotal = tDots.length;
+
+function goTo(i) {
+  tIdx = (i + tTotal) % tTotal;
+  tInner.style.transform = `translateX(-${tIdx * 100}%)`;
+  tDots.forEach((d, j) => d.classList.toggle('active', j === tIdx));
+}
+document.getElementById('testimonialsprev').addEventListener('click', () => goTo(tIdx - 1));
+document.getElementById('testimonialsnext').addEventListener('click', () => goTo(tIdx + 1));
+tDots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
 </script>
 
 </body>
