@@ -271,6 +271,23 @@
     flex-shrink: 0;
   }
 
+ .skills-divider {
+  border-top: 1px solid var(--border);
+  margin-top: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.skills-section-label {
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
   /* Outils en ligne horizontale */
   .skills-row {
     display: grid;
@@ -494,7 +511,8 @@
     </div>
 
     <!-- Outils en ligne horizontale -->
-    <div class="skills-section-label" style="border-top: 1px solid var(--border); margin-bottom: 2rem; margin-top: 2rem">Outils</div>
+   <div class="skills-divider"></div>
+    <div class="skills-section-label">Outils</div>
     <div class="skills-row">
 
       <div class="skill-cell">
@@ -503,7 +521,8 @@
           <span class="skill-cell-name">Figma</span>
         </div>
         <div class="skill-cell-pct">45%</div>
-        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div></div>
+        <div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div>
+        </div>
       </div>
 
       <div class="skill-cell">
