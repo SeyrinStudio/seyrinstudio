@@ -8,11 +8,11 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
- 
+
 /* ── Supprime TOUS les focus rings partout ── */
 *:focus { outline:none !important; }
 *:focus-visible { outline:none !important; }
- 
+
 :root {
   --border: rgba(255,255,255,0.08);
   --text: #fff;
@@ -21,9 +21,9 @@
   --nav-h: 60px;
   --footer-h: 64px;
 }
- 
+
 html, body { height:100%; overflow:hidden; }
- 
+
 body {
   font-family:'Inter',sans-serif;
   font-weight:300;
@@ -34,9 +34,9 @@ body {
     radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%),
     linear-gradient(180deg, #0a1223 0%, #09111f 100%);
 }
- 
+
 a { color:inherit; text-decoration:none; }
- 
+
 /* ── NAV ── */
 nav {
   position:fixed; inset:0 0 auto 0;
@@ -58,7 +58,7 @@ nav {
 .nav-right { display:flex; justify-content:flex-end; }
 .nav-cta { font-size:1rem; padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color .18s, background .18s; }
 .nav-cta:hover { border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.05); }
- 
+
 /* ── FOOTER ── */
 footer {
   position:fixed; inset:auto 0 0 0;
@@ -71,21 +71,21 @@ footer {
 .footer-text, .footer-link { font-size:0.72rem; color:var(--muted); }
 .footer-links { display:flex; gap:1.25rem; }
 .footer-link:hover { color:var(--text); }
- 
+
 /* ── MAIN ── */
 main {
   position:fixed;
   inset:var(--nav-h) 0 var(--footer-h) 0;
   overflow:hidden;
 }
- 
+
 /* ── LAYERS ── */
 .disk-layer {
   position:absolute; inset:0;
   display:flex; align-items:center; justify-content:center;
   pointer-events:none;
 }
- 
+
 /* ── SVG DISQUE ── */
 .disk-svg {
   width:min(88vh, 88vw);
@@ -98,7 +98,7 @@ main {
   /* Supprime outline SVG natif */
   outline:none;
 }
- 
+
 /* Halos */
 .halo {
   position:absolute; border-radius:50%;
@@ -112,7 +112,7 @@ main {
   0%,100% { opacity:0.3; transform:scale(1); }
   50%      { opacity:0.8; transform:scale(1.015); }
 }
- 
+
 /* Badge central */
 .disk-center {
   position:absolute;
@@ -134,7 +134,7 @@ main {
   font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase;
   color:rgba(255,255,255,0.35);
 }
- 
+
 /* ── CARD OVERLAY ── */
 .overlay {
   position:absolute; inset:0;
@@ -165,7 +165,7 @@ main {
   display:flex; align-items:center; gap:0.6rem;
 }
 .s-label::before { content:''; width:16px; height:1px; background:var(--accent); flex-shrink:0; }
- 
+
 /* ── SLIDES ── */
 .slide { display:none; animation:fadeSlide .4s ease both; }
 .slide.active { display:block; }
@@ -186,7 +186,7 @@ main {
 .slide-imgs { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin-top:0.85rem; }
 .slide-img { border-radius:10px; overflow:hidden; aspect-ratio:4/3; background:rgba(255,255,255,0.04); border:1px solid var(--border); }
 .slide-img img, .slide-img video { width:100%; height:100%; object-fit:cover; display:block; }
- 
+
 /* Navigation */
 .slide-nav { display:flex; align-items:center; gap:0.85rem; margin-top:1.4rem; }
 .nav-arrow {
@@ -201,13 +201,13 @@ main {
 .nav-arrow:hover { border-color:rgba(255,255,255,0.3); color:var(--text); background:rgba(255,255,255,0.05); }
 .slide-counter { font-family:'Instrument Serif',serif; font-style:italic; font-size:0.88rem; color:rgba(255,255,255,0.35); }
 .slide-counter em { color:var(--accent); font-style:normal; }
- 
+
 /* ── SVG SEGMENT STYLES ── */
 /* Appliqués via attributs SVG + quelques overrides CSS */
 .seg-fill { transition:fill .35s, opacity .35s; }
 .seg-stroke { fill:none; pointer-events:none; }
 .seg-text { pointer-events:none; }
- 
+
 @media (max-width:768px) {
   nav { padding:0 1rem; }
   footer { padding:0 1rem; }
@@ -219,7 +219,7 @@ main {
 </style>
 </head>
 <body>
- 
+
 <nav>
   <a href="index.html" class="nav-left">Seyrin Studio</a>
   <div class="nav-center">
@@ -230,15 +230,15 @@ main {
     <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta">Me contacter</a>
   </div>
 </nav>
- 
+
 <main>
- 
+
   <!-- Halos -->
   <div class="disk-layer">
     <div class="halo halo-1"></div>
     <div class="halo halo-2"></div>
   </div>
- 
+
   <!-- Disque SVG -->
   <div class="disk-layer">
     <svg class="disk-svg" id="diskSvg"
@@ -261,7 +261,7 @@ main {
         stroke="rgba(108,99,255,0.3)" stroke-width="0.008"/>
     </svg>
   </div>
- 
+
   <!-- Badge central (fixe, ne tourne pas) -->
   <div class="disk-layer">
     <div class="disk-center">
@@ -269,13 +269,13 @@ main {
       <div class="center-label" id="centerLabel">/ 4</div>
     </div>
   </div>
- 
+
   <!-- Carte contenu -->
   <section class="overlay">
     <div class="overlay-card">
       <a href="index.html#portfolio" class="back-link">← Retour aux projets</a>
       <div class="s-label" id="sectionLabel">Contexte</div>
- 
+
       <div class="slide active">
         <div class="slide-eyebrow">01 · Contexte</div>
         <h1 class="slide-title">Site web · <span class="hl">Portfolio</span></h1>
@@ -286,7 +286,7 @@ main {
         </div>
         <p class="slide-text">Conception d'un portfolio format site internet pour présenter différents projets avec une navigation fluide et une identité visuelle forte. L'objectif : donner envie d'aller plus loin à chaque scroll.</p>
       </div>
- 
+
       <div class="slide">
         <div class="slide-eyebrow">02 · Problème</div>
         <h2 class="slide-title">Le défi <span class="hl">identitaire</span></h2>
@@ -297,7 +297,7 @@ main {
           <div class="stat-box"><div class="stat-val">100%</div><div class="stat-label">Code from scratch</div></div>
         </div>
       </div>
- 
+
       <div class="slide">
         <div class="slide-eyebrow">03 · Approche</div>
         <h2 class="slide-title">Concevoir <span class="hl">par couches</span></h2>
@@ -307,7 +307,7 @@ main {
           <div class="slide-img"><img src="Portfolio-02.png" alt="Maquette" loading="lazy"></div>
         </div>
       </div>
- 
+
       <div class="slide">
         <div class="slide-eyebrow">04 · Résultat</div>
         <h2 class="slide-title">Un site qui <span class="hl">raconte</span></h2>
@@ -318,7 +318,7 @@ main {
           <div class="stat-box"><div class="stat-val">↗</div><div class="stat-label">GitHub Pages</div></div>
         </div>
       </div>
- 
+
       <div class="slide-nav">
         <button class="nav-arrow" id="prevBtn" tabindex="-1">←</button>
         <button class="nav-arrow" id="nextBtn" tabindex="-1">→</button>
@@ -326,9 +326,9 @@ main {
       </div>
     </div>
   </section>
- 
+
 </main>
- 
+
 <footer>
   <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
   <div class="footer-links">
@@ -337,7 +337,7 @@ main {
     <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a>
   </div>
 </footer>
- 
+
 <script>
 const SLIDES_CONFIG = [
   { label: 'Contexte' },
@@ -346,7 +346,7 @@ const SLIDES_CONFIG = [
   { label: 'Résultat' },
 ];
 const N = SLIDES_CONFIG.length;
- 
+
 const segGroup    = document.getElementById('segGroup');
 const diskSvg     = document.getElementById('diskSvg');
 const slides      = Array.from(document.querySelectorAll('.slide'));
@@ -357,47 +357,47 @@ const totalNumEl  = document.getElementById('totalNum');
 const centerNumEl = document.getElementById('centerNum');
 const centerLabel = document.getElementById('centerLabel');
 const sectionLbl  = document.getElementById('sectionLabel');
- 
+
 totalNumEl.textContent  = N;
 centerLabel.textContent = `/ ${N}`;
- 
+
 let current = 0;
 let diskRotation = 0;
- 
+
 /* ── Build segments ── */
 function buildSegments() {
   segGroup.innerHTML = '';
   const R   = 0.90;
   const r   = 0.29;
   const gap = 0.022;
- 
+
   for (let i = 0; i < N; i++) {
     const a0 = (2 * Math.PI * i / N) - Math.PI / 2 + gap;
     const a1 = (2 * Math.PI * (i + 1) / N) - Math.PI / 2 - gap;
     const large = (a1 - a0 > Math.PI) ? 1 : 0;
- 
+
     const ox1 = R * Math.cos(a0), oy1 = R * Math.sin(a0);
     const ox2 = R * Math.cos(a1), oy2 = R * Math.sin(a1);
     const ix2 = r * Math.cos(a1), iy2 = r * Math.sin(a1);
     const ix1 = r * Math.cos(a0), iy1 = r * Math.sin(a0);
- 
+
     const d = `M ${ox1} ${oy1} A ${R} ${R} 0 ${large} 1 ${ox2} ${oy2} L ${ix2} ${iy2} A ${r} ${r} 0 ${large} 0 ${ix1} ${iy1} Z`;
- 
+
     const mid = (a0 + a1) / 2;
     const tR  = (R + r) / 2;
     const tx  = tR * Math.cos(mid);
     const ty  = tR * Math.sin(mid);
     const tDeg = (mid * 180 / Math.PI) + 90;
- 
+
     const isActive = i === 0;
- 
+
     /* Groupe — tabindex=-1 pour pas de focus natif */
     const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
     g.setAttribute('tabindex', '-1');
     g.style.cursor = 'pointer';
     g.style.outline = 'none';
     g.dataset.index = i;
- 
+
     /* Fill */
     const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
     path.setAttribute('d', d);
@@ -406,7 +406,7 @@ function buildSegments() {
     path.setAttribute('stroke-width', '0.008');
     path.style.transition = 'fill 0.35s';
     g.appendChild(path);
- 
+
     /* Texte */
     const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
     txt.setAttribute('x', tx);
@@ -422,7 +422,7 @@ function buildSegments() {
     txt.style.pointerEvents = 'none';
     txt.textContent = SLIDES_CONFIG[i].label;
     g.appendChild(txt);
- 
+
     /* Hover via mouseenter/leave */
     g.addEventListener('mouseenter', () => {
       if (i !== current) path.setAttribute('fill', 'rgba(108,99,255,0.24)');
@@ -430,29 +430,29 @@ function buildSegments() {
     g.addEventListener('mouseleave', () => {
       if (i !== current) path.setAttribute('fill', 'rgba(108,99,255,0.1)');
     });
- 
+
     /* Clic — preventDefault + blur pour bloquer le focus */
     g.addEventListener('mousedown', e => e.preventDefault());
     g.addEventListener('click', () => {
       document.activeElement?.blur();
       goTo(i);
     });
- 
+
     segGroup.appendChild(g);
   }
 }
- 
+
 /* ── Navigation ── */
 function goTo(i) {
   const prev = current;
   current = ((i % N) + N) % N;
- 
+
   let diff = current - prev;
   if (diff >  N / 2) diff -= N;
   if (diff < -N / 2) diff += N;
   diskRotation -= diff * (360 / N);
   diskSvg.style.transform = `rotate(${diskRotation}deg)`;
- 
+
   /* Met à jour les fills directement sur les paths */
   const segs  = segGroup.querySelectorAll('g');
   const texts = segGroup.querySelectorAll('text');
@@ -463,19 +463,19 @@ function goTo(i) {
     p.setAttribute('fill', active ? 'rgba(108,99,255,0.48)' : 'rgba(108,99,255,0.1)');
     t.setAttribute('fill', active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.42)');
   });
- 
+
   slides.forEach((s, j) => s.classList.toggle('active', j === current));
   curNumEl.textContent    = current + 1;
   centerNumEl.textContent = current + 1;
   sectionLbl.textContent  = SLIDES_CONFIG[current].label;
 }
- 
+
 /* ── Boutons (mousedown preventDefault = pas de focus) ── */
 prevBtn.addEventListener('mousedown', e => e.preventDefault());
 nextBtn.addEventListener('mousedown', e => e.preventDefault());
 prevBtn.addEventListener('click', () => goTo(current - 1));
 nextBtn.addEventListener('click', () => goTo(current + 1));
- 
+
 /* ── Swipe ── */
 let tx0 = 0;
 document.addEventListener('touchstart', e => { tx0 = e.touches[0].clientX; }, {passive:true});
@@ -484,7 +484,7 @@ document.addEventListener('touchend',   e => {
   if (dx >  50) goTo(current + 1);
   if (dx < -50) goTo(current - 1);
 }, {passive:true});
- 
+
 /* ── Molette ── */
 let wLock = false;
 document.addEventListener('wheel', e => {
@@ -493,7 +493,7 @@ document.addEventListener('wheel', e => {
   goTo(current + (e.deltaY > 0 ? 1 : -1));
   setTimeout(() => { wLock = false; }, 750);
 }, {passive:true});
- 
+
 /* ── Init ── */
 buildSegments();
 </script>
