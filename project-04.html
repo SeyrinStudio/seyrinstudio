@@ -1,1 +1,505 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projet 01 — Site web · Portfolio</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
 
+/* ── Supprime TOUS les focus rings partout ── */
+*:focus { outline:none !important; }
+*:focus-visible { outline:none !important; }
+
+:root {
+  --border: rgba(255,255,255,0.08);
+  --text: #fff;
+  --muted: #e2e8f0;
+  --accent: #6c63ff;
+  --nav-h: 60px;
+  --footer-h: 64px;
+}
+
+html, body { height:100%; overflow:hidden; }
+
+body {
+  font-family:'Inter',sans-serif;
+  font-weight:300;
+  color:var(--text);
+  -webkit-tap-highlight-color: transparent;
+  background:
+    radial-gradient(circle at 76% 18%, rgba(46,102,255,.18), transparent 28%),
+    radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%),
+    linear-gradient(180deg, #0a1223 0%, #09111f 100%);
+}
+
+a { color:inherit; text-decoration:none; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; inset:0 0 auto 0;
+  height:var(--nav-h); z-index:200;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; padding:0 2.5rem;
+  background:rgba(16,30,48,0.88); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-left, .nav-link, .nav-cta {
+  font-family:'League Gothic',sans-serif;
+  letter-spacing:0.1em; text-transform:uppercase;
+}
+.nav-left { font-size:1.1rem; color:var(--text); transition:color .18s; }
+.nav-left:hover { color:var(--accent); }
+.nav-center { display:flex; gap:0.25rem; }
+.nav-link { font-size:1rem; color:var(--muted); padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; }
+.nav-link:hover { color:var(--text); background:rgba(255,255,255,0.06); }
+.nav-right { display:flex; justify-content:flex-end; }
+.nav-cta { font-size:1rem; padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color .18s, background .18s; }
+.nav-cta:hover { border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.05); }
+
+/* ── FOOTER ── */
+footer {
+  position:fixed; inset:auto 0 0 0;
+  height:var(--footer-h); z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 2.5rem;
+  border-top:1px solid var(--border);
+  background:rgba(9,17,31,0.72); backdrop-filter:blur(12px);
+}
+.footer-text, .footer-link { font-size:0.72rem; color:var(--muted); }
+.footer-links { display:flex; gap:1.25rem; }
+.footer-link:hover { color:var(--text); }
+
+/* ── MAIN ── */
+main {
+  position:fixed;
+  inset:var(--nav-h) 0 var(--footer-h) 0;
+  overflow:hidden;
+}
+
+/* ── LAYERS ── */
+.disk-layer {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  pointer-events:none;
+}
+
+/* ── SVG DISQUE ── */
+.disk-svg {
+  width:min(88vh, 88vw);
+  height:min(88vh, 88vw);
+  max-width:880px; max-height:880px;
+  transition:transform 0.75s cubic-bezier(.16,1,.3,1);
+  transform-origin:center center;
+  filter:drop-shadow(0 0 60px rgba(108,99,255,0.2));
+  pointer-events:all;
+  /* Supprime outline SVG natif */
+  outline:none;
+}
+
+/* Halos */
+.halo {
+  position:absolute; border-radius:50%;
+  border:1px solid rgba(108,99,255,0.07);
+  pointer-events:none;
+  animation:haloBreath 5s ease-in-out infinite;
+}
+.halo-1 { width:min(96vw,960px); height:min(96vw,960px); }
+.halo-2 { width:min(104vw,1040px); height:min(104vw,1040px); animation-delay:1.5s; }
+@keyframes haloBreath {
+  0%,100% { opacity:0.3; transform:scale(1); }
+  50%      { opacity:0.8; transform:scale(1.015); }
+}
+
+/* Badge central */
+.disk-center {
+  position:absolute;
+  width:min(13vw,110px); height:min(13vw,110px);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(108,99,255,0.38) 0%, rgba(108,99,255,0.1) 70%);
+  border:1px solid rgba(108,99,255,0.45);
+  backdrop-filter:blur(10px);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:0.1rem;
+  pointer-events:none; z-index:5;
+}
+.center-num {
+  font-family:'Instrument Serif',serif;
+  font-style:italic; font-size:clamp(1rem,2vw,1.6rem);
+  color:var(--accent); line-height:1;
+}
+.center-label {
+  font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase;
+  color:rgba(255,255,255,0.35);
+}
+
+/* ── CARD OVERLAY ── */
+.overlay {
+  position:absolute; inset:0;
+  display:flex; align-items:center;
+  padding:2rem 4rem;
+  pointer-events:none; z-index:10;
+}
+.overlay-card {
+  width:min(500px,46vw);
+  padding:2rem 2.25rem;
+  border:1px solid rgba(255,255,255,0.09);
+  border-radius:24px;
+  background:rgba(6,10,20,0.54);
+  backdrop-filter:blur(18px);
+  box-shadow:0 24px 80px rgba(0,0,0,0.3);
+  pointer-events:all;
+}
+.back-link {
+  display:inline-flex; gap:0.5rem;
+  font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--muted); opacity:0.6;
+  margin-bottom:1rem; transition:opacity .18s, color .18s;
+}
+.back-link:hover { opacity:1; color:var(--accent); }
+.s-label {
+  font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase;
+  color:var(--accent); margin-bottom:0.85rem;
+  display:flex; align-items:center; gap:0.6rem;
+}
+.s-label::before { content:''; width:16px; height:1px; background:var(--accent); flex-shrink:0; }
+
+/* ── SLIDES ── */
+.slide { display:none; animation:fadeSlide .4s ease both; }
+.slide.active { display:block; }
+@keyframes fadeSlide {
+  from { opacity:0; transform:translateY(8px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.slide-eyebrow { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-bottom:0.6rem; }
+.slide-title { font-family:'Instrument Serif',serif; font-size:clamp(1.4rem,2.4vw,2.2rem); font-weight:400; line-height:1.15; margin-bottom:0.75rem; }
+.slide-title .hl { color:var(--accent); font-style:italic; }
+.slide-tags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.85rem; }
+.tag { font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); padding:0.2rem 0.65rem; border:1px solid rgba(108,99,255,0.28); border-radius:100px; }
+.slide-text { font-size:0.88rem; color:var(--muted); line-height:1.82; opacity:0.85; margin-bottom:0.75rem; }
+.slide-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:0.7rem; margin-top:0.85rem; }
+.stat-box { padding:0.9rem 0.8rem; border-radius:14px; border:1px solid var(--border); background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01)); }
+.stat-val { font-family:'Instrument Serif',serif; font-size:1.45rem; color:var(--accent); line-height:1; margin-bottom:0.25rem; }
+.stat-label { font-size:0.68rem; color:var(--muted); opacity:0.6; line-height:1.4; }
+.slide-imgs { display:grid; grid-template-columns:1fr 1fr; gap:0.6rem; margin-top:0.85rem; }
+.slide-img { border-radius:10px; overflow:hidden; aspect-ratio:4/3; background:rgba(255,255,255,0.04); border:1px solid var(--border); }
+.slide-img img, .slide-img video { width:100%; height:100%; object-fit:cover; display:block; }
+
+/* Navigation */
+.slide-nav { display:flex; align-items:center; gap:0.85rem; margin-top:1.4rem; }
+.nav-arrow {
+  width:38px; height:38px; border-radius:50%;
+  border:1px solid var(--border); background:transparent;
+  color:var(--muted); cursor:pointer;
+  display:grid; place-items:center; font-size:0.95rem;
+  transition:border-color .18s, color .18s, background .18s;
+  /* Pas de focus ring sur les boutons non plus */
+  outline:none;
+}
+.nav-arrow:hover { border-color:rgba(255,255,255,0.3); color:var(--text); background:rgba(255,255,255,0.05); }
+.slide-counter { font-family:'Instrument Serif',serif; font-style:italic; font-size:0.88rem; color:rgba(255,255,255,0.35); }
+.slide-counter em { color:var(--accent); font-style:normal; }
+
+/* ── SVG SEGMENT STYLES ── */
+/* Appliqués via attributs SVG + quelques overrides CSS */
+.seg-fill { transition:fill .35s, opacity .35s; }
+.seg-stroke { fill:none; pointer-events:none; }
+.seg-text { pointer-events:none; }
+
+@media (max-width:768px) {
+  nav { padding:0 1rem; }
+  footer { padding:0 1rem; }
+  .overlay { padding:1rem; align-items:flex-end; }
+  .overlay-card { width:100%; }
+  .slide-stats { grid-template-columns:1fr 1fr; }
+  .disk-center { width:80px; height:80px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-left">Seyrin Studio</a>
+  <div class="nav-center">
+    <a href="index.html#portfolio" class="nav-link">Projets</a>
+    <a href="index.html#about" class="nav-link">À propos</a>
+  </div>
+  <div class="nav-right">
+    <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta">Me contacter</a>
+  </div>
+</nav>
+
+<main>
+
+  <!-- Halos -->
+  <div class="disk-layer">
+    <div class="halo halo-1"></div>
+    <div class="halo halo-2"></div>
+  </div>
+
+  <!-- Disque SVG -->
+  <div class="disk-layer">
+    <svg class="disk-svg" id="diskSvg"
+         viewBox="-1 -1 2 2"
+         xmlns="http://www.w3.org/2000/svg"
+         tabindex="-1">
+      <!-- Cercles de fond -->
+      <circle cx="0" cy="0" r="0.96"
+        fill="rgba(108,99,255,0.04)"
+        stroke="rgba(108,99,255,0.12)" stroke-width="0.008"/>
+      <circle cx="0" cy="0" r="0.72"
+        fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.005"/>
+      <circle cx="0" cy="0" r="0.52"
+        fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="0.005"/>
+      <!-- Segments injectés par JS -->
+      <g id="segGroup"></g>
+      <!-- Cache centre -->
+      <circle cx="0" cy="0" r="0.265"
+        fill="rgba(9,17,31,0.75)"
+        stroke="rgba(108,99,255,0.3)" stroke-width="0.008"/>
+    </svg>
+  </div>
+
+  <!-- Badge central (fixe, ne tourne pas) -->
+  <div class="disk-layer">
+    <div class="disk-center">
+      <div class="center-num" id="centerNum">1</div>
+      <div class="center-label" id="centerLabel">/ 4</div>
+    </div>
+  </div>
+
+  <!-- Carte contenu -->
+  <section class="overlay">
+    <div class="overlay-card">
+      <a href="index.html#portfolio" class="back-link">← Retour aux projets</a>
+      <div class="s-label" id="sectionLabel">Contexte</div>
+
+      <div class="slide active">
+        <div class="slide-eyebrow">01 · Contexte</div>
+        <h1 class="slide-title">Interface analytics · <span class="hl">Dashboard RH</span></h1>
+        <div class="slide-tags">
+          <span class="tag">UI Design</span>
+          <span class="tag">Data Viz</span>
+          <span class="tag">Product</span>
+        </div>
+        <p class="slide-text">Conception d’une interface analytics pour un outil RH, 
+          pensée pour centraliser les indicateurs clés et permettre une lecture rapide des données par des profils non techniques.</p>
+      </div>
+
+      <div class="slide">
+        <div class="slide-eyebrow">02 · Problème</div>
+        <h2 class="slide-title">Un dashboard <span class="hl">trop dense</span></h2>
+        <p class="slide-text">  Le dashboard initial présentait un volume important d’informations, avec une hiérarchie peu lisible. 
+          L’enjeu était de rendre les données compréhensibles sans expertise analytique, tout en gardant la richesse des indicateurs.</p>
+        <div class="slide-stats">
+          <div class="stat-box"><div class="stat-val">0</div><div class="stat-label">Jargon technique visible</div></div>
+          <div class="stat-box"><div class="stat-val">3</div><div class="stat-label">Niveaux de lecture distincts</div></div>
+          <div class="stat-box"><div class="stat-val">5</div><div class="stat-label">KPI prioritaires affichés</div></div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-eyebrow">03 · Approche</div>
+        <h2 class="slide-title">Concevoir <span class="hl">par hiérarchie</span></h2>
+        <p class="slide-text">J’ai retravaillé la structure visuelle pour faire ressortir les KPI essentiels en premier, 
+          regrouper les données par intention, simplifier les libellés et rendre les actions plus évidentes.</p>
+        <div class="slide-imgs">
+          <div class="slide-img"><video autoplay muted loop playsinline><source src="TemplateSite.mp4" type="video/mp4"></video></div>
+          <div class="slide-img"><img src="Portfolio-04.png" alt="Maquette" loading="lazy"></div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <div class="slide-eyebrow">04 · Résultat</div>
+        <h2 class="slide-title">Une interface <span class="hl">actionnable</span></h2>
+        <p class="slide-text">Le résultat est un dashboard plus clair, plus lisible et plus utile au quotidien, 
+          capable d’aider les équipes RH à comprendre les tendances, repérer les points d’attention et prendre des décisions plus vite.</p>
+        <div class="slide-stats">
+          <div class="stat-box"><div class="stat-val">100%</div><div class="stat-label">Lisible pour profils non techniques</div></div>
+          <div class="stat-box"><div class="stat-val">3</div><div class="stat-label">Actions clés mises en avant</div></div>
+          <div class="stat-box"><div class="stat-val">⚡</div><div class="stat-label">Décision plus rapide</div></div>
+        </div>
+      </div>
+
+      <div class="slide-nav">
+        <button class="nav-arrow" id="prevBtn" tabindex="-1">←</button>
+        <button class="nav-arrow" id="nextBtn" tabindex="-1">→</button>
+        <div class="slide-counter"><em id="curNum">1</em> / <span id="totalNum">4</span></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
+  <div class="footer-links">
+    <a href="#" class="footer-link">LinkedIn</a>
+    <a href="#" class="footer-link">Dribbble</a>
+    <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+const SLIDES_CONFIG = [
+  { label: 'Contexte' },
+  { label: 'Problème' },
+  { label: 'Approche' },
+  { label: 'Résultat' },
+];
+const N = SLIDES_CONFIG.length;
+
+const segGroup    = document.getElementById('segGroup');
+const diskSvg     = document.getElementById('diskSvg');
+const slides      = Array.from(document.querySelectorAll('.slide'));
+const prevBtn     = document.getElementById('prevBtn');
+const nextBtn     = document.getElementById('nextBtn');
+const curNumEl    = document.getElementById('curNum');
+const totalNumEl  = document.getElementById('totalNum');
+const centerNumEl = document.getElementById('centerNum');
+const centerLabel = document.getElementById('centerLabel');
+const sectionLbl  = document.getElementById('sectionLabel');
+
+totalNumEl.textContent  = N;
+centerLabel.textContent = `/ ${N}`;
+
+let current = 0;
+let diskRotation = 0;
+
+/* ── Build segments ── */
+function buildSegments() {
+  segGroup.innerHTML = '';
+  const R   = 0.90;
+  const r   = 0.29;
+  const gap = 0.022;
+
+  for (let i = 0; i < N; i++) {
+    const a0 = (2 * Math.PI * i / N) - Math.PI / 2 + gap;
+    const a1 = (2 * Math.PI * (i + 1) / N) - Math.PI / 2 - gap;
+    const large = (a1 - a0 > Math.PI) ? 1 : 0;
+
+    const ox1 = R * Math.cos(a0), oy1 = R * Math.sin(a0);
+    const ox2 = R * Math.cos(a1), oy2 = R * Math.sin(a1);
+    const ix2 = r * Math.cos(a1), iy2 = r * Math.sin(a1);
+    const ix1 = r * Math.cos(a0), iy1 = r * Math.sin(a0);
+
+    const d = `M ${ox1} ${oy1} A ${R} ${R} 0 ${large} 1 ${ox2} ${oy2} L ${ix2} ${iy2} A ${r} ${r} 0 ${large} 0 ${ix1} ${iy1} Z`;
+
+    const mid = (a0 + a1) / 2;
+    const tR  = (R + r) / 2;
+    const tx  = tR * Math.cos(mid);
+    const ty  = tR * Math.sin(mid);
+    const tDeg = (mid * 180 / Math.PI) + 90;
+
+    const isActive = i === 0;
+
+    /* Groupe — tabindex=-1 pour pas de focus natif */
+    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    g.setAttribute('tabindex', '-1');
+    g.style.cursor = 'pointer';
+    g.style.outline = 'none';
+    g.dataset.index = i;
+
+    /* Fill */
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', d);
+    path.setAttribute('fill', isActive ? 'rgba(108,99,255,0.48)' : 'rgba(108,99,255,0.1)');
+    path.setAttribute('stroke', 'rgba(108,99,255,0.3)');
+    path.setAttribute('stroke-width', '0.008');
+    path.style.transition = 'fill 0.35s';
+    g.appendChild(path);
+
+    /* Texte */
+    const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    txt.setAttribute('x', tx);
+    txt.setAttribute('y', ty);
+    txt.setAttribute('text-anchor', 'middle');
+    txt.setAttribute('dominant-baseline', 'middle');
+    txt.setAttribute('font-family', 'League Gothic, sans-serif');
+    txt.setAttribute('font-size', '0.058');
+    txt.setAttribute('letter-spacing', '0.006');
+    txt.setAttribute('fill', isActive ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.42)');
+    txt.setAttribute('transform', `rotate(${tDeg},${tx},${ty})`);
+    txt.style.transition = 'fill 0.3s';
+    txt.style.pointerEvents = 'none';
+    txt.textContent = SLIDES_CONFIG[i].label;
+    g.appendChild(txt);
+
+    /* Hover via mouseenter/leave */
+    g.addEventListener('mouseenter', () => {
+      if (i !== current) path.setAttribute('fill', 'rgba(108,99,255,0.24)');
+    });
+    g.addEventListener('mouseleave', () => {
+      if (i !== current) path.setAttribute('fill', 'rgba(108,99,255,0.1)');
+    });
+
+    /* Clic — preventDefault + blur pour bloquer le focus */
+    g.addEventListener('mousedown', e => e.preventDefault());
+    g.addEventListener('click', () => {
+      document.activeElement?.blur();
+      goTo(i);
+    });
+
+    segGroup.appendChild(g);
+  }
+}
+
+/* ── Navigation ── */
+function goTo(i) {
+  const prev = current;
+  current = ((i % N) + N) % N;
+
+  let diff = current - prev;
+  if (diff >  N / 2) diff -= N;
+  if (diff < -N / 2) diff += N;
+  diskRotation -= diff * (360 / N);
+  diskSvg.style.transform = `rotate(${diskRotation}deg)`;
+
+  /* Met à jour les fills directement sur les paths */
+  const segs  = segGroup.querySelectorAll('g');
+  const texts = segGroup.querySelectorAll('text');
+  segs.forEach((g, j) => {
+    const p = g.querySelector('path');
+    const t = g.querySelector('text');
+    const active = j === current;
+    p.setAttribute('fill', active ? 'rgba(108,99,255,0.48)' : 'rgba(108,99,255,0.1)');
+    t.setAttribute('fill', active ? 'rgba(255,255,255,0.92)' : 'rgba(255,255,255,0.42)');
+  });
+
+  slides.forEach((s, j) => s.classList.toggle('active', j === current));
+  curNumEl.textContent    = current + 1;
+  centerNumEl.textContent = current + 1;
+  sectionLbl.textContent  = SLIDES_CONFIG[current].label;
+}
+
+/* ── Boutons (mousedown preventDefault = pas de focus) ── */
+prevBtn.addEventListener('mousedown', e => e.preventDefault());
+nextBtn.addEventListener('mousedown', e => e.preventDefault());
+prevBtn.addEventListener('click', () => goTo(current - 1));
+nextBtn.addEventListener('click', () => goTo(current + 1));
+
+/* ── Swipe ── */
+let tx0 = 0;
+document.addEventListener('touchstart', e => { tx0 = e.touches[0].clientX; }, {passive:true});
+document.addEventListener('touchend',   e => {
+  const dx = tx0 - e.changedTouches[0].clientX;
+  if (dx >  50) goTo(current + 1);
+  if (dx < -50) goTo(current - 1);
+}, {passive:true});
+
+/* ── Molette ── */
+let wLock = false;
+document.addEventListener('wheel', e => {
+  if (wLock) return;
+  wLock = true;
+  goTo(current + (e.deltaY > 0 ? 1 : -1));
+  setTimeout(() => { wLock = false; }, 750);
+}, {passive:true});
+
+/* ── Init ── */
+buildSegments();
+</script>
+</body>
+</html>
