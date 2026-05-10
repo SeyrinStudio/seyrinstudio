@@ -202,6 +202,20 @@ main {
 .slide-counter { font-family:'Instrument Serif',serif; font-style:italic; font-size:0.88rem; color:rgba(255,255,255,0.35); }
 .slide-counter em { color:var(--accent); font-style:normal; }
 
+/* Mode plein écran pour mon image*/
+.slide {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.full-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
 /* ── SVG SEGMENT STYLES ── */
 /* Appliqués via attributs SVG + quelques overrides CSS */
 .seg-fill { transition:fill .35s, opacity .35s; }
@@ -306,7 +320,7 @@ main {
         <p class="slide-text">J’ai retravaillé la structure visuelle pour faire ressortir les KPI essentiels en premier, 
           regrouper les données par intention, simplifier les libellés et rendre les actions plus évidentes.</p>
         <div class="slide-imgs">
-          <div class="slide-img"><img src="DashboardRH.png" alt="Maquette" loading="lazy"></div>
+          <div class="slide active"><img src="DashboardRH.png" alt="Dashboard RH" class="full-image" loading="eager"></div>
           <div class="slide-img"><img src="Portfolio-04.png" alt="Maquette" loading="lazy"></div>
         </div>
       </div>
