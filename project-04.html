@@ -203,17 +203,46 @@ main {
 .slide-counter em { color:var(--accent); font-style:normal; }
 
 /* Mode plein écran pour mon image*/
-.slide {
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
+.img-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(5, 9, 18, 0.92);
+  backdrop-filter: blur(12px);
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
 }
 
-.full-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.img-modal.show {
+  display: flex;
+}
+
+.img-modal-content {
+  max-width: 96vw;
+  max-height: 92vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 16px;
+  box-shadow: 0 30px 90px rgba(0,0,0,0.45);
+}
+
+.img-close {
+  position: fixed;
+  top: 18px;
+  right: 22px;
+  font-size: 2rem;
+  line-height: 1;
+  color: #fff;
+  cursor: pointer;
+  user-select: none;
+  opacity: 0.9;
+}
+
+#dashboardImg {
+  cursor: zoom-in;
 }
 
 /* ── SVG SEGMENT STYLES ── */
@@ -320,7 +349,7 @@ main {
         <p class="slide-text">J’ai retravaillé la structure visuelle pour faire ressortir les KPI essentiels en premier, 
           regrouper les données par intention, simplifier les libellés et rendre les actions plus évidentes.</p>
         <div class="slide-imgs">
-          <div class="slide active"><img src="DashboardRH.png" alt="Dashboard RH" class="full-image" loading="eager"></div>
+          <div class="slide-img"><img id="dashboardImg" src="DashboardRH.png" alt="Dashboard RH" loading="lazy"></div>
           <div class="slide-img"><img src="Portfolio-04.png" alt="Maquette" loading="lazy"></div>
         </div>
       </div>
@@ -515,5 +544,37 @@ document.addEventListener('wheel', e => {
 /* ── Init ── */
 buildSegments();
 </script>
+
+/*Plein écran*/
+<div id="imgModal" class="img-modal">
+  <span class="img-close" id="imgClose">×</span>
+  <img class="img-modal-content" id="imgModalContent" alt="">
+</div>
+
+<script>
+  const dashboardImg = document.getElementById('dashboardImg');
+  const imgModal = document.getElementById('imgModal');
+  const imgModalContent = document.getElementById('imgModalContent');
+  const imgClose = document.getElementById('imgClose');
+
+  dashboardImg.addEventListener('click', () => {
+    imgModalContent.src = dashboardImg.src;
+    imgModalContent.alt = dashboardImg.alt;
+    imgModal.classList.add('show');
+  });
+
+  imgClose.addEventListener('click', () => {
+    imgModal.classList.remove('show');
+    imgModalContent.src = '';
+  });
+
+  imgModal.addEventListener('click', (e) => {
+    if (e.target === imgModal) {
+      imgModal.classList.remove('show');
+      imgModalContent.src = '';
+    }
+  });
+</script>
+  
 </body>
 </html>
