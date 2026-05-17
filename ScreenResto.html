@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Restaurant Asiatique — Menu</title>
   <style>
-    :root{--bg:#0f0b0d;--card:#171116;--card2:#22171d;--text:#f7f2e8;--muted:#c9b9aa;--red:#d11f2f;--gold:#d7b35a;--green:#4caf72;--line:rgba(255,255,255,.08)}
+    :root{--bg:#0f0b0d;--card:#171116;--card2:#22171d;--text:#f7f2e8;--muted:#c9b9aa;--red:#d11f2f;--gold:#d7b35a;--line:rgba(255,255,255,.08)}
     *{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:radial-gradient(circle at top, #2b1518 0%, var(--bg) 45%);color:var(--text)}
     header{padding:28px 20px 12px;max-width:1200px;margin:0 auto}
     .brand{display:flex;align-items:center;gap:14px;margin-bottom:10px}
@@ -16,12 +16,12 @@
     .menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
     .card,.cart{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);border-radius:22px;box-shadow:0 18px 55px rgba(0,0,0,.25)}
     .menu-item{overflow:hidden}
-    .hero{height:148px;background:linear-gradient(135deg,rgba(209,31,47,.35),rgba(215,179,90,.2)),url('https://images.unsplash.com/photo-1541542684-4f7a0b8d7d7f?auto=format&fit=crop&w=1200&q=80') center/cover}
-    .hero2{background-image:linear-gradient(135deg,rgba(209,31,47,.35),rgba(215,179,90,.2)),url('https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80')}
-    .hero3{background-image:linear-gradient(135deg,rgba(209,31,47,.35),rgba(215,179,90,.2)),url('https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80')}
-    .hero4{background-image:linear-gradient(135deg,rgba(209,31,47,.35),rgba(215,179,90,.2)),url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80')}
-    .hero5{background-image:linear-gradient(135deg,rgba(209,31,47,.35),rgba(215,179,90,.2)),url('https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=1200&q=80')}
-    .hero6{background-image:linear-gradient(135deg,rgba(209,31,47,.35),rgba(215,179,90,.2)),url('https://images.unsplash.com/photo-1625938145744-3dca3c4dcd0b?auto=format&fit=crop&w=1200&q=80')}
+    .hero{height:148px;background:url('https://images.unsplash.com/photo-1541542684-4f7a0b8d7d7f?auto=format&fit=crop&w=1200&q=80') center/cover}
+    .hero2{background-image:url('https://images.unsplash.com/photo-1525755662778-989d0524087e?auto=format&fit=crop&w=1200&q=80')}
+    .hero3{background-image:url('https://images.unsplash.com/photo-1512058564366-18510be2db19?auto=format&fit=crop&w=1200&q=80')}
+    .hero4{background-image:url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=1200&q=80')}
+    .hero5{background-image:url('https://images.unsplash.com/photo-1553621042-f6e147245754?auto=format&fit=crop&w=1200&q=80')}
+    .hero6{background-image:url('https://images.unsplash.com/photo-1625938145744-3dca3c4dcd0b?auto=format&fit=crop&w=1200&q=80')}
     .content{padding:16px}
     .topline{display:flex;justify-content:space-between;gap:12px;align-items:start}
     .title{font-size:20px;font-weight:700;margin:0 0 6px}
@@ -35,17 +35,19 @@
     .cart{position:sticky;top:18px;padding:18px;min-height:calc(100vh - 36px)}
     .cart h2,.modal h2{margin:0 0 12px}
     .cart-list{display:grid;gap:10px;margin:12px 0 16px}
-    .cart-item{display:flex;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03)}
+    .cart-item{display:flex;justify-content:space-between;gap:10px;padding:12px;border:1px solid var(--line);border-radius:16px;background:rgba(255,255,255,.03);align-items:center}
     .cart-item small{color:var(--muted)}
+    .cart-actions{display:flex;gap:8px;align-items:center}
+    .icon-btn{width:32px;height:32px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--text);cursor:pointer}
     .empty{color:var(--muted);border:1px dashed var(--line);padding:16px;border-radius:16px;text-align:center}
     .total{display:flex;justify-content:space-between;align-items:center;margin:10px 0 16px;font-size:18px}
     .total strong{color:var(--gold)}
     .badge{display:inline-flex;align-items:center;gap:8px;background:rgba(215,179,90,.12);border:1px solid rgba(215,179,90,.22);color:var(--gold);padding:8px 12px;border-radius:999px;font-size:13px}
     .modal-backdrop{position:fixed;inset:0;background:rgba(10,8,10,.72);backdrop-filter:blur(8px);display:none;align-items:center;justify-content:center;padding:18px;z-index:20}
     .modal-backdrop.open{display:flex}
-    .modal{width:min(920px,100%);background:linear-gradient(180deg,#1f1418,#130d10);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.5)}
+    .modal{width:min(920px,100%);background:linear-gradient(180deg,#1f1418,#130d10);border:1px solid var(--line);border-radius:24px;overflow:hidden;box-shadow:0 30px 90px rgba(0,0,0,.5);position:relative}
     .modal-grid{display:grid;grid-template-columns:1fr 1fr;min-height:420px}
-    .modal-media{background:linear-gradient(135deg,rgba(209,31,47,.35),rgba(215,179,90,.18));padding:24px;display:flex;align-items:center;justify-content:center}
+    .modal-media{padding:24px;display:flex;align-items:center;justify-content:center;background:#120d0f}
     .plate{width:min(100%,360px);aspect-ratio:1;border-radius:30px;background:radial-gradient(circle at 30% 30%, #fff6 0, transparent 30%), linear-gradient(145deg,#f2d7a1,#9e6332 55%,#341d16);box-shadow:0 20px 70px rgba(0,0,0,.35);position:relative;overflow:hidden}
     .plate:before,.plate:after{content:'';position:absolute;border-radius:50%;background:rgba(255,255,255,.15)}
     .plate:before{width:120px;height:120px;right:22px;top:22px}.plate:after{width:70px;height:70px;left:28px;bottom:28px}
@@ -69,7 +71,7 @@
         <div class="badge">Cuisine asiatique — commande en ligne</div>
       </div>
     </div>
-    <p class="subtitle">Sélectionne un menu pour l’ajouter au panier. La fiche produit s’ouvre en parallèle pour ajuster la quantité et valider ta sélection.</p>
+    <p class="subtitle">Sélectionne un menu pour l’ajouter au panier. Tu peux aussi ajuster ou retirer les éléments directement depuis le panier.</p>
   </header>
 
   <main class="layout">
@@ -130,17 +132,35 @@
     const qtyValue = document.getElementById('qtyValue');
     let currentItem = null, qty = 1;
 
-    function eur(v){ return new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v); }
-    function showToast(msg){ toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 1500); }
-    function openModal(item){ currentItem = item; qty = 1; qtyValue.textContent = qty; modalTitle.textContent = item.name; modalDesc.textContent = item.desc; modalPrice.textContent = eur(item.price); modalCategory.textContent = item.cat; backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden','false'); }
-    function closeModal(){ backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); }
+    const eur = v => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(v);
+    const showToast = msg => { toast.textContent = msg; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'), 1500); };
+    const openModal = item => { currentItem = item; qty = 1; qtyValue.textContent = qty; modalTitle.textContent = item.name; modalDesc.textContent = item.desc; modalPrice.textContent = eur(item.price); modalCategory.textContent = item.cat; backdrop.classList.add('open'); backdrop.setAttribute('aria-hidden','false'); };
+    const closeModal = () => { backdrop.classList.remove('open'); backdrop.setAttribute('aria-hidden','true'); };
+
     function renderCart(){
       cartList.innerHTML = '';
       let total = 0;
-      if(cart.size === 0){ cartList.innerHTML = '<div class="empty">Ton panier est vide.</div>'; }
-      cart.forEach((v,k)=>{ total += v.price*v.qty; const el = document.createElement('div'); el.className='cart-item'; el.innerHTML = `<div><strong>${v.name}</strong><br><small>x${v.qty} · ${eur(v.price)}</small></div><div><strong>${eur(v.price*v.qty)}</strong></div>`; cartList.appendChild(el); });
+      if(cart.size === 0) cartList.innerHTML = '<div class="empty">Ton panier est vide.</div>';
+      cart.forEach((v,k)=>{
+        total += v.price * v.qty;
+        const el = document.createElement('div');
+        el.className = 'cart-item';
+        el.innerHTML = `<div><strong>${v.name}</strong><br><small>x${v.qty} · ${eur(v.price)}</small></div><div class="cart-actions"><strong>${eur(v.price*v.qty)}</strong><button class="icon-btn" data-dec="${k}">−</button><button class="icon-btn" data-inc="${k}">+</button><button class="icon-btn" data-rm="${k}">×</button></div>`;
+        cartList.appendChild(el);
+      });
       cartTotal.textContent = eur(total);
+      document.querySelectorAll('[data-dec]').forEach(b=>b.onclick=()=>changeQty(+b.dataset.dec,-1));
+      document.querySelectorAll('[data-inc]').forEach(b=>b.onclick=()=>changeQty(+b.dataset.inc,1));
+      document.querySelectorAll('[data-rm]').forEach(b=>b.onclick=()=>removeItem(+b.dataset.rm));
     }
+    function changeQty(id, delta){
+      const item = cart.get(id);
+      if(!item) return;
+      item.qty += delta;
+      if(item.qty <= 0) cart.delete(id); else cart.set(id, item);
+      renderCart();
+    }
+    function removeItem(id){ cart.delete(id); renderCart(); }
     function renderMenus(){
       menuGrid.innerHTML = menus.map((m,i)=>`<article class="card menu-item"><div class="hero ${i===1?'hero2':''} ${i===2?'hero3':''} ${i===3?'hero4':''} ${i===4?'hero5':''} ${i===5?'hero6':''}"></div><div class="content"><div class="topline"><div><div class="badge">${m.cat}</div><h3 class="title">${m.name}</h3></div></div><p class="desc">${m.desc}</p><div class="meta"><div class="price">${eur(m.price)}</div><button class="btn btn-primary" data-id="${m.id}">Sélectionner</button></div></div></article>`).join('');
       document.querySelectorAll('[data-id]').forEach(btn=>btn.addEventListener('click',()=>openModal(menus.find(m=>m.id==btn.dataset.id))));
