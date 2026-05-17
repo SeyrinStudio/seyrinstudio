@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -34,13 +35,13 @@
   @keyframes haloBreath{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.8;transform:scale(1.015)}}
   .screen-scene{position:absolute;inset:0;perspective:1800px;perspective-origin:center 48%;overflow:hidden}
   .screen-track{position:relative;width:100%;height:100%;transform-style:preserve-3d}
-  .screen-panel{position:absolute;top:50%;left:50%;width:min(28vw,320px);height:min(60vh,520px);transform-style:preserve-3d;transition:transform var(--ease),opacity 480ms ease,filter 480ms ease}
+  .screen-panel{position:absolute;top:50%;left:50%;width:min(28vw,320px);aspect-ratio:9/16;height:auto;max-height:min(60vh,520px);transform-style:preserve-3d;transition:transform var(--ease),opacity 480ms ease,filter 480ms ease}
   .screen-shell{position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.028));backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,.25)}
   .screen-topbar{height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04)}
   .dots-mac{display:flex;gap:6px}.dots-mac span{width:9px;height:9px;border-radius:50%;display:block}.dots-mac span:nth-child(1){background:#ff5f57}.dots-mac span:nth-child(2){background:#febc2e}.dots-mac span:nth-child(3){background:#28c840}
   .screen-url{font-size:.72rem;color:rgba(255,255,255,.45)}
-  .screen-content{height:calc(100% - 40px);position:relative;background:radial-gradient(circle at 50% 18%, rgba(108,99,255,.09), transparent 34%),linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.012))}
-  .screen-frame{width:100%;height:100%;border:0;display:block;background:#fff}
+  .screen-content{height:calc(100% - 40px);position:relative;overflow:hidden;background:radial-gradient(circle at 50% 18%, rgba(108,99,255,.09), transparent 34%),linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.012))}
+  .screen-frame,.screen-video{width:100%;height:100%;border:0;display:block;background:#000;object-fit:cover;object-position:center center}
   .screen-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,20,.02),rgba(7,11,20,.14));pointer-events:none;transition:opacity var(--ease),background var(--ease)}
   .screen-hit{position:absolute;inset:0;z-index:5;background:transparent;border:none;cursor:pointer;display:none}
   .screen-panel.is-center{transform:translate(-50%,-50%) translateZ(140px) rotateY(0deg) scale(1);z-index:3;opacity:1;filter:brightness(1)}
@@ -50,13 +51,6 @@
   .screen-panel.is-right{transform:translate(55%,-50%) translateZ(-40px) rotateY(-42deg) scale(.82);z-index:2;opacity:.72;filter:brightness(.58)}
   .screen-panel.is-right .screen-hit{display:block}
   .screen-panel.is-hidden{opacity:0;pointer-events:none;transform:translate(-50%,-50%) translateZ(-260px) scale(.7)}
- .screen-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  background: #000;
-}
   .overlay{position:absolute;inset:0;display:flex;align-items:center;padding:2rem 4rem;pointer-events:none;z-index:10}
   .back-link{position:absolute;left:4rem;top:1.1rem;display:inline-flex;gap:.5rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7;pointer-events:auto;z-index:20;transition:opacity .18s,color .18s}
   .back-link:hover{opacity:1;color:var(--accent)}
@@ -65,7 +59,7 @@
   .nav-arrow:hover{border-color:rgba(255,255,255,.3);color:var(--text);background:rgba(255,255,255,.05)}
   .slide-counter{font-family:'Instrument Serif',serif;font-style:italic;font-size:.88rem;color:rgba(255,255,255,.35)}
   .slide-counter em{color:var(--accent);font-style:normal}
-  @media (max-width:768px){nav,footer{padding:0 1rem}.back-link{left:1rem}.overlay{padding:1rem;align-items:flex-end}.screen-panel{width:220px;height:400px}.screen-panel.is-left{transform:translate(-128%,-50%) translateZ(-40px) rotateY(42deg) scale(.76)}.screen-panel.is-right{transform:translate(28%,-50%) translateZ(-40px) rotateY(-42deg) scale(.76)}}
+  @media (max-width:768px){nav,footer{padding:0 1rem}.back-link{left:1rem}.overlay{padding:1rem;align-items:flex-end}.screen-panel{width:min(78vw,280px);aspect-ratio:9/16;height:auto;max-height:72vh}.screen-panel.is-left{transform:translate(-128%,-50%) translateZ(-40px) rotateY(42deg) scale(.76)}.screen-panel.is-right{transform:translate(28%,-50%) translateZ(-40px) rotateY(-42deg) scale(.76)}}
 </style>
 </head>
 <body>
@@ -88,10 +82,7 @@
     <div class="screen-track">
       <article class="screen-panel" data-index="0">
         <div class="screen-shell">
-          <div class="screen-topbar">
-            <div class="dots-mac"><span></span><span></span><span></span></div>
-            <div class="screen-url">Maison du Dragon</div>
-          </div>
+          <div class="screen-topbar"><div class="dots-mac"><span></span><span></span><span></span></div><div class="screen-url">Maison du Dragon</div></div>
           <iframe src="ScreenResto.html" title="Interface du premier écran" class="screen-frame" loading="lazy"></iframe>
           <div class="screen-overlay"></div>
           <button class="screen-hit" type="button" aria-label="Ramener cet écran au centre"></button>
@@ -99,12 +90,9 @@
       </article>
       <article class="screen-panel" data-index="1">
         <div class="screen-shell">
-          <div class="screen-topbar">
-            <div class="dots-mac"><span></span><span></span><span></span></div>
-            <div class="screen-url">Template vidéo</div>
-          </div>
-          <video class="screen-video" autoplay muted loop playsinline>
-           <source src="RestoVideo.mp4" type="video/mp4">
+          <div class="screen-topbar"><div class="dots-mac"><span></span><span></span><span></span></div><div class="screen-url">Écran vidéo</div></div>
+          <video class="screen-video" autoplay muted loop playsinline preload="metadata">
+            <source src="RestoVideo.mp4" type="video/mp4">
           </video>
           <div class="screen-overlay"></div>
           <button class="screen-hit" type="button" aria-label="Ramener cet écran au centre"></button>
@@ -112,10 +100,7 @@
       </article>
       <article class="screen-panel" data-index="2">
         <div class="screen-shell">
-          <div class="screen-topbar">
-            <div class="dots-mac"><span></span><span></span><span></span></div>
-            <div class="screen-url">écran-03</div>
-          </div>
+          <div class="screen-topbar"><div class="dots-mac"><span></span><span></span><span></span></div><div class="screen-url">écran-03</div></div>
           <div class="screen-content"></div>
           <div class="screen-overlay"></div>
           <button class="screen-hit" type="button" aria-label="Ramener cet écran au centre"></button>
@@ -134,11 +119,7 @@
 </main>
 <footer>
   <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
-  <div class="footer-links">
-    <a href="#" class="footer-link">LinkedIn</a>
-    <a href="#" class="footer-link">Dribbble</a>
-    <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a>
-  </div>
+  <div class="footer-links"><a href="#" class="footer-link">LinkedIn</a><a href="#" class="footer-link">Dribbble</a><a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a></div>
 </footer>
 <script>
 const panels=[...document.querySelectorAll('.screen-panel')];
@@ -150,24 +131,13 @@ let current=0;
 totalNumEl.textContent=panels.length;
 function update(){
   curNumEl.textContent=current+1;
-  panels.forEach((p,i)=>{
-    p.classList.remove('is-left','is-center','is-right','is-hidden');
-    if(i===current)p.classList.add('is-center');
-    else if(i===(current+2)%3)p.classList.add('is-left');
-    else if(i===(current+1)%3)p.classList.add('is-right');
-    else p.classList.add('is-hidden');
-  });
+  panels.forEach((p,i)=>{p.classList.remove('is-left','is-center','is-right','is-hidden');if(i===current)p.classList.add('is-center');else if(i===(current+2)%3)p.classList.add('is-left');else if(i===(current+1)%3)p.classList.add('is-right');else p.classList.add('is-hidden');});
 }
 function goTo(i){current=(i+panels.length)%panels.length;update();}
 prevBtn.addEventListener('click',()=>goTo(current-1));
 nextBtn.addEventListener('click',()=>goTo(current+1));
 panels.forEach(p=>p.querySelector('.screen-hit').addEventListener('click',()=>goTo(Number(p.dataset.index))));
-document.addEventListener('keydown',e=>{
-  const tag=document.activeElement?.tagName?.toLowerCase();
-  if(['input','textarea','select'].includes(tag))return;
-  if(e.key==='ArrowLeft')goTo(current-1);
-  if(e.key==='ArrowRight')goTo(current+1);
-});
+document.addEventListener('keydown',e=>{const tag=document.activeElement?.tagName?.toLowerCase();if(['input','textarea','select'].includes(tag))return;if(e.key==='ArrowLeft')goTo(current-1);if(e.key==='ArrowRight')goTo(current+1);});
 update();
 </script>
 </body>
