@@ -50,6 +50,13 @@
   .screen-panel.is-right{transform:translate(55%,-50%) translateZ(-40px) rotateY(-42deg) scale(.82);z-index:2;opacity:.72;filter:brightness(.58)}
   .screen-panel.is-right .screen-hit{display:block}
   .screen-panel.is-hidden{opacity:0;pointer-events:none;transform:translate(-50%,-50%) translateZ(-260px) scale(.7)}
+ .screen-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  background: #000;
+}
   .overlay{position:absolute;inset:0;display:flex;align-items:center;padding:2rem 4rem;pointer-events:none;z-index:10}
   .back-link{position:absolute;left:4rem;top:1.1rem;display:inline-flex;gap:.5rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7;pointer-events:auto;z-index:20;transition:opacity .18s,color .18s}
   .back-link:hover{opacity:1;color:var(--accent)}
