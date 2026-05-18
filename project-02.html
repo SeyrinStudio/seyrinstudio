@@ -1,67 +1,348 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Portfolio 02 — Trois écrans</title>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Portfolio 02 — Écrans interactifs</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
-  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-  :root{--border:rgba(255,255,255,.08);--text:#fff;--muted:#e2e8f0;--accent:#6c63ff;--nav-h:60px;--footer-h:64px;--ease:780ms cubic-bezier(.16,1,.3,1)}
-  html,body{height:100%;overflow:hidden}
-  body{font-family:'Inter',sans-serif;font-weight:300;color:var(--text);-webkit-tap-highlight-color:transparent;background:radial-gradient(circle at 76% 18%, rgba(46,102,255,.18), transparent 28%),radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%),linear-gradient(180deg,#0a1223 0%,#09111f 100%)}
-  a{color:inherit;text-decoration:none}
-  :focus{outline:none}
-  :focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:10px}
-  nav{position:fixed;inset:0 0 auto 0;height:var(--nav-h);z-index:200;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:0 2.5rem;background:rgba(16,30,48,.88);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
-  .nav-left,.nav-link,.nav-cta{font-family:'League Gothic',sans-serif;letter-spacing:.1em;text-transform:uppercase}
-  .nav-left{font-size:1.1rem;color:var(--text)}
-  .nav-center{display:flex;gap:.25rem}
-  .nav-link{font-size:1rem;color:var(--muted);padding:.35rem .9rem;border-radius:100px;transition:color .18s,background .18s}
-  .nav-link:hover{color:var(--text);background:rgba(255,255,255,.06)}
-  .nav-right{display:flex;justify-content:flex-end}
-  .nav-cta{font-size:1rem;padding:.4rem 1.1rem;border:1px solid rgba(255,255,255,.2);border-radius:100px;transition:border-color .18s,background .18s}
-  .nav-cta:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.05)}
-  footer{position:fixed;inset:auto 0 0 0;height:var(--footer-h);z-index:200;display:flex;align-items:center;justify-content:space-between;padding:0 2.5rem;border-top:1px solid var(--border);background:rgba(9,17,31,.72);backdrop-filter:blur(12px)}
-  .footer-text,.footer-link{font-size:.72rem;color:var(--muted)}
-  .footer-links{display:flex;gap:1.25rem}.footer-link:hover{color:var(--text)}
-  main{position:fixed;inset:var(--nav-h) 0 var(--footer-h) 0;overflow:hidden}
-  .bg-layer{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-  .halo{position:absolute;border-radius:50%;border:1px solid rgba(108,99,255,.07);animation:haloBreath 5s ease-in-out infinite}
-  .halo-1{width:min(96vw,960px);height:min(96vw,960px)}
-  .halo-2{width:min(104vw,1040px);height:min(104vw,1040px);animation-delay:1.5s}
-  @keyframes haloBreath{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.8;transform:scale(1.015)}}
-  .screen-scene{position:absolute;inset:0;perspective:1800px;perspective-origin:center 48%;overflow:hidden}
-  .screen-track{position:relative;width:100%;height:100%;transform-style:preserve-3d}
-  .screen-panel{position:absolute;top:50%;left:50%;width:min(28vw,320px);aspect-ratio:9/16;height:auto;max-height:min(60vh,520px);transform-style:preserve-3d;transition:transform var(--ease),opacity 480ms ease,filter 480ms ease}
-  .screen-shell{position:relative;width:100%;height:100%;border-radius:28px;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.028));backdrop-filter:blur(12px);box-shadow:0 30px 80px rgba(0,0,0,.25)}
-  .screen-topbar{height:40px;display:flex;align-items:center;gap:8px;padding:0 14px;border-bottom:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04)}
-  .dots-mac{display:flex;gap:6px}.dots-mac span{width:9px;height:9px;border-radius:50%;display:block}.dots-mac span:nth-child(1){background:#ff5f57}.dots-mac span:nth-child(2){background:#febc2e}.dots-mac span:nth-child(3){background:#28c840}
-  .screen-url{font-size:.72rem;color:rgba(255,255,255,.45)}
-  .screen-content{height:calc(100% - 40px);position:relative;overflow:hidden;background:radial-gradient(circle at 50% 18%, rgba(108,99,255,.09), transparent 34%),linear-gradient(180deg,rgba(255,255,255,.028),rgba(255,255,255,.012))}
-  .screen-frame,.screen-video{width:100%;height:100%;border:0;display:block;background:#000;object-fit:cover;object-position:center center}
-  .screen-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,11,20,.02),rgba(7,11,20,.14));pointer-events:none;transition:opacity var(--ease),background var(--ease)}
-  .screen-hit{position:absolute;inset:0;z-index:5;background:transparent;border:none;cursor:pointer;display:none}
-  .screen-panel.is-center{transform:translate(-50%,-50%) translateZ(140px) rotateY(0deg) scale(1);z-index:3;opacity:1;filter:brightness(1)}
-  .screen-panel.is-center .screen-overlay{opacity:0}.screen-panel.is-center .screen-hit{display:none}
-  .screen-panel.is-left{transform:translate(-155%,-50%) translateZ(-40px) rotateY(42deg) scale(.82);z-index:2;opacity:.72;filter:brightness(.58)}
-  .screen-panel.is-left .screen-hit{display:block}
-  .screen-panel.is-right{transform:translate(55%,-50%) translateZ(-40px) rotateY(-42deg) scale(.82);z-index:2;opacity:.72;filter:brightness(.58)}
-  .screen-panel.is-right .screen-hit{display:block}
-  .screen-panel.is-hidden{opacity:0;pointer-events:none;transform:translate(-50%,-50%) translateZ(-260px) scale(.7)}
-  .overlay{position:absolute;inset:0;display:flex;align-items:center;padding:2rem 4rem;pointer-events:none;z-index:10}
-  .back-link{position:absolute;left:4rem;top:1.1rem;display:inline-flex;gap:.5rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);opacity:.7;pointer-events:auto;z-index:20;transition:opacity .18s,color .18s}
-  .back-link:hover{opacity:1;color:var(--accent)}
-  .slide-nav{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);display:flex;align-items:center;gap:.85rem;pointer-events:auto;z-index:20}
-  .nav-arrow{width:38px;height:38px;border-radius:50%;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;display:grid;place-items:center;font-size:.95rem;transition:border-color .18s,color .18s,background .18s}
-  .nav-arrow:hover{border-color:rgba(255,255,255,.3);color:var(--text);background:rgba(255,255,255,.05)}
-  .slide-counter{font-family:'Instrument Serif',serif;font-style:italic;font-size:.88rem;color:rgba(255,255,255,.35)}
-  .slide-counter em{color:var(--accent);font-style:normal}
-  @media (max-width:768px){nav,footer{padding:0 1rem}.back-link{left:1rem}.overlay{padding:1rem;align-items:flex-end}.screen-panel{width:min(78vw,280px);aspect-ratio:9/16;height:auto;max-height:72vh}.screen-panel.is-left{transform:translate(-128%,-50%) translateZ(-40px) rotateY(42deg) scale(.76)}.screen-panel.is-right{transform:translate(28%,-50%) translateZ(-40px) rotateY(-42deg) scale(.76)}}
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+:root {
+  --border: rgba(255,255,255,.08);
+  --text: #fff;
+  --muted: #e2e8f0;
+  --accent: #6c63ff;
+  --nav-h: 60px;
+  --footer-h: 64px;
+  --ease: 780ms cubic-bezier(.16,1,.3,1);
+}
+
+*:focus { outline:none; }
+*:focus-visible { outline:2px solid var(--accent); outline-offset:3px; border-radius:10px; }
+
+html, body { height:100%; overflow:hidden; }
+
+body {
+  font-family:'Inter',sans-serif; font-weight:300;
+  color:var(--text); -webkit-tap-highlight-color:transparent;
+  background:
+    radial-gradient(circle at 76% 18%, rgba(46,102,255,.18), transparent 28%),
+    radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%),
+    linear-gradient(180deg,#0a1223 0%,#09111f 100%);
+}
+
+a { color:inherit; text-decoration:none; }
+
+/* ── NAV ── */
+nav {
+  position:fixed; inset:0 0 auto 0; height:var(--nav-h); z-index:200;
+  display:grid; grid-template-columns:1fr auto 1fr;
+  align-items:center; padding:0 2.5rem;
+  background:rgba(16,30,48,.88); backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-left,.nav-link,.nav-cta { font-family:'League Gothic',sans-serif; letter-spacing:.1em; text-transform:uppercase; }
+.nav-left { font-size:1.1rem; color:var(--text); transition:color .18s; }
+.nav-left:hover { color:var(--accent); }
+.nav-center { display:flex; gap:.25rem; }
+.nav-link { font-size:1rem; color:var(--muted); padding:.35rem .9rem; border-radius:100px; transition:color .18s,background .18s; }
+.nav-link:hover { color:var(--text); background:rgba(255,255,255,.06); }
+.nav-right { display:flex; justify-content:flex-end; }
+.nav-cta { font-size:1rem; padding:.4rem 1.1rem; border:1px solid rgba(255,255,255,.2); border-radius:100px; transition:border-color .18s,background .18s; }
+.nav-cta:hover { border-color:rgba(255,255,255,.4); background:rgba(255,255,255,.05); }
+
+/* Burger */
+.nav-burger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; margin-left:auto; }
+.nav-burger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; }
+.nav-drawer { display:none; position:fixed; inset:var(--nav-h) 0 0 0; z-index:199; background:rgba(10,18,35,.97); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:2rem; }
+.nav-drawer.open { display:flex; }
+.nav-drawer .nav-link { font-size:1.5rem; color:var(--text); }
+
+/* ── FOOTER ── */
+footer {
+  position:fixed; inset:auto 0 0 0; height:var(--footer-h); z-index:200;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 2.5rem;
+  border-top:1px solid var(--border);
+  background:rgba(9,17,31,.72); backdrop-filter:blur(12px);
+}
+.footer-text,.footer-link { font-size:.72rem; color:var(--muted); }
+.footer-links { display:flex; gap:1.25rem; }
+.footer-link:hover { color:var(--text); }
+
+/* ── MAIN ── */
+main {
+  position:fixed; inset:var(--nav-h) 0 var(--footer-h) 0;
+  overflow:hidden; display:flex; flex-direction:column;
+}
+
+/* ── HALOS ── */
+.bg-layer { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; }
+.halo { position:absolute; border-radius:50%; border:1px solid rgba(108,99,255,.06); animation:haloBreath 5s ease-in-out infinite; }
+.halo-1 { width:min(96vw,960px); height:min(96vw,960px); }
+.halo-2 { width:min(108vw,1080px); height:min(108vw,1080px); animation-delay:1.8s; }
+@keyframes haloBreath { 0%,100%{opacity:.25;transform:scale(1)} 50%{opacity:.7;transform:scale(1.012)} }
+
+/* ── SCÈNE 3D ── */
+.screen-scene {
+  position:absolute; inset:0;
+  perspective:1600px;
+  perspective-origin:50% 52%;
+  overflow:hidden;
+}
+
+.screen-track {
+  position:relative;
+  width:100%; height:100%;
+  transform-style:preserve-3d;
+}
+
+/* ── ÉCRAN (format large paysage) ── */
+.screen-panel {
+  position:absolute;
+  /* Largeur responsive : 72% de la fenêtre, max 880px */
+  width: min(72vw, 880px);
+  /* Ratio paysage ciné : 16/9 */
+  aspect-ratio: 16 / 9;
+  /* Hauteur max pour ne pas déborder */
+  max-height: min(52vh, 500px);
+  /* Centre horizontal/vertical */
+  top:50%; left:50%;
+  transform-style:preserve-3d;
+  transition:transform var(--ease), opacity 480ms ease, filter 480ms ease;
+  /* L'effet courbé est simulé par rotateY + border-radius asymétrique */
+}
+
+.screen-shell {
+  position:relative; width:100%; height:100%;
+  border-radius:24px;
+  overflow:hidden;
+  /* Bordure lumineuse subtile */
+  border:1.5px solid rgba(255,255,255,.14);
+  background:#0d1628;
+  /* Ombre portée profonde pour l'effet cinéma */
+  box-shadow:
+    0 40px 120px rgba(0,0,0,.55),
+    0 0 0 1px rgba(108,99,255,.12),
+    inset 0 1px 0 rgba(255,255,255,.08);
+  /* Courbure simulée : le shell a une légère déformation verticale */
+}
+
+/* Reflet de courbure sur l'écran actif */
+.screen-shell::before {
+  content:'';
+  position:absolute; inset:0;
+  background: radial-gradient(ellipse 120% 60% at 50% -10%, rgba(255,255,255,.05) 0%, transparent 60%);
+  pointer-events:none; z-index:4; border-radius:inherit;
+}
+
+/* Barre du haut style OS */
+.screen-topbar {
+  height:36px; display:flex; align-items:center; gap:8px; padding:0 14px;
+  border-bottom:1px solid rgba(255,255,255,.06);
+  background:rgba(10,16,30,.8);
+  position:relative; z-index:3; flex-shrink:0;
+}
+.dots-mac { display:flex; gap:6px; }
+.dots-mac span { width:9px; height:9px; border-radius:50%; display:block; }
+.dots-mac span:nth-child(1) { background:#ff5f57; }
+.dots-mac span:nth-child(2) { background:#febc2e; }
+.dots-mac span:nth-child(3) { background:#28c840; }
+.screen-url { font-size:.68rem; color:rgba(255,255,255,.35); flex:1; text-align:center; letter-spacing:.04em; }
+
+/* Zone contenu = 100% - topbar */
+.screen-body {
+  position:absolute; top:36px; left:0; right:0; bottom:0;
+  overflow:hidden;
+}
+
+/* ── IFRAME responsive ── */
+.screen-body iframe {
+  /* On scale down une iframe "full desktop" pour qu'elle tienne dans l'écran */
+  position:absolute;
+  top:0; left:0;
+  /* Taille "virtuelle" du contenu desktop */
+  width:1440px;
+  height:900px;
+  /* Scale pour remplir la zone visible */
+  transform-origin:0 0;
+  border:none;
+  pointer-events:none; /* désactivé quand pas actif */
+  /* la scale est calculée en JS */
+}
+.screen-panel.is-center .screen-body iframe { pointer-events:all; }
+
+/* ── VIDÉO responsive ── */
+.screen-body video {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center;
+  display:block;
+  pointer-events:none;
+}
+
+/* ── IMAGE responsive ── */
+.screen-body img {
+  width:100%; height:100%;
+  object-fit:cover; object-position:center top;
+  display:block;
+}
+
+/* Overlay gradient en bas */
+.screen-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(180deg, transparent 60%, rgba(7,11,20,.2) 100%);
+  pointer-events:none; z-index:2;
+  transition:opacity var(--ease);
+}
+.screen-panel.is-center .screen-overlay { opacity:0; }
+
+/* Blocker pour les écrans non-actifs */
+.screen-hit {
+  position:absolute; inset:0; z-index:5;
+  background:transparent; border:none; cursor:pointer; display:none;
+}
+.screen-panel:not(.is-center) .screen-hit { display:block; }
+
+/* Label flottant sous l'écran */
+.screen-label {
+  position:absolute; bottom:-32px; left:50%;
+  transform:translateX(-50%);
+  font-size:.65rem; letter-spacing:.18em; text-transform:uppercase;
+  color:rgba(255,255,255,.0); white-space:nowrap;
+  transition:color .4s;
+  pointer-events:none;
+}
+.screen-panel.is-center .screen-label { color:var(--accent); }
+
+/* ══════════════════════════════════
+   POSITIONS DES ÉCRANS
+   Effet cinéma incurvé :
+   - Centre : grand, droit, lumineux
+   - Côtés : tournés, rapetissés, sombres
+   - La translation Y négative donne l'arc
+══════════════════════════════════ */
+
+/* Calcul de base : l'écran est centré par translate(-50%,-50%) */
+.screen-panel.is-center {
+  transform: translate(-50%,-50%) translateZ(80px) rotateY(0deg) scale(1);
+  opacity:1; filter:brightness(1) saturate(1);
+  z-index:10;
+}
+
+.screen-panel.is-left {
+  transform: translate(-118%,-43%) translateZ(-60px) rotateY(38deg) scale(.72);
+  opacity:.6; filter:brightness(.55) saturate(.8);
+  z-index:5;
+}
+
+.screen-panel.is-right {
+  transform: translate(18%,-43%) translateZ(-60px) rotateY(-38deg) scale(.72);
+  opacity:.6; filter:brightness(.55) saturate(.8);
+  z-index:5;
+}
+
+.screen-panel.is-far-left {
+  transform: translate(-138%,-36%) translateZ(-160px) rotateY(52deg) scale(.54);
+  opacity:.2; filter:brightness(.3) saturate(.5);
+  z-index:1;
+}
+
+.screen-panel.is-far-right {
+  transform: translate(38%,-36%) translateZ(-160px) rotateY(-52deg) scale(.54);
+  opacity:.2; filter:brightness(.3) saturate(.5);
+  z-index:1;
+}
+
+.screen-panel.is-hidden {
+  opacity:0; pointer-events:none;
+  transform: translate(-50%,-50%) translateZ(-280px) scale(.5);
+  z-index:0;
+}
+
+/* ── OVERLAY UI ── */
+.overlay {
+  position:absolute; inset:0;
+  pointer-events:none; z-index:20;
+}
+
+.back-link {
+  position:absolute; left:2.5rem; top:1rem;
+  display:inline-flex; gap:.5rem;
+  font-size:.7rem; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--muted); opacity:.6;
+  pointer-events:auto;
+  transition:opacity .18s, color .18s;
+}
+.back-link:hover { opacity:1; color:var(--accent); }
+
+/* Titre projet */
+.proj-title {
+  position:absolute; left:2.5rem; bottom:2.5rem;
+  pointer-events:none;
+}
+.proj-eyebrow { font-size:.65rem; letter-spacing:.2em; text-transform:uppercase; color:rgba(255,255,255,.3); margin-bottom:.35rem; }
+.proj-name { font-family:'Instrument Serif',serif; font-size:clamp(1.2rem,2vw,1.8rem); font-weight:400; line-height:1.15; letter-spacing:-.01em; }
+.proj-name .hl { font-style:italic; color:var(--accent); }
+
+/* Contrôles nav */
+.slide-nav {
+  position:absolute; left:50%; bottom:1.5rem;
+  transform:translateX(-50%);
+  display:flex; align-items:center; gap:.85rem;
+  pointer-events:auto; z-index:25;
+}
+.nav-arrow {
+  width:40px; height:40px; border-radius:50%;
+  border:1px solid rgba(255,255,255,.15);
+  background:rgba(16,30,48,.7); backdrop-filter:blur(8px);
+  color:var(--muted); cursor:pointer;
+  display:grid; place-items:center; font-size:1rem;
+  transition:border-color .18s, color .18s, transform .1s;
+  -webkit-tap-highlight-color:transparent;
+}
+.nav-arrow:hover { border-color:rgba(255,255,255,.35); color:var(--text); }
+.nav-arrow:active { transform:scale(.92); }
+
+.slide-counter { font-family:'Instrument Serif',serif; font-style:italic; font-size:.88rem; color:rgba(255,255,255,.35); }
+.slide-counter em { color:var(--accent); font-style:normal; }
+
+.nav-dots { display:flex; gap:6px; align-items:center; }
+.nav-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,.2); cursor:pointer; transition:background .25s, transform .25s; -webkit-tap-highlight-color:transparent; }
+.nav-dot.on { background:#fff; transform:scale(1.5); }
+
+/* ── RESPONSIVE ── */
+@media (max-width:900px) {
+  nav,footer { padding:0 1.5rem; }
+  .back-link { left:1.5rem; }
+  .proj-title { left:1.5rem; bottom:2rem; }
+
+  .screen-panel { width:min(82vw,680px); }
+  .screen-panel.is-left  { transform:translate(-108%,-42%) translateZ(-60px) rotateY(34deg) scale(.72); }
+  .screen-panel.is-right { transform:translate(8%,-42%) translateZ(-60px) rotateY(-34deg) scale(.72); }
+  .screen-panel.is-far-left  { transform:translate(-125%,-35%) translateZ(-160px) rotateY(48deg) scale(.52); }
+  .screen-panel.is-far-right { transform:translate(25%,-35%) translateZ(-160px) rotateY(-48deg) scale(.52); }
+}
+
+@media (max-width:640px) {
+  .nav-center,.nav-right { display:none; }
+  .nav-burger { display:flex; }
+  nav { grid-template-columns:1fr auto; }
+  footer .footer-links { display:none; }
+
+  .screen-panel { width:min(88vw,480px); max-height:min(38vh,280px); }
+  .screen-panel.is-left  { transform:translate(-102%,-40%) translateZ(-40px) rotateY(30deg) scale(.68); }
+  .screen-panel.is-right { transform:translate(2%,-40%) translateZ(-40px) rotateY(-30deg) scale(.68); }
+  .screen-panel.is-far-left  { transform:translate(-115%,-32%) translateZ(-100px) rotateY(44deg) scale(.5); }
+  .screen-panel.is-far-right { transform:translate(15%,-32%) translateZ(-100px) rotateY(-44deg) scale(.5); }
+
+  .back-link { left:1rem; font-size:.62rem; }
+  .proj-title { left:1rem; bottom:1.5rem; }
+}
 </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="nav-left">Seyrin Studio</a>
   <div class="nav-center">
@@ -71,73 +352,230 @@
   <div class="nav-right">
     <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta">Me contacter</a>
   </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="index.html#portfolio" class="nav-link" onclick="closeDrawer()">Projets</a>
+  <a href="index.html#about" class="nav-link" onclick="closeDrawer()">À propos</a>
+  <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta" onclick="closeDrawer()">Me contacter</a>
+</div>
+
 <main>
   <div class="bg-layer">
     <div class="halo halo-1"></div>
     <div class="halo halo-2"></div>
   </div>
+
   <div class="screen-scene">
-    <div class="screen-track">
-      <article class="screen-panel" data-index="0">
+    <div class="screen-track" id="screenTrack">
+
+      <!-- ══ ÉCRAN 01 — iframe ══ -->
+      <article class="screen-panel" data-index="0"
+        data-eyebrow="Écran 01 · Interface web"
+        data-title="Maison du <span class='hl'>Dragon</span>">
         <div class="screen-shell">
-          <div class="screen-topbar"><div class="dots-mac"><span></span><span></span><span></span></div><div class="screen-url">Maison du Dragon</div></div>
-          <iframe src="LeCerisier.html" title="Interface du premier écran" class="screen-frame" loading="lazy"></iframe>
+          <div class="screen-topbar">
+            <div class="dots-mac"><span></span><span></span><span></span></div>
+            <div class="screen-url">lecerisier.studio</div>
+          </div>
+          <div class="screen-body">
+            <iframe
+              src="LeCerisier.html"
+              title="Interface Le Cerisier"
+              loading="lazy"
+              sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
+            </iframe>
+          </div>
           <div class="screen-overlay"></div>
-          <button class="screen-hit" type="button" aria-label="Ramener cet écran au centre"></button>
+          <button class="screen-hit" type="button" aria-label="Sélectionner cet écran"></button>
+          <div class="screen-label">Écran 01</div>
         </div>
       </article>
-      <article class="screen-panel" data-index="1">
+
+      <!-- ══ ÉCRAN 02 — vidéo ══ -->
+      <article class="screen-panel" data-index="1"
+        data-eyebrow="Écran 02 · Vidéo immersive"
+        data-title="Narration <span class='hl'>produit</span>">
         <div class="screen-shell">
-          <div class="screen-topbar"><div class="dots-mac"><span></span><span></span><span></span></div><div class="screen-url">Écran vidéo</div></div>
-          <video class="screen-video" autoplay muted loop playsinline preload="metadata">
-            <source src="RestoVideo.mp4" type="video/mp4">
-          </video>
+          <div class="screen-topbar">
+            <div class="dots-mac"><span></span><span></span><span></span></div>
+            <div class="screen-url">seyrin.studio / video</div>
+          </div>
+          <div class="screen-body">
+            <video autoplay muted loop playsinline preload="metadata">
+              <source src="RestoVideo.mp4" type="video/mp4">
+            </video>
+          </div>
           <div class="screen-overlay"></div>
-          <button class="screen-hit" type="button" aria-label="Ramener cet écran au centre"></button>
+          <button class="screen-hit" type="button" aria-label="Sélectionner cet écran"></button>
+          <div class="screen-label">Écran 02</div>
         </div>
       </article>
-      <article class="screen-panel" data-index="2">
+
+      <!-- ══ ÉCRAN 03 — image ══ -->
+      <article class="screen-panel" data-index="2"
+        data-eyebrow="Écran 03 · Maquette"
+        data-title="Wireframe <span class='hl'>annoté</span>">
         <div class="screen-shell">
-          <div class="screen-topbar"><div class="dots-mac"><span></span><span></span><span></span></div><div class="screen-url">écran-03</div></div>
-          <div class="screen-content"></div>
+          <div class="screen-topbar">
+            <div class="dots-mac"><span></span><span></span><span></span></div>
+            <div class="screen-url">seyrin.studio / maquette</div>
+          </div>
+          <div class="screen-body">
+            <!-- Remplace par ton image : src="Portfolio-03.png" -->
+            <img src="Portfolio-03.png" alt="Maquette annotée" loading="lazy">
+          </div>
           <div class="screen-overlay"></div>
-          <button class="screen-hit" type="button" aria-label="Ramener cet écran au centre"></button>
+          <button class="screen-hit" type="button" aria-label="Sélectionner cet écran"></button>
+          <div class="screen-label">Écran 03</div>
         </div>
       </article>
+
     </div>
   </div>
+
+  <!-- UI overlay -->
   <div class="overlay">
     <a class="back-link" href="index.html#portfolio">← Retour aux projets</a>
-    <div class="slide-nav" aria-label="Navigation écrans">
-      <button class="nav-arrow" id="prevBtn" type="button" aria-label="Écran précédent">←</button>
-      <button class="nav-arrow" id="nextBtn" type="button" aria-label="Écran suivant">→</button>
-      <div class="slide-counter"><em id="curNum">1</em> / <span id="totalNum">3</span></div>
+
+    <!-- Titre dynamique -->
+    <div class="proj-title">
+      <div class="proj-eyebrow" id="projEyebrow">Écran 01 · Interface web</div>
+      <div class="proj-name" id="projName">Maison du <span class="hl">Dragon</span></div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="slide-nav">
+      <button class="nav-arrow" id="prevBtn" aria-label="Précédent">←</button>
+      <div class="nav-dots" id="dotsWrap"></div>
+      <button class="nav-arrow" id="nextBtn" aria-label="Suivant">→</button>
     </div>
   </div>
 </main>
+
 <footer>
   <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
-  <div class="footer-links"><a href="#" class="footer-link">LinkedIn</a><a href="#" class="footer-link">Dribbble</a><a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a></div>
+  <div class="footer-links">
+    <a href="#" class="footer-link">LinkedIn</a>
+    <a href="#" class="footer-link">Dribbble</a>
+    <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a>
+  </div>
 </footer>
+
 <script>
-const panels=[...document.querySelectorAll('.screen-panel')];
-const prevBtn=document.getElementById('prevBtn');
-const nextBtn=document.getElementById('nextBtn');
-const curNumEl=document.getElementById('curNum');
-const totalNumEl=document.getElementById('totalNum');
-let current=0;
-totalNumEl.textContent=panels.length;
-function update(){
-  curNumEl.textContent=current+1;
-  panels.forEach((p,i)=>{p.classList.remove('is-left','is-center','is-right','is-hidden');if(i===current)p.classList.add('is-center');else if(i===(current+2)%3)p.classList.add('is-left');else if(i===(current+1)%3)p.classList.add('is-right');else p.classList.add('is-hidden');});
+/* ── Burger ── */
+document.getElementById('navBurger').addEventListener('click', () => {
+  document.getElementById('navDrawer').classList.toggle('open');
+});
+function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); }
+
+/* ── Carousel ── */
+const panels   = Array.from(document.querySelectorAll('.screen-panel'));
+const dotsWrap = document.getElementById('dotsWrap');
+const projEyebrow = document.getElementById('projEyebrow');
+const projName    = document.getElementById('projName');
+const N = panels.length;
+let current = 0;
+
+/* Crée les dots */
+const dotEls = panels.map((_, i) => {
+  const d = document.createElement('div');
+  d.className = 'nav-dot';
+  d.addEventListener('click', () => goTo(i));
+  dotsWrap.appendChild(d);
+  return d;
+});
+
+/* Positions : 0=center, 1=right, 2=far-right, ..., N-1=left */
+function getPos(panelIdx, activeIdx) {
+  const diff = ((panelIdx - activeIdx) % N + N) % N;
+  const signed = diff > N/2 ? diff - N : diff;
+  if (signed === 0)  return 'is-center';
+  if (signed === 1)  return 'is-right';
+  if (signed === -1) return 'is-left';
+  if (signed === 2)  return 'is-far-right';
+  if (signed === -2) return 'is-far-left';
+  return 'is-hidden';
 }
-function goTo(i){current=(i+panels.length)%panels.length;update();}
-prevBtn.addEventListener('click',()=>goTo(current-1));
-nextBtn.addEventListener('click',()=>goTo(current+1));
-panels.forEach(p=>p.querySelector('.screen-hit').addEventListener('click',()=>goTo(Number(p.dataset.index))));
-document.addEventListener('keydown',e=>{const tag=document.activeElement?.tagName?.toLowerCase();if(['input','textarea','select'].includes(tag))return;if(e.key==='ArrowLeft')goTo(current-1);if(e.key==='ArrowRight')goTo(current+1);});
-update();
+
+/* Scale les iframes pour remplir leur écran */
+function scaleIframes() {
+  panels.forEach(panel => {
+    const body = panel.querySelector('.screen-body');
+    const iframe = panel.querySelector('iframe');
+    if (!iframe || !body) return;
+    const scaleX = body.offsetWidth / 1440;
+    const scaleY = body.offsetHeight / 900;
+    const scale = Math.max(scaleX, scaleY);
+    iframe.style.transform = `scale(${scale})`;
+    iframe.style.width = (body.offsetWidth / scale) + 'px';
+    iframe.style.height = (body.offsetHeight / scale) + 'px';
+  });
+}
+
+function render() {
+  panels.forEach((p, i) => {
+    /* Retire toutes les classes de position */
+    p.classList.remove('is-center','is-left','is-right','is-far-left','is-far-right','is-hidden');
+    p.classList.add(getPos(i, current));
+  });
+  dotEls.forEach((d, i) => d.classList.toggle('on', i === current));
+
+  /* Titre dynamique */
+  const active = panels[current];
+  projEyebrow.textContent = active.dataset.eyebrow || '';
+  projName.innerHTML      = active.dataset.title   || '';
+
+  scaleIframes();
+}
+
+function goTo(i) {
+  current = ((i % N) + N) % N;
+  render();
+}
+
+/* Boutons */
+document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+/* Clic sur les écrans non-actifs */
+panels.forEach(p => {
+  p.querySelector('.screen-hit').addEventListener('click', () => goTo(Number(p.dataset.index)));
+});
+
+/* Clavier */
+document.addEventListener('keydown', e => {
+  const tag = document.activeElement?.tagName?.toLowerCase();
+  if (['input','textarea','select'].includes(tag)) return;
+  if (e.key === 'ArrowLeft')  goTo(current - 1);
+  if (e.key === 'ArrowRight') goTo(current + 1);
+});
+
+/* Swipe touch */
+let tx0 = 0;
+document.querySelector('.screen-scene').addEventListener('touchstart', e => { tx0 = e.touches[0].clientX; }, {passive:true});
+document.querySelector('.screen-scene').addEventListener('touchend', e => {
+  const dx = tx0 - e.changedTouches[0].clientX;
+  if (dx > 50) goTo(current + 1);
+  if (dx < -50) goTo(current - 1);
+}, {passive:true});
+
+/* Molette */
+let wLock = false;
+document.querySelector('.screen-scene').addEventListener('wheel', e => {
+  if (wLock) return; wLock = true;
+  goTo(current + (e.deltaX > 0 || e.deltaY > 0 ? 1 : -1));
+  setTimeout(() => { wLock = false; }, 750);
+}, {passive:true});
+
+/* Resize → recalcule les scales */
+window.addEventListener('resize', () => { render(); });
+
+/* Init */
+render();
 </script>
 </body>
 </html>
