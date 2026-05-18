@@ -65,7 +65,13 @@
     .close{position:absolute;right:14px;top:14px;width:40px;height:40px;border-radius:12px;border:1px solid rgba(204,103,108,.18);background:#fff;color:var(--rose);font-size:18px;z-index:2}
     .toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#111;color:#fff;padding:12px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.08);opacity:0;pointer-events:none;transition:.25s;z-index:30;max-width:calc(100vw - 32px);text-align:center}
     .toast.show{opacity:1;transform:translateX(-50%) translateY(-4px)}
-    .heroimg{height:170px;background:url('image.jpg') center/cover no-repeat}
+    .heroimg{height:170px;background-size:cover;background-position:center;background-repeat:no-repeat}
+    .img1{background-image:url('https://images.unsplash.com/photo-1557872943-16a5ac26437e?auto=format&fit=crop&w=1200&q=80')}
+    .img2{background-image:url('https://images.unsplash.com/photo-1579584425555-c3ce17fd4351?auto=format&fit=crop&w=1200&q=80')}
+    .img3{background-image:url('https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=1200&q=80')}
+    .img4{background-image:url('https://images.unsplash.com/photo-1611270629569-8b357cb88da9?auto=format&fit=crop&w=1200&q=80')}
+    .img5{background-image:url('https://images.unsplash.com/photo-1580822184713-fc33b3d7f89d?auto=format&fit=crop&w=1200&q=80')}
+    .img6{background-image:url('https://images.unsplash.com/photo-1617196034796-73dfa7b1fd56?auto=format&fit=crop&w=1200&q=80')}
     @media (max-width: 980px){.layout{grid-template-columns:1fr}.cart{position:relative;top:0;min-height:auto}.menu-grid{grid-template-columns:1fr}.modal-grid{grid-template-columns:1fr}.modal-media{min-height:240px}}
     @media (max-width: 640px){header{padding:18px 14px 8px}.layout{padding:8px 14px 20px;gap:14px}.menu-grid{gap:14px}.content,.modal-body,.cart{padding:14px}.heroimg{height:150px}.meta{align-items:stretch}.meta .btn,.total .btn{width:100%}.cart-item{flex-direction:column;align-items:flex-start}.cart-actions{width:100%;justify-content:flex-start}.modal-backdrop{padding:8px}.modal{max-height:calc(100dvh - 16px);border-radius:20px}.detail-price{font-size:24px}.close{right:10px;top:10px}}
   </style>
@@ -126,12 +132,12 @@
 
   <script>
     const menus = [
-      {id:1,name:'Ramen Shoyu',cat:'Noodle Bowl',price:14.9,desc:'Bouillon soja, nouilles, œuf mariné, champignons, pak choï.'},
-      {id:2,name:'Bowl Teriyaki',cat:'Rice Bowl',price:13.5,desc:'Poulet laqué, riz jasmin, sésame, légumes croquants.'},
-      {id:3,name:'Sushi Mix',cat:'Sushi',price:18.9,desc:'12 pièces assorties : maki, nigiri, california et gingembre.'},
-      {id:4,name:'Pad Thai',cat:'Wok',price:15.2,desc:'Nouilles sautées, cacahuètes, citron vert, crevettes ou tofu.'},
-      {id:5,name:'Curry Rouge',cat:'Curry',price:16.4,desc:'Lait de coco, basilic thaï, légumes, riz parfumé.'},
-      {id:6,name:'Bao Duo',cat:'Street Food',price:12.8,desc:'Deux bao buns vapeur, porc braisé, pickles, coriandre.'}
+      {id:1,name:'Ramen Shoyu',cat:'Nouilles',price:14.9,desc:'Bouillon soja, nouilles, œuf mariné, champignons, pak choï.'},
+      {id:2,name:'Sushi Mix',cat:'Sushi',price:18.9,desc:'12 pièces assorties : maki, nigiri, california et gingembre.'},
+      {id:3,name:'Sashimi Saumon',cat:'Sashimi',price:17.2,desc:'Tranches de saumon frais, riz vinaigré et wasabi.'},
+      {id:4,name:'Tempura Crevettes',cat:'Tempura',price:15.8,desc:'Crevettes et légumes en friture légère, sauce soja.'},
+      {id:5,name:'Donburi Poulet',cat:'Donburi',price:13.7,desc:'Bol de riz japonais, poulet mariné, légumes et œuf.'},
+      {id:6,name:'Okonomiyaki',cat:'Spécialité',price:12.8,desc:'Galette japonaise garnie, sauce okonomi et mayo.'}
     ];
     const cart = new Map();
     const menuGrid = document.getElementById('menuGrid');
@@ -163,7 +169,7 @@
     function removeItem(id){ cart.delete(id); renderCart(); }
     function sakuraSvg(){ return `<svg viewBox="0 0 220 70" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g><path d="M10 45c28-25 53-20 79-2 20 14 39 18 63 5 12-6 24-15 39-27" fill="none" stroke="#7a5a5f" stroke-width="3" stroke-linecap="round"/><g fill="#f1b1c1"><circle cx="72" cy="33" r="8"/><circle cx="87" cy="25" r="7"/><circle cx="104" cy="31" r="8"/><circle cx="123" cy="37" r="7"/><circle cx="139" cy="28" r="8"/><circle cx="156" cy="18" r="7"/><circle cx="57" cy="40" r="7"/><circle cx="30" cy="47" r="6"/></g><g fill="#fffafa" opacity=".9"><circle cx="72" cy="33" r="3"/><circle cx="87" cy="25" r="3"/><circle cx="104" cy="31" r="3"/><circle cx="123" cy="37" r="3"/><circle cx="139" cy="28" r="3"/><circle cx="156" cy="18" r="3"/><circle cx="57" cy="40" r="3"/><circle cx="30" cy="47" r="2.5"/></g></g></svg>`; }
     function renderMenus(){
-      menuGrid.innerHTML = menus.map((m)=>`<article class="card menu-item"><div class="sakura">${sakuraSvg()}</div><div class="heroimg"></div><div class="sakura right">${sakuraSvg()}</div><div class="content"><div class="badge">${m.cat}</div><h3 class="title">${m.name}</h3><p class="desc">${m.desc}</p><div class="meta"><div class="price">${eur(m.price)}</div><button class="btn btn-primary" data-id="${m.id}">Sélectionner</button></div></div></article>`).join('');
+      menuGrid.innerHTML = menus.map((m,i)=>`<article class="card menu-item"><div class="sakura">${sakuraSvg()}</div><div class="heroimg img${i+1}"></div><div class="sakura right">${sakuraSvg()}</div><div class="content"><div class="badge">${m.cat}</div><h3 class="title">${m.name}</h3><p class="desc">${m.desc}</p><div class="meta"><div class="price">${eur(m.price)}</div><button class="btn btn-primary" data-id="${m.id}">Sélectionner</button></div></div></article>`).join('');
       document.querySelectorAll('[data-id]').forEach(btn=>btn.addEventListener('click',()=>openModal(menus.find(m=>m.id==btn.dataset.id))));
     }
     document.getElementById('minusQty').onclick = ()=>{ qty = Math.max(1, qty-1); qtyValue.textContent = qty; };
