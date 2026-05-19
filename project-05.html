@@ -561,22 +561,16 @@ const dotEls = panels.map((_, i) => {
 });
 
 /* Calcule la hauteur d'un panel (incluant le gap) */
-function getPanelH() {
-  const p = panels[0];
-  const gap = 20; // correspond au gap CSS
-  return p.offsetHeight + gap;
-}
-
-/* Calcule la position Y pour centrer l'écran actif */
-function getOffset() {
-  const colH    = carouselCol.offsetHeight;
-  const panelH  = getPanelH();
-  /* Le track commence avec padding-top:40px */
-  const trackPad = 40;
-  /* Position du centre de l'écran actif dans le track */
-  const activeCenterY = trackPad + panels[0].offsetHeight / 2 + current * panelH;
-  /* On veut que activeCenterY soit au milieu de la colonne */
-  return colH / 2 - activeCenterY;
+function centerTrack() {
+  const active = panels[current];
+  const colRect = carouselCol.getBoundingClientRect();
+  const trackRect = track.getBoundingClientRect();
+  const activeRect = active.getBoundingClientRect();
+  const delta = (colRect.top + colRect.height / 2) - (activeRect.top + activeRect.height / 2);
+  const currentY = parseFloat(track.dataset.baseY || '0');
+  const nextY = currentY + delta;
+  track.dataset.baseY = nextY;
+  track.style.transform = `translateY(${nextY}px)`;
 }
 
 /* Classes de position */
@@ -607,9 +601,8 @@ function scaleIframes() {
 
 function render(animate = true) {
   /* Translate le track pour centrer l'actif */
-  const offset = getOffset();
-  track.style.transition = animate ? `transform var(--ease)` : 'none';
-  track.style.transform  = `translateY(${offset}px)`;
+track.style.transition = animate ? `transform var(--ease)` : 'none';
+centerTrack();
 
   /* Classes de position */
   panels.forEach((p, i) => {
@@ -684,6 +677,7 @@ carouselCol.addEventListener('wheel', e => {
 window.addEventListener('resize', () => render(false));
 
 /* Init */
+track.dataset.baseY = '0';
 render(false);
 </script>
 </body>
