@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -8,16 +9,35 @@
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-:root { --bg:#0F172A; --surface:#162033; --border:rgba(255,255,255,0.08); --text:#FFFFFF; --muted:#E2E8F0; --accent:#6C63FF; --blue:#6C63FF; }
-html, body { height:100%; scroll-behavior:smooth; }
-body { margin:0; font-family:'Inter',sans-serif; font-weight:300; line-height:1.6; min-height:100vh; color:var(--text); background:radial-gradient(circle at 76% 18%, rgba(46,102,255,.18), transparent 28%), radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%), linear-gradient(180deg, #0a1223 0%, #09111f 100%); overflow:hidden; }
-#pageScroll { height:100vh; overflow-y:auto; scroll-snap-type:y mandatory; scroll-behavior:smooth; scroll-padding-top:60px; }
+
+:root { 
+  --bg:#0F172A; --surface:#162033; 
+  --border:rgba(255,255,255,0.08); 
+  --text:#FFFFFF; --muted:#E2E8F0; 
+  --accent:#6C63FF; --blue:#6C63FF; 
+}
+
+html { scroll-behavior:smooth; }
+
+body { 
+  margin:0; font-family:'Inter',sans-serif; font-weight:300;
+  line-height:1.6; min-height:100vh; color:var(--text); 
+  background:
+    radial-gradient(circle at 76% 18%, rgba(46,102,255,.18), transparent 28%),
+    radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%),
+    linear-gradient(180deg, #0a1223 0%, #09111f 100%);
+}
+
 a { color:inherit; }
-#pageScroll { height:100vh; overflow-y:auto; scroll-snap-type:y mandatory; scroll-behavior:smooth; }
-section { scroll-snap-align:start; scroll-snap-stop:always; min-height:calc(100vh - 60px); }
 
 /* ── NAV ── */
-nav { position:fixed; top:0; left:0; right:0; z-index:200; display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:0 2.5rem; height:60px; background:rgba(16,30,48,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); }
+nav { 
+  position:fixed; top:0; left:0; right:0; z-index:200; 
+  display:grid; grid-template-columns:1fr auto 1fr; 
+  align-items:center; padding:0 2.5rem; height:60px; 
+  background:rgba(16,30,48,0.92); backdrop-filter:blur(20px); 
+  border-bottom:1px solid var(--border); 
+}
 .nav-left { font-family:'League Gothic',sans-serif; font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); text-decoration:none; transition:color 0.18s; }
 .nav-left:hover { color:var(--accent); }
 .nav-center { display:flex; gap:0.25rem; }
@@ -28,15 +48,23 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; display:grid; grid-te
 .nav-right { display:flex; justify-content:flex-end; }
 .nav-cta { font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text); text-decoration:none; padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color 0.18s, background 0.18s, color 0.18s; }
 .nav-cta:hover { border-color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.05); }
+
+/* Burger mobile */
 .nav-burger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; margin-left:auto; -webkit-tap-highlight-color:transparent; }
 .nav-burger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:all .25s; }
-.nav-drawer { display:none; position:fixed; inset:60px 0 0 0; z-index:199; background:rgba(10,18,35,0.97); backdrop-filter:blur(20px); flex-direction:column; align-items:center; justify-content:center; gap:2rem; }
+
+/* Drawer */
+.nav-drawer { 
+  display:none; position:fixed; inset:60px 0 0 0; z-index:199;
+  background:rgba(10,18,35,0.97); backdrop-filter:blur(20px);
+  flex-direction:column; align-items:center; justify-content:center; gap:2rem;
+}
 .nav-drawer.open { display:flex; }
 .nav-drawer .nav-link { font-size:1.5rem; color:var(--text); }
 .nav-drawer .nav-cta { font-size:1.2rem; }
-  
+
 /* ── HERO ── */
-.hero { min-height:calc(100vh - 60px); display:flex; flex-direction:column; justify-content:flex-start; padding:6.5rem 2.5rem 2.5rem; position:relative; overflow:hidden; scroll-snap-align:start; scroll-margin-top:60px; }
+.hero { display:flex; flex-direction:column; justify-content:center; padding:11rem 2.5rem 2.5rem; position:relative; overflow:hidden; }
 .hero-glow { position:absolute; inset:0; background:radial-gradient(ellipse 60% 55% at 72% 38%, rgba(43,117,207,0.1) 0%, transparent 70%), radial-gradient(ellipse 40% 30% at 20% 70%, rgba(43,117,207,0.05) 0%, transparent 60%); pointer-events:none; }
 .hero-intro { display:flex; flex-direction:column; gap:1.25rem; max-width:1000px; position:relative; z-index:1; }
 .hero-eyebrow { font-size:0.72rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); }
@@ -44,18 +72,25 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; display:grid; grid-te
 .hero-title .italic { font-style:italic; color:var(--accent); }
 .hero-desc { font-size:0.92rem; color:var(--muted); max-width:600px; line-height:1.8; border-left:2px solid rgba(108,99,255,0.4); padding-left:1rem; }
 .hero-desc strong { color:var(--accent); font-weight:400; }
+
 .hero-scroll-wrap { display:flex; justify-content:flex-end; align-items:center; gap:0.75rem; padding-right:3.5rem; margin-bottom:3rem; }
 .scroll-label { font-size:0.65rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--muted); writing-mode:vertical-rl; }
 .scroll-bar { width:1px; height:48px; background:var(--border); position:relative; overflow:hidden; }
 .scroll-bar::after { content:''; position:absolute; top:-100%; left:0; width:1px; height:100%; background:var(--blue); animation:scrollDrop 2.2s ease-in-out infinite; }
 @keyframes scrollDrop { 0%{top:-100%} 100%{top:100%} }
-  
+
 /* ── PORTFOLIO ── */
 .portfolio-section { position:relative; z-index:1; }
-.section { max-width:980px; margin:0 auto; padding:5rem 2rem; min-height:calc(100vh - 60px); display:flex; flex-direction:column; justify-content:center; scroll-margin-top:60px; }
 .s-label { font-size:0.68rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--blue); margin-bottom:2rem; display:flex; align-items:center; gap:0.8rem; }
 .s-label::before { content:''; width:20px; height:1px; background:var(--blue); flex-shrink:0; }
-.portfolio-stage { position:relative; min-height:580px; display:flex; align-items:center; justify-content:center; overflow:hidden; padding:0 0 56px; touch-action:pan-y; }
+
+/* Stage desktop */
+.portfolio-stage { 
+  position:relative; min-height:580px; 
+  display:flex; align-items:center; justify-content:center; 
+  overflow:hidden; padding:0 0 56px; 
+  touch-action:pan-y;
+}
 .portfolio-track { position:relative; width:min(100%, 1100px); height:500px; display:flex; align-items:center; justify-content:center; }
 .portfolio-card { position:absolute; width:190px; height:360px; border-radius:22px; overflow:hidden; border:1px solid rgba(255,255,255,.12); box-shadow:0 24px 40px rgba(0,0,0,.28); background:#13203a; cursor:pointer; transition:transform .5s cubic-bezier(.16,1,.3,1), opacity .35s ease, filter .35s ease, box-shadow .35s ease; will-change:transform; }
 .portfolio-card img,.portfolio-card video { width:100%; height:100%; object-fit:cover; }
@@ -66,6 +101,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; display:grid; grid-te
 .portfolio-card.right-1 { transform:translateX(260px) scale(.92) perspective(900px) rotateY(-8deg); z-index:4; opacity:.76; }
 .portfolio-card.right-2 { transform:translateX(440px) scale(.76) perspective(900px) rotateY(-12deg); z-index:2; opacity:.34; filter:saturate(.8); }
 .portfolio-card.is-hidden { opacity:0; pointer-events:none; }
+
 .portfolio-dots { position:absolute; bottom:14px; left:50%; transform:translateX(-50%); display:flex; gap:8px; }
 .portfolio-dots button { width:7px; height:7px; border:0; border-radius:50%; padding:0; background:rgba(255,255,255,.24); cursor:pointer; -webkit-tap-highlight-color:transparent; }
 .portfolio-dots button.active { background:#fff; }
@@ -73,23 +109,30 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; display:grid; grid-te
 .portfolio-label { display:inline-block; font-size:12px; letter-spacing:.14em; text-transform:uppercase; color:rgba(255,255,255,0.45); margin-bottom:10px; }
 .portfolio-title { margin:0 0 8px; font-family:'Instrument Serif',serif; font-size:clamp(1.15rem,1rem + .7vw,1.55rem); font-weight:400; line-height:1.08; letter-spacing:-0.03em; }
 .portfolio-text { margin:0; color:var(--muted); font-size:0.88rem; }
+
+/* Swipe hint mobile */
 .swipe-hint { display:none; text-align:center; font-size:0.68rem; letter-spacing:0.12em; text-transform:uppercase; color:rgba(255,255,255,0.3); margin-top:0.5rem; }
 
-/* Effet slide fondu */
-.section-fade { opacity:0; transform:translateY(24px); filter:blur(6px); transition:opacity .9s ease, transform .9s ease, filter .9s ease; }
-.section-fade.in-view { opacity:1; transform:translateY(0); filter:blur(0); }
-  
+.section { max-width:980px; margin:0 auto; padding:8rem 2rem; }
+
 /* ── ABOUT ── */
-.about-carousel { position:relative; height:520px; overflow:hidden; mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.6) 16%, black 26%, black 74%, rgba(0,0,0,0.6) 84%, rgba(0,0,0,0.15) 92%, transparent 100%); -webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.6) 16%, black 26%, black 74%, rgba(0,0,0,0.6) 84%, rgba(0,0,0,0.15) 92%, transparent 100%); }
+.about-carousel {
+  position:relative; height:520px; overflow:hidden;
+  mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.6) 16%, black 26%, black 74%, rgba(0,0,0,0.6) 84%, rgba(0,0,0,0.15) 92%, transparent 100%);
+  -webkit-mask-image:linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.15) 8%, rgba(0,0,0,0.6) 16%, black 26%, black 74%, rgba(0,0,0,0.6) 84%, rgba(0,0,0,0.15) 92%, transparent 100%);
+}
 .about-track { display:flex; flex-direction:column; transition:transform 0.65s cubic-bezier(.16,1,.3,1); }
 .about-slide { height:520px; display:flex; flex-direction:column; justify-content:center; padding:0 3rem 0 0; flex-shrink:0; transition:opacity 0.4s ease; }
 .about-slide:not(.active-slide) { opacity:0.22; pointer-events:none; }
 .about-slide-header { font-family:'League Gothic',sans-serif; font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; color:rgba(255,255,255,0.4); margin-bottom:1.75rem; }
 .about-slide.active-slide .about-slide-header { color:var(--accent); opacity:1; }
+
 .about-tabs { position:absolute; right:0; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:10px; z-index:10; }
 .about-tab { border:0; background:transparent; color:rgba(255,255,255,0.35); font-family:'League Gothic',sans-serif; font-size:0.72rem; letter-spacing:0.16em; text-transform:uppercase; text-align:right; cursor:pointer; padding:0.2rem 0; transition:color 0.2s, transform 0.2s; -webkit-tap-highlight-color:transparent; }
 .about-tab.active { color:#fff; transform:translateX(-4px); }
 .about-tab:hover { color:var(--accent); }
+
+/* About slide contents */
 .about-who { font-family:'Instrument Serif',serif; font-size:clamp(1.3rem,2.2vw,1.8rem); font-weight:400; line-height:1.5; letter-spacing:-0.01em; max-width:680px; }
 .about-who .hl { color:var(--accent); }
 .about-build-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; max-width:760px; }
@@ -119,7 +162,7 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; display:grid; grid-te
 .about-value-num { font-family:'Instrument Serif',serif; font-style:italic; font-size:1.2rem; color:var(--accent); opacity:0.5; flex-shrink:0; line-height:1.3; min-width:24px; }
 .about-value-text strong { display:block; font-size:0.88rem; font-weight:500; color:var(--text); margin-bottom:0.2rem; }
 .about-value-text p { font-size:0.78rem; color:var(--muted); line-height:1.7; margin:0; }
-  
+
 /* ── TÉMOIGNAGES ── */
 .testimonials-wrap { position:relative; }
 .testimonials-track { overflow:hidden; }
@@ -140,78 +183,270 @@ nav { position:fixed; top:0; left:0; right:0; z-index:200; display:grid; grid-te
 .testimonials-arrows { display:flex; gap:0.75rem; }
 .arrow-btn { width:40px; height:40px; border-radius:50%; border:1px solid var(--border); background:transparent; color:var(--muted); cursor:pointer; display:grid; place-items:center; font-size:1rem; transition:border-color 0.18s, color 0.18s, background 0.18s; -webkit-tap-highlight-color:transparent; }
 .arrow-btn:hover { border-color:rgba(255,255,255,0.3); color:var(--text); background:rgba(255,255,255,0.05); }
+
 footer { border-top:1px solid var(--border); padding:2rem 3.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem; }
 .footer-text,.footer-link { font-size:0.72rem; color:var(--muted); text-decoration:none; }
 .footer-links { display:flex; gap:1.5rem; }
 .footer-link:hover { color:var(--text); }
-@media (max-width:900px) { nav { padding:0 1.5rem; } .hero { padding:8rem 1.5rem 2rem; } .hero-scroll-wrap { padding-right:1.5rem; } .portfolio-card { width:140px; height:270px; } .portfolio-card.center { width:220px; height:340px; } .portfolio-card.left-1 { transform:translateX(-190px) scale(.9) perspective(900px) rotateY(8deg); } .portfolio-card.right-1 { transform:translateX(190px) scale(.9) perspective(900px) rotateY(-8deg); } .portfolio-card.left-2 { transform:translateX(-320px) scale(.74) perspective(900px) rotateY(12deg); } .portfolio-card.right-2 { transform:translateX(320px) scale(.74) perspective(900px) rotateY(-12deg); } .about-build-grid { grid-template-columns:1fr 1fr; } .about-approach-grid { grid-template-columns:1fr 1fr; } footer { padding:2rem 1.5rem; } .swipe-hint { display:block; } }
-@media (max-width:640px) { .nav-center, .nav-right { display:none; } .nav-burger { display:flex; } .hero { padding:5rem 1.25rem 1.5rem; min-height:100vh; } .hero-scroll-wrap { display:none; } .section { padding:4rem 1.25rem; } .portfolio-stage { min-height:420px; padding-bottom:50px; } .portfolio-track { height:360px; } .portfolio-card { width:120px; height:230px; } .portfolio-card.center { width:180px; height:290px; } .portfolio-card.left-1 { transform:translateX(-150px) scale(.88) perspective(600px) rotateY(8deg); } .portfolio-card.right-1 { transform:translateX(150px) scale(.88) perspective(600px) rotateY(-8deg); } .portfolio-card.left-2 { transform:translateX(-250px) scale(.7) perspective(600px) rotateY(12deg); } .portfolio-card.right-2 { transform:translateX(250px) scale(.7) perspective(600px) rotateY(-12deg); } .about-carousel { height:auto; mask-image:none; -webkit-mask-image:none; overflow:visible; } .about-track { transition:none; transform:none !important; } .about-slide { height:auto; min-height:0; padding:0; opacity:1 !important; pointer-events:auto !important; display:none; } .about-slide.active-slide { display:flex; } .about-tabs { position:static; transform:none; flex-direction:row; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem; justify-content:flex-start; } .about-tab { font-size:0.65rem; padding:0.3rem 0.7rem; border:1px solid var(--border); border-radius:100px; } .about-tab.active { color:var(--accent); border-color:rgba(108,99,255,0.4); transform:none; } .about-build-grid, .about-approach-grid { grid-template-columns:1fr; } .testimonial-card { padding:1.5rem; } footer { padding:1.5rem 1.25rem; flex-direction:column; align-items:flex-start; } }
+
+/* ══ RESPONSIVE TABLETTE ══ */
+@media (max-width:900px) {
+  nav { padding:0 1.5rem; }
+  .hero { padding:8rem 1.5rem 2rem; }
+  .hero-scroll-wrap { padding-right:1.5rem; }
+
+  /* Portfolio tablette : cartes plus petites */
+  .portfolio-card { width:140px; height:270px; }
+  .portfolio-card.center { width:220px; height:340px; }
+  .portfolio-card.left-1 { transform:translateX(-190px) scale(.9) perspective(900px) rotateY(8deg); }
+  .portfolio-card.right-1 { transform:translateX(190px) scale(.9) perspective(900px) rotateY(-8deg); }
+  .portfolio-card.left-2 { transform:translateX(-320px) scale(.74) perspective(900px) rotateY(12deg); }
+  .portfolio-card.right-2 { transform:translateX(320px) scale(.74) perspective(900px) rotateY(-12deg); }
+
+  .about-build-grid { grid-template-columns:1fr 1fr; }
+  .about-approach-grid { grid-template-columns:1fr 1fr; }
+  footer { padding:2rem 1.5rem; }
+  .swipe-hint { display:block; }
+}
+
+/* ══ RESPONSIVE MOBILE ══ */
+@media (max-width:640px) {
+  /* Nav → burger */
+  .nav-center, .nav-right { display:none; }
+  .nav-burger { display:flex; }
+
+  .hero { padding:5rem 1.25rem 1.5rem; }
+  .hero-scroll-wrap { display:none; }
+  .section { padding:4rem 1.25rem; }
+
+  /* Portfolio mobile : cartes encore plus petites */
+  .portfolio-stage { min-height:420px; padding-bottom:50px; }
+  .portfolio-track { height:360px; }
+  .portfolio-card { width:120px; height:230px; }
+  .portfolio-card.center { width:180px; height:290px; }
+  .portfolio-card.left-1 { transform:translateX(-150px) scale(.88) perspective(600px) rotateY(8deg); }
+  .portfolio-card.right-1 { transform:translateX(150px) scale(.88) perspective(600px) rotateY(-8deg); }
+  .portfolio-card.left-2 { transform:translateX(-250px) scale(.7) perspective(600px) rotateY(12deg); }
+  .portfolio-card.right-2 { transform:translateX(250px) scale(.7) perspective(600px) rotateY(-12deg); }
+
+  /* About */
+  .about-carousel { height:auto; mask-image:none; -webkit-mask-image:none; overflow:visible; }
+  .about-track { transition:none; transform:none !important; }
+  .about-slide { height:auto; min-height:0; padding:0; opacity:1 !important; pointer-events:auto !important; display:none; }
+  .about-slide.active-slide { display:flex; }
+  .about-tabs { position:static; transform:none; flex-direction:row; flex-wrap:wrap; gap:0.5rem; margin-bottom:1.5rem; justify-content:flex-start; }
+  .about-tab { font-size:0.65rem; padding:0.3rem 0.7rem; border:1px solid var(--border); border-radius:100px; }
+  .about-tab.active { color:var(--accent); border-color:rgba(108,99,255,0.4); transform:none; }
+
+  .about-build-grid, .about-approach-grid { grid-template-columns:1fr; }
+
+  .testimonial-card { padding:1.5rem; }
+  footer { padding:1.5rem 1.25rem; flex-direction:column; align-items:flex-start; }
+}
 </style>
 </head>
-  
 <body>
-  
+
 <nav>
   <a href="#" class="nav-left">Seyrin Studio</a>
-  <div class="nav-center"><a href="#portfolio" class="nav-link">Projets</a><a href="#about" class="nav-link">À propos</a></div>
-  <div class="nav-right"><a href="mailto:seyrin.cbs@gmail.com" class="nav-cta">Me contacter</a></div>
-  <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="nav-center">
+    <a href="#portfolio" class="nav-link">Projets</a>
+    <a href="#about" class="nav-link">À propos</a>
+  </div>
+  <div class="nav-right">
+    <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta">Me contacter</a>
+  </div>
+  <button class="nav-burger" id="navBurger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-  
-<div class="nav-drawer" id="navDrawer"><a href="#portfolio" class="nav-link" onclick="closeDrawer()">Projets</a><a href="#about" class="nav-link" onclick="closeDrawer()">À propos</a><a href="mailto:seyrin.cbs@gmail.com" class="nav-cta" onclick="closeDrawer()">Me contacter</a></div>
-<div id="pageScroll">
-  
+
+<div class="nav-drawer" id="navDrawer">
+  <a href="#portfolio" class="nav-link" onclick="closeDrawer()">Projets</a>
+  <a href="#about" class="nav-link" onclick="closeDrawer()">À propos</a>
+  <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta" onclick="closeDrawer()">Me contacter</a>
+</div>
+
+<script>
+  document.getElementById('navBurger').addEventListener('click', () => {
+    document.getElementById('navDrawer').classList.toggle('open');
+  });
+  function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); }
+  document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+    document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active'));
+    l.classList.add('active');
+    closeDrawer();
+  }));
+</script>
+
+<!-- HERO -->
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-intro">
     <div class="hero-eyebrow" style="margin-top:8rem">Paris, France · Disponible</div>
     <h1 class="hero-title">Transformez l'<span class="italic">expérience</span><br>utilisateur en levier stratégique.</h1>
-    <p class="hero-desc"><strong>Product Designer</strong> spécialisée en UX Research, design système et stratégie produit, je conçois des interfaces claires à partir de problématiques complexes.</p>
+    <p class="hero-desc">
+      <strong>Product Designer</strong> spécialisée en UX Research, design système et stratégie produit, je conçois des interfaces claires à partir de problématiques complexes.
+    </p>
   </div>
 </section>
-  
-<div class="hero-scroll-wrap"><span class="scroll-label">Seyrin Studio</span><div class="scroll-bar"></div></div>
 
-<section id="portfolio" class="section section-fade">
+<div class="hero-scroll-wrap">
+  <span class="scroll-label">Seyrin Studio</span>
+  <div class="scroll-bar"></div>
+</div>
+
+<!-- PORTFOLIO -->
+<section id="portfolio" class="section">
   <div class="portfolio-section">
     <div class="s-label">Portfolio</div>
-    <div class="portfolio-stage" id="portfolioStage"><div class="portfolio-track" id="portfolioTrack">
-      <a class="portfolio-card" href="project-01.html" data-label="Portfolio 01" data-title="Portfolio digital" data-text="Conception et développement d’un site pour valoriser différents projets et leurs processus de création."><video autoplay muted loop playsinline preload="metadata"><source src="Exemple design portfolio.mp4" type="video/mp4"></video></a>
-      <a class="portfolio-card" href="project-02.html" data-label="Portfolio 02" data-title="Expérience mobile immersive" data-text="Hiérarchie d'écrans, premiers points d'entrée et narration produit."><img src="Portfolio-02.png" alt="Portfolio 2" loading="lazy"></a>
-      <a class="portfolio-card" href="project-03.html" data-label="Portfolio 03" data-title="Projet confidentiel · en cours" data-text="Un projet mené de A à Z pour transformer un besoin marché en solution produit tangible."><img src="Portfolio-03.png" alt="Portfolio 3" loading="lazy"></a>
-      <a class="portfolio-card" href="project-04.html" data-label="Portfolio 04" data-title="Tableau de bord RH" data-text="Dashboard complexe rendu plus lisible et actionnable pour des profils non-techniques."><img src="Portfolio-04.png" alt="Portfolio 4" loading="lazy"></a>
-      <a class="portfolio-card" href="project-05.html" data-label="Portfolio 05" data-title="Refonte d’une expérience web" data-text="De l’analyse des usages à une interface plus claire et plus utile."><img src="Portfolio-05.png" alt="Portfolio 5" loading="lazy"></a>
-    </div><div class="portfolio-dots" id="portfolioDots"><button class="active" type="button"></button><button type="button"></button><button type="button"></button><button type="button"></button><button type="button"></button></div></div>
+    <div class="portfolio-stage" id="portfolioStage">
+      <div class="portfolio-track" id="portfolioTrack">
+        <a class="portfolio-card" href="project-01.html" data-label="Portfolio 01" data-title="Portfolio digital" data-text="Conception et développement d’un site pour valoriser différents projets et leurs processus de création.">
+          <video autoplay muted loop playsinline preload="metadata"><source src="Exemple design portfolio.mp4" type="video/mp4"></video>
+        </a>
+        <a class="portfolio-card" href="project-02.html" data-label="Portfolio 02" data-title="Expérience mobile immersive" data-text="Hiérarchie d'écrans, premiers points d'entrée et narration produit.">
+          <img src="Portfolio-02.png" alt="Portfolio 2" loading="lazy">
+        </a>
+        <a class="portfolio-card" href="project-03.html" data-label="Portfolio 03" data-title="Projet confidentiel · en cours" data-text="Un projet mené de A à Z pour transformer un besoin marché en solution produit tangible.">
+          <img src="Portfolio-03.png" alt="Portfolio 3" loading="lazy">
+        </a>
+        <a class="portfolio-card" href="project-04.html" data-label="Portfolio 04" data-title="Tableau de bord RH" data-text="Dashboard complexe rendu plus lisible et actionnable pour des profils non-techniques.">
+          <img src="Portfolio-04.png" alt="Portfolio 4" loading="lazy">
+        </a>
+        <a class="portfolio-card" href="project-05.html" data-label="Portfolio 05" data-title="Refonte d’une expérience web" data-text="De l’analyse des usages à une interface plus claire et plus utile.">
+          <img src="Portfolio-05.png" alt="Portfolio 5" loading="lazy">
+        </a>
+      </div>
+      <div class="portfolio-dots" id="portfolioDots">
+        <button class="active" type="button"></button>
+        <button type="button"></button>
+        <button type="button"></button>
+        <button type="button"></button>
+        <button type="button"></button>
+      </div>
+    </div>
     <p class="swipe-hint">← Swiper pour naviguer →</p>
-    <div class="portfolio-detail" id="portfolioDetail"><span class="portfolio-label">Portfolio 03</span><h2 class="portfolio-title">Projet à impact · confidentiel</h2><p class="portfolio-text">Un projet mené de A à Z pour transformer un besoin marché en solution produit tangible.</p></div>
+    <div class="portfolio-detail" id="portfolioDetail">
+      <span class="portfolio-label">Portfolio 03</span>
+      <h2 class="portfolio-title">Projet à impact · confidentiel</h2>
+      <p class="portfolio-text">Un projet mené de A à Z pour transformer un besoin marché en solution produit tangible.</p>
+    </div>
   </div>
 </section>
-  
-<section id="about" style="border-top:1px solid var(--border)" class="section section-fade">
-  <div class="s-label">À propos</div>
-  <div style="position:relative">
-    <div class="about-tabs" id="aboutTabs" role="tablist"><button type="button" class="about-tab active" data-index="0">Qui je suis</button><button type="button" class="about-tab" data-index="1">Ce que je construis</button><button type="button" class="about-tab" data-index="2">Mon approche</button><button type="button" class="about-tab" data-index="3">Mes outils</button><button type="button" class="about-tab" data-index="4">Ce que j'apporte</button></div>
-    <div class="about-carousel" id="aboutCarousel"><div class="about-track" id="aboutTrack">
-      <div class="about-slide active-slide"><div class="about-slide-header">Qui suis-je ?</div><p class="about-who">Depuis <span class="hl">2 ans</span>, je conçois des interfaces utiles, <span class="hl">en adéquation</span> avec les besoins des utilisateurs et les évolutions du marché.<br><strong style="font-style:italic;font-weight:400">Mon objectif :</strong> Transformer des problèmes complexes en solutions concrètes, actionnables et fluides.</p></div>
-      <div class="about-slide"><div class="about-slide-header">Ce que je construis</div><div class="about-build-grid"><div class="about-build-card"><div class="about-build-icon">✦</div><h4>UX Research</h4><p>Je transforme les retours terrain en décisions produit claires et actionnables.</p></div><div class="about-build-card"><div class="about-build-icon">✿</div><h4>Design système</h4><p>Je construis des interfaces cohérentes, lisibles et faciles à faire évoluer.</p></div><div class="about-build-card"><div class="about-build-icon">◎</div><h4>Stratégie produit</h4><p>Je relie les enjeux métier, les besoins utilisateurs et les priorités d'équipe.</p></div></div></div>
-      <div class="about-slide"><div class="about-slide-header">Mon approche</div><div class="about-approach-grid"><div class="about-stat"><div class="about-stat-icon">01</div><h3>Comprendre le besoin</h3><p>Immersion terrain — interviews, observation, analyse des données — pour identifier les vrais enjeux.</p></div><div class="about-stat"><div class="about-stat-icon">02</div><h3>Concevoir en itérant</h3><p>Je prototype, teste et ajuste pour avancer avec justesse.</p></div><div class="about-stat"><div class="about-stat-icon">03</div><h3>Livrer & mesurer</h3><p>Specs claires, handoff soigné et suivi post-lancement pour itérer jusqu'à l'impact attendu.</p></div></div></div>
-      <div class="about-slide"><div class="about-slide-header">Mes outils</div><div class="about-tools"><div class="skill-row"><div class="skill-logo-s"><img src="logo-figma.png" alt="Figma"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Figma</span><span class="skill-pct">45%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div></div></div></div><div class="skill-row"><div class="skill-logo-s"><img src="logo-ux.png" alt="UX Research"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">UX Research</span><span class="skill-pct">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div></div><div class="skill-row"><div class="skill-logo-s"><img src="logo-notion.png" alt="Notion"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Notion</span><span class="skill-pct">95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div></div></div><div class="skill-row"><div class="skill-logo-s"><img src="logo-miro.png" alt="Miro"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Miro</span><span class="skill-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div></div><div class="skill-row"><div class="skill-logo-s"><img src="logo-canva.png" alt="Canva"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Canva</span><span class="skill-pct">98%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:98%"></div></div></div></div></div></div>
-      <div class="about-slide"><div class="about-slide-header">Ce que j'apporte</div><div class="about-value-list"><div class="about-value-item"><span class="about-value-num">01</span><div class="about-value-text"><strong>Clarté dans la complexité</strong><p>Je décompose les problèmes difficiles en parcours simples et lisibles.</p></div></div><div class="about-value-item"><span class="about-value-num">02</span><div class="about-value-text"><strong>Décisions fondées sur les données</strong><p>Chaque choix s'appuie sur la recherche terrain et les métriques produit.</p></div></div><div class="about-value-item"><span class="about-value-num">03</span><div class="about-value-text"><strong>Collaboration fluide avec le dev</strong><p>Specs précises, handoff soigné et accompagnement jusqu'en production.</p></div></div><div class="about-value-item"><span class="about-value-num">04</span><div class="about-value-text"><strong>Impact mesurable</strong><p>Je mesure l'effet de chaque livraison et j'itère jusqu'aux objectifs fixés.</p></div></div></div></div>
-    </div></div>
+
+<!-- À PROPOS -->
+<section id="about" style="border-top:1px solid var(--border)">
+  <div class="section">
+    <div class="s-label">À propos</div>
+    <div style="position:relative">
+
+      <div class="about-tabs" id="aboutTabs" role="tablist">
+        <button type="button" class="about-tab active" data-index="0">Qui je suis</button>
+        <button type="button" class="about-tab" data-index="1">Ce que je construis</button>
+        <button type="button" class="about-tab" data-index="2">Mon approche</button>
+        <button type="button" class="about-tab" data-index="3">Mes outils</button>
+        <button type="button" class="about-tab" data-index="4">Ce que j'apporte</button>
+      </div>
+
+      <div class="about-carousel" id="aboutCarousel">
+        <div class="about-track" id="aboutTrack">
+
+          <div class="about-slide active-slide">
+            <div class="about-slide-header">Qui suis-je ?</div>
+            <p class="about-who">Depuis <span class="hl">2 ans</span>, je conçois des interfaces utiles, <span class="hl">en adéquation</span> avec les besoins des utilisateurs et les évolutions du marché.<br><strong style="font-style:italic;font-weight:400">Mon objectif :</strong> Transformer des problèmes complexes en solutions concrètes, actionnables et fluides.</p>
+          </div>
+
+          <div class="about-slide">
+            <div class="about-slide-header">Ce que je construis</div>
+            <div class="about-build-grid">
+              <div class="about-build-card"><div class="about-build-icon">✦</div><h4>UX Research</h4><p>Je transforme les retours terrain en décisions produit claires et actionnables.</p></div>
+              <div class="about-build-card"><div class="about-build-icon">✿</div><h4>Design système</h4><p>Je construis des interfaces cohérentes, lisibles et faciles à faire évoluer.</p></div>
+              <div class="about-build-card"><div class="about-build-icon">◎</div><h4>Stratégie produit</h4><p>Je relie les enjeux métier, les besoins utilisateurs et les priorités d'équipe.</p></div>
+            </div>
+          </div>
+
+          <div class="about-slide">
+            <div class="about-slide-header">Mon approche</div>
+            <div class="about-approach-grid">
+              <div class="about-stat"><div class="about-stat-icon">01</div><h3>Comprendre le besoin</h3><p>Immersion terrain — interviews, observation, analyse des données — pour identifier les vrais enjeux.</p></div>
+              <div class="about-stat"><div class="about-stat-icon">02</div><h3>Concevoir en itérant</h3><p>Je prototype, teste et ajuste pour avancer avec justesse.</p></div>
+              <div class="about-stat"><div class="about-stat-icon">03</div><h3>Livrer & mesurer</h3><p>Specs claires, handoff soigné et suivi post-lancement pour itérer jusqu'à l'impact attendu.</p></div>
+            </div>
+          </div>
+
+          <div class="about-slide">
+            <div class="about-slide-header">Mes outils</div>
+            <div class="about-tools">
+              <div class="skill-row"><div class="skill-logo-s"><img src="logo-figma.png" alt="Figma"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Figma</span><span class="skill-pct">45%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:45%"></div></div></div></div>
+              <div class="skill-row"><div class="skill-logo-s"><img src="logo-ux.png" alt="UX Research"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">UX Research</span><span class="skill-pct">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:85%"></div></div></div></div>
+              <div class="skill-row"><div class="skill-logo-s"><img src="logo-notion.png" alt="Notion"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Notion</span><span class="skill-pct">95%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:95%"></div></div></div></div>
+              <div class="skill-row"><div class="skill-logo-s"><img src="logo-miro.png" alt="Miro"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Miro</span><span class="skill-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:75%"></div></div></div></div>
+              <div class="skill-row"><div class="skill-logo-s"><img src="logo-canva.png" alt="Canva"></div><div class="skill-info"><div class="skill-name-row"><span class="skill-name">Canva</span><span class="skill-pct">98%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" style="width:98%"></div></div></div></div>
+            </div>
+          </div>
+
+          <div class="about-slide">
+            <div class="about-slide-header">Ce que j'apporte</div>
+            <div class="about-value-list">
+              <div class="about-value-item"><span class="about-value-num">01</span><div class="about-value-text"><strong>Clarté dans la complexité</strong><p>Je décompose les problèmes difficiles en parcours simples et lisibles.</p></div></div>
+              <div class="about-value-item"><span class="about-value-num">02</span><div class="about-value-text"><strong>Décisions fondées sur les données</strong><p>Chaque choix s'appuie sur la recherche terrain et les métriques produit.</p></div></div>
+              <div class="about-value-item"><span class="about-value-num">03</span><div class="about-value-text"><strong>Collaboration fluide avec le dev</strong><p>Specs précises, handoff soigné et accompagnement jusqu'en production.</p></div></div>
+              <div class="about-value-item"><span class="about-value-num">04</span><div class="about-value-text"><strong>Impact mesurable</strong><p>Je mesure l'effet de chaque livraison et j'itère jusqu'aux objectifs fixés.</p></div></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
   </div>
 </section>
-  
-<section id="testimonials" style="border-top:1px solid var(--border)" class="section section-fade">
-  <div class="s-label">Témoignages clients</div>
-  <div class="testimonials-wrap"><div class="testimonials-track"><div class="testimonials-inner" id="testimonialsInner">
-    <div class="testimonial-card"><div class="testimonial-quote">"</div><p class="testimonial-text">Seyrin a su transformer un brief complexe en une interface limpide. Sa capacité à jongler entre les contraintes techniques et les besoins utilisateurs est remarquable.</p><div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">ML</div><div><div class="testimonial-name">Marie L.</div><div class="testimonial-role">Head of Product · B2C</div></div></div><span class="testimonial-tag">UX Research</span></div></div>
-    <div class="testimonial-card"><div class="testimonial-quote">"</div><p class="testimonial-text">Le design system livré par Seyrin a permis à nos 4 équipes de travailler de façon cohérente pour la première fois. Une organisation exemplaire.</p><div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">TR</div><div><div class="testimonial-name">Thomas R.</div><div class="testimonial-role">CTO · Scale-up SaaS</div></div></div><span class="testimonial-tag">Design Système</span></div></div>
-    <div class="testimonial-card"><div class="testimonial-quote">"</div><p class="testimonial-text">Nous avions un dashboard illisible pour nos équipes RH. Seyrin a repensé toute l'architecture de l'information. L'adoption a été immédiate.</p><div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">SC</div><div><div class="testimonial-name">Sophie C.</div><div class="testimonial-role">DRH</div></div></div><span class="testimonial-tag">Stratégie produit</span></div></div>
-    <div class="testimonial-card"><div class="testimonial-quote">"</div><p class="testimonial-text">Une designer qui écoute vraiment. Seyrin a passé du temps sur le terrain avec nos utilisateurs avant de dessiner la moindre maquette.</p><div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">AB</div><div><div class="testimonial-name">Alexis B.</div><div class="testimonial-role">CEO · Startup early-stage</div></div></div><span class="testimonial-tag">Expérience visuelle</span></div></div>
-  </div></div>
-  <div class="testimonials-nav"><div class="testimonials-dots" id="testimonialsDots"><button class="active" type="button"></button><button type="button"></button><button type="button"></button><button type="button"></button></div><div class="testimonials-arrows"><button class="arrow-btn" id="testimonialsprev">←</button><button class="arrow-btn" id="testimonialsnext">→</button></div></div></div>
+
+<!-- TÉMOIGNAGES -->
+<section id="testimonials" style="border-top:1px solid var(--border)">
+  <div class="section">
+    <div class="s-label">Témoignages clients</div>
+    <div class="testimonials-wrap">
+      <div class="testimonials-track">
+        <div class="testimonials-inner" id="testimonialsInner">
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Seyrin a su transformer un brief complexe en une interface limpide. Sa capacité à jongler entre les contraintes techniques et les besoins utilisateurs est remarquable.</p>
+            <div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">ML</div><div><div class="testimonial-name">Marie L.</div><div class="testimonial-role">Head of Product · B2C</div></div></div><span class="testimonial-tag">UX Research</span></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Le design system livré par Seyrin a permis à nos 4 équipes de travailler de façon cohérente pour la première fois. Une organisation exemplaire.</p>
+            <div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">TR</div><div><div class="testimonial-name">Thomas R.</div><div class="testimonial-role">CTO · Scale-up SaaS</div></div></div><span class="testimonial-tag">Design Système</span></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Nous avions un dashboard illisible pour nos équipes RH. Seyrin a repensé toute l'architecture de l'information. L'adoption a été immédiate.</p>
+            <div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">SC</div><div><div class="testimonial-name">Sophie C.</div><div class="testimonial-role">DRH</div></div></div><span class="testimonial-tag">Stratégie produit</span></div>
+          </div>
+          <div class="testimonial-card">
+            <div class="testimonial-quote">"</div>
+            <p class="testimonial-text">Une designer qui écoute vraiment. Seyrin a passé du temps sur le terrain avec nos utilisateurs avant de dessiner la moindre maquette.</p>
+            <div class="testimonial-footer"><div class="testimonial-author"><div class="testimonial-avatar">AB</div><div><div class="testimonial-name">Alexis B.</div><div class="testimonial-role">CEO · Startup early-stage</div></div></div><span class="testimonial-tag">Expérience visuelle</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonials-nav">
+        <div class="testimonials-dots" id="testimonialsDots">
+          <button class="active" type="button"></button>
+          <button type="button"></button>
+          <button type="button"></button>
+          <button type="button"></button>
+        </div>
+        <div class="testimonials-arrows">
+          <button class="arrow-btn" id="testimonialsprev">←</button>
+          <button class="arrow-btn" id="testimonialsnext">→</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-  
+
 <footer>
   <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
   <div class="footer-links">
@@ -220,32 +455,137 @@ footer { border-top:1px solid var(--border); padding:2rem 3.5rem; display:flex; 
     <a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a>
   </div>
 </footer>
-</div>
-  
+
 <script>
-document.getElementById('navBurger').addEventListener('click', () => { document.getElementById('navDrawer').classList.toggle('open'); });
-function closeDrawer() { document.getElementById('navDrawer').classList.remove('open'); }
-document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => { document.querySelectorAll('.nav-link').forEach(x => x.classList.remove('active')); l.classList.add('active'); closeDrawer(); }));
-const fadeSections = document.querySelectorAll('.hero, #portfolio, #about, #testimonials');
-const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('in-view'); observer.unobserve(entry.target); } }); }, { threshold:0.25, rootMargin:'0px 0px -15% 0px' });
-fadeSections.forEach(section => { section.classList.add('section-fade'); observer.observe(section); });
-const pCards = Array.from(document.querySelectorAll('.portfolio-card'));
-const pDots = Array.from(document.querySelectorAll('#portfolioDots button'));
+/* ══ PORTFOLIO ══ */
+const pCards  = Array.from(document.querySelectorAll('.portfolio-card'));
+const pDots   = Array.from(document.querySelectorAll('#portfolioDots button'));
 const pDetail = document.getElementById('portfolioDetail');
-const pStage = document.getElementById('portfolioStage');
+const pStage  = document.getElementById('portfolioStage');
 let pIdx = 2;
-function renderPortfolio(i) { pIdx = ((i % pCards.length) + pCards.length) % pCards.length; pCards.forEach((c, j) => { c.className = 'portfolio-card'; const o = j - pIdx; if (o===0) c.classList.add('center'); else if (o===-1) c.classList.add('left-1'); else if (o===-2) c.classList.add('left-2'); else if (o===1) c.classList.add('right-1'); else if (o===2) c.classList.add('right-2'); else c.classList.add('is-hidden'); }); pDots.forEach((d, j) => d.classList.toggle('active', j === pIdx)); pDetail.querySelector('.portfolio-label').textContent = pCards[pIdx].dataset.label; pDetail.querySelector('.portfolio-title').textContent = pCards[pIdx].dataset.title; pDetail.querySelector('.portfolio-text').textContent = pCards[pIdx].dataset.text; }
+
+function renderPortfolio(i) {
+  pIdx = ((i % pCards.length) + pCards.length) % pCards.length;
+  pCards.forEach((c, j) => {
+    c.className = 'portfolio-card';
+    const o = j - pIdx;
+    if (o===0) c.classList.add('center');
+    else if (o===-1) c.classList.add('left-1');
+    else if (o===-2) c.classList.add('left-2');
+    else if (o===1)  c.classList.add('right-1');
+    else if (o===2)  c.classList.add('right-2');
+    else c.classList.add('is-hidden');
+  });
+  pDots.forEach((d, j) => d.classList.toggle('active', j === pIdx));
+  pDetail.querySelector('.portfolio-label').textContent = pCards[pIdx].dataset.label;
+  pDetail.querySelector('.portfolio-title').textContent = pCards[pIdx].dataset.title;
+  pDetail.querySelector('.portfolio-text').textContent  = pCards[pIdx].dataset.text;
+}
+
+/* Dots */
 pDots.forEach((d, i) => d.addEventListener('click', () => renderPortfolio(i)));
-pCards.forEach((c, i) => { c.addEventListener('mouseenter', () => renderPortfolio(i)); c.addEventListener('click', e => { if (i !== pIdx) { e.preventDefault(); renderPortfolio(i); } }); });
+
+/* Hover desktop */
+pCards.forEach((c, i) => {
+  c.addEventListener('mouseenter', () => renderPortfolio(i));
+  c.addEventListener('click', e => {
+    if (i !== pIdx) { e.preventDefault(); renderPortfolio(i); }
+  });
+});
+
+/* ── SWIPE TOUCH sur le portfolio (tablette + mobile) ── */
 let pTouchX = 0, pTouchY = 0, pDragging = false;
-pStage.addEventListener('touchstart', e => { pTouchX = e.touches[0].clientX; pTouchY = e.touches[0].clientY; pDragging = false; }, {passive:true});
-pStage.addEventListener('touchmove', e => { const dx = Math.abs(e.touches[0].clientX - pTouchX); const dy = Math.abs(e.touches[0].clientY - pTouchY); if (dx > dy && dx > 8) { pDragging = true; } }, {passive:true});
-pStage.addEventListener('touchend', e => { const dx = pTouchX - e.changedTouches[0].clientX; const dy = Math.abs(e.changedTouches[0].clientY - pTouchY); if (Math.abs(dx) > 40 && Math.abs(dx) > dy) { if (dx > 0) renderPortfolio(pIdx + 1); else renderPortfolio(pIdx - 1); } }, {passive:true});
+
+pStage.addEventListener('touchstart', e => {
+  pTouchX = e.touches[0].clientX;
+  pTouchY = e.touches[0].clientY;
+  pDragging = false;
+}, {passive:true});
+
+pStage.addEventListener('touchmove', e => {
+  const dx = Math.abs(e.touches[0].clientX - pTouchX);
+  const dy = Math.abs(e.touches[0].clientY - pTouchY);
+  if (dx > dy && dx > 8) { pDragging = true; }
+}, {passive:true});
+
+pStage.addEventListener('touchend', e => {
+  const dx = pTouchX - e.changedTouches[0].clientX;
+  const dy = Math.abs(e.changedTouches[0].clientY - pTouchY);
+  /* Ne swipe que si mouvement horizontal dominant */
+  if (Math.abs(dx) > 40 && Math.abs(dx) > dy) {
+    if (dx > 0) renderPortfolio(pIdx + 1);
+    else renderPortfolio(pIdx - 1);
+  }
+}, {passive:true});
+
 renderPortfolio(pIdx);
-const aSlides = Array.from(document.querySelectorAll('.about-slide')); const aTabs = Array.from(document.querySelectorAll('#aboutTabs .about-tab')); const aTrack = document.getElementById('aboutTrack'); const aCarousel = document.getElementById('aboutCarousel'); const SLIDE_H = 520; let aIdx = 0; const aTotal = aSlides.length; function isDesktop() { return window.innerWidth > 640; } function goAbout(i) { aIdx = Math.max(0, Math.min(i, aTotal - 1)); if (isDesktop()) { aTrack.style.transform = `translateY(-${aIdx * SLIDE_H}px)`; aSlides.forEach((s, j) => s.classList.toggle('active-slide', j === aIdx)); } else { aSlides.forEach((s, j) => s.classList.toggle('active-slide', j === aIdx)); } aTabs.forEach((t, j) => t.classList.toggle('active', j === aIdx)); } aTabs.forEach((t, i) => t.addEventListener('click', () => goAbout(i))); aCarousel.addEventListener('wheel', e => { if (!isDesktop()) return; e.preventDefault(); if (e.deltaY > 20) goAbout(aIdx + 1); if (e.deltaY < -20) goAbout(aIdx - 1); }, {passive:false}); let aTouchY = 0; aCarousel.addEventListener('touchstart', e => { aTouchY = e.touches[0].clientY; }, {passive:true}); aCarousel.addEventListener('touchend', e => { const dy = aTouchY - e.changedTouches[0].clientY; if (dy > 40) goAbout(aIdx + 1); if (dy < -40) goAbout(aIdx - 1); }, {passive:true}); goAbout(0);
-if (location.hash) { const el = document.querySelector(location.hash); if (el) setTimeout(() => el.scrollIntoView({block:'start'}), 80); }
-const tInner = document.getElementById('testimonialsInner'); const tDots = Array.from(document.querySelectorAll('#testimonialsDots button')); let tIdx = 0, tTotal = tDots.length; function goTo(i) { tIdx = (i + tTotal) % tTotal; tInner.style.transform = `translateX(-${tIdx * 100}%)`; tDots.forEach((d, j) => d.classList.toggle('active', j === tIdx)); } document.getElementById('testimonialsprev').addEventListener('click', () => goTo(tIdx - 1)); document.getElementById('testimonialsnext').addEventListener('click', () => goTo(tIdx + 1)); tDots.forEach((d, i) => d.addEventListener('click', () => goTo(i))); let tTouchX = 0; tInner.addEventListener('touchstart', e => { tTouchX = e.touches[0].clientX; }, {passive:true}); tInner.addEventListener('touchend', e => { const dx = tTouchX - e.changedTouches[0].clientX; if (dx > 40) goTo(tIdx + 1); if (dx < -40) goTo(tIdx - 1); }, {passive:true});
+
+/* ══ ABOUT ══ */
+const aSlides   = Array.from(document.querySelectorAll('.about-slide'));
+const aTabs     = Array.from(document.querySelectorAll('#aboutTabs .about-tab'));
+const aTrack    = document.getElementById('aboutTrack');
+const aCarousel = document.getElementById('aboutCarousel');
+const SLIDE_H   = 520;
+let aIdx = 0;
+const aTotal = aSlides.length;
+
+function isDesktop() { return window.innerWidth > 640; }
+
+function goAbout(i) {
+  aIdx = Math.max(0, Math.min(i, aTotal - 1));
+  if (isDesktop()) {
+    aTrack.style.transform = `translateY(-${aIdx * SLIDE_H}px)`;
+    aSlides.forEach((s, j) => s.classList.toggle('active-slide', j === aIdx));
+  } else {
+    aSlides.forEach((s, j) => s.classList.toggle('active-slide', j === aIdx));
+  }
+  aTabs.forEach((t, j) => t.classList.toggle('active', j === aIdx));
+}
+
+aTabs.forEach((t, i) => t.addEventListener('click', () => goAbout(i)));
+
+/* Molette desktop */
+aCarousel.addEventListener('wheel', e => {
+  if (!isDesktop()) return;
+  e.preventDefault();
+  if (e.deltaY > 20) goAbout(aIdx + 1);
+  if (e.deltaY < -20) goAbout(aIdx - 1);
+}, {passive:false});
+
+/* Swipe about */
+let aTouchY = 0;
+aCarousel.addEventListener('touchstart', e => { aTouchY = e.touches[0].clientY; }, {passive:true});
+aCarousel.addEventListener('touchend', e => {
+  const dy = aTouchY - e.changedTouches[0].clientY;
+  if (dy > 40) goAbout(aIdx + 1);
+  if (dy < -40) goAbout(aIdx - 1);
+}, {passive:true});
+
+goAbout(0);
+
+/* ══ TÉMOIGNAGES ══ */
+const tInner = document.getElementById('testimonialsInner');
+const tDots  = Array.from(document.querySelectorAll('#testimonialsDots button'));
+let tIdx = 0, tTotal = tDots.length;
+
+function goTo(i) {
+  tIdx = (i + tTotal) % tTotal;
+  tInner.style.transform = `translateX(-${tIdx * 100}%)`;
+  tDots.forEach((d, j) => d.classList.toggle('active', j === tIdx));
+}
+
+document.getElementById('testimonialsprev').addEventListener('click', () => goTo(tIdx - 1));
+document.getElementById('testimonialsnext').addEventListener('click', () => goTo(tIdx + 1));
+tDots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+/* Swipe témoignages */
+let tTouchX = 0;
+tInner.addEventListener('touchstart', e => { tTouchX = e.touches[0].clientX; }, {passive:true});
+tInner.addEventListener('touchend', e => {
+  const dx = tTouchX - e.changedTouches[0].clientX;
+  if (dx > 40) goTo(tIdx + 1);
+  if (dx < -40) goTo(tIdx - 1);
+}, {passive:true});
 </script>
-  
 </body>
 </html>
