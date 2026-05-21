@@ -43,16 +43,8 @@
 
   /* ── ECRAN ROTATIF ── */
   .phone-col{position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
-  .phone-scene{position:relative;width:100%;height:100%;perspective:1800px;display:flex;align-items:center;justify-content:center}
-  .phone-3d{
-   position:relative;
-   width:clamp(240px, 32vw, 380px);
-   aspect-ratio:9/18.5;
-   transform-style:preserve-3d;
-   transition:transform var(--ease),filter var(--ease);
-   will-change:transform
-  }
-
+  .phone-scene{position:relative;width:min(100%,1100px);height:min(100%,500px);perspective:1800px;display:flex;align-items:center;justify-content:center}
+  .phone-3d{position:relative;width:clamp(240px,32vw,380px);height:calc(clamp(240px,32vw,380px) * 18.5 / 9);transform-style:preserve-3d;transition:transform var(--ease),filter var(--ease);will-change:transform}
   .phone-frame{position:absolute;inset:0;border-radius:42px;background:linear-gradient(180deg,#1b2437,#0d1322 55%,#0a0f18);border:1px solid rgba(255,255,255,.14);box-shadow:0 40px 120px rgba(0,0,0,.55),0 0 0 1px rgba(108,99,255,.1),inset 0 1px 0 rgba(255,255,255,.06);transform:translateZ(18px)}
   .phone-frame::before{content:'';position:absolute;inset:10px;border-radius:34px;border:1px solid rgba(255,255,255,.06);pointer-events:none}
   .phone-frame::after{content:'';position:absolute;inset:0;border-radius:inherit;background:radial-gradient(ellipse 120% 70% at 50% 0%, rgba(255,255,255,.08) 0%, transparent 42%);pointer-events:none}
@@ -72,12 +64,14 @@
   .phone-title{font-family:'Instrument Serif',serif;font-size:clamp(1.4rem,2.2vw,2.2rem);font-weight:400;line-height:1.15;letter-spacing:-.01em;margin-bottom:.35rem}
   .phone-title .hl{font-style:italic;color:var(--accent)}
   .phone-desc{font-size:.82rem;color:var(--muted);opacity:.76;line-height:1.75;max-width:230px}
-  @media (max-width:900px){nav,footer{padding:0 1.5rem}main{grid-template-columns:minmax(0,1fr) minmax(210px,19vw);gap:.5rem}.back-link{margin-bottom:1.8rem}.phone-info{max-width:200px}.phone-3d{width:min(46vw,300px)}.text-col{padding:1.25rem .75rem 1.25rem .15rem}.s-label{margin-bottom:1rem}}
-  @media (max-width:640px){.nav-center,.nav-right{display:none}.nav-burger{display:flex}nav{grid-template-columns:1fr auto}footer .footer-links{display:none}main{grid-template-columns:1fr;grid-template-rows:1fr auto;gap:0}.phone-col{min-height:calc(100vh - var(--nav-h) - var(--footer-h) - 120px)}.phone-3d{width:min(76vw,300px)}.text-col{padding:.9rem 1rem 1rem 1rem;border-left:none;border-top:1px solid var(--border)}.back-link{margin-bottom:.9rem}.s-label{display:block;margin:.75rem 0 .85rem}.phone-info{max-width:none}.phone-title{font-size:1rem;margin-bottom:.45rem}.phone-desc{display:none}}
+
+  @media (max-width:900px){nav,footer{padding:0 1.5rem}main{grid-template-columns:minmax(0,1fr) minmax(210px,19vw);gap:.5rem}.back-link{margin-bottom:1.8rem}.phone-info{max-width:200px}.phone-3d{width:clamp(220px,36vw,300px);height:calc(clamp(220px,36vw,300px) * 18.5 / 9)}.text-col{padding:1.25rem .75rem 1.25rem .15rem}.s-label{margin-bottom:1rem}}
+
+  @media (max-width:640px){.nav-center,.nav-right{display:none}.nav-burger{display:flex}nav{grid-template-columns:1fr auto}footer .footer-links{display:none}main{grid-template-columns:1fr;grid-template-rows:minmax(0,1fr) auto;gap:0}.phone-col{min-height:calc(100vh - var(--nav-h) - var(--footer-h) - 120px)}.phone-scene{width:100%;height:100%}.phone-3d{width:clamp(220px,78vw,300px);height:calc(clamp(220px,78vw,300px) * 18.5 / 9)}.phone-screen{inset:52px 12px 12px 12px;border-radius:24px}.phone-top{inset:12px 12px auto 12px}.camera{width:84px;height:18px;gap:8px}.camera span{width:7px;height:7px}.text-col{padding:.9rem 1rem 1rem 1rem;border-left:none;border-top:1px solid var(--border)}.back-link{margin-bottom:.9rem}.s-label{display:block;margin:.75rem 0 .85rem}.phone-info{max-width:none}.phone-title{font-size:1rem;margin-bottom:.45rem}.phone-desc{display:none}}
 </style>
 </head>
 <body>
-  
+
 <nav>
   <a href="index.html" class="nav-left">Seyrin Studio</a>
   <div class="nav-center">
@@ -89,13 +83,13 @@
   </div>
   <button class="nav-burger" id="navBurger" aria-label="Menu"><span></span><span></span><span></span></button>
 </nav>
-  
+
 <div class="nav-drawer" id="navDrawer">
   <a href="index.html#portfolio" class="nav-link" onclick="closeDrawer()">Projets</a>
   <a href="index.html#about" class="nav-link" onclick="closeDrawer()">À propos</a>
   <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta" onclick="closeDrawer()">Me contacter</a>
 </div>
-  
+
 <main>
   <div class="phone-col">
     <div class="phone-scene">
@@ -119,19 +113,17 @@
       <div class="phone-kicker">Écran immersif</div>
       <div class="phone-title">Interface <br><span class="hl">multi-supports</span></div>
       <p class="phone-desc">Un smartphone 3D rotatif avec le contenu du site intégré dans l’écran.</p>
-     <br><br>
-     <p class="phone-desc"><i>Ce projet explore l’adaptation d’une interface web à différents supports (desktop, tablette, mobile) afin d’en étendre les usages.<br><br>
-Il s’agit d’un projet pilote visant à comprendre les premiers points d’entrée, les logiques de navigation et la narration produit dans un contexte mobile, 
-      tout en explorant les spécificités et contraintes liées à la conception d’une application mobile, notamment en matière d’ergonomie et d’expérience utilisateur.<br><br>
-Ce travail marque une transition vers une nouvelle expertise dans le design d’interfaces mobiles et l’élargissement des compétences en conception responsive.</i></p>
+      <br><br>
+      <p class="phone-desc"><i>Ce projet explore l’adaptation d’une interface web à différents supports (desktop, tablette, mobile) afin d’en étendre les usages.<br><br>Il s’agit d’un projet pilote visant à comprendre les premiers points d’entrée, les logiques de navigation et la narration produit dans un contexte mobile, tout en explorant les spécificités et contraintes liées à la conception d’une application mobile, notamment en matière d’ergonomie et d’expérience utilisateur.<br><br>Ce travail marque une transition vers une nouvelle expertise dans le design d’interfaces mobiles et l’élargissement des compétences en conception responsive.</i></p>
     </div>
   </div>
 </main>
-  
+
 <footer>
   <span class="footer-text">© 2026 — Seyrin Studio · Paris</span>
   <div class="footer-links"><a href="#" class="footer-link">LinkedIn</a><a href="#" class="footer-link">Dribbble</a><a href="mailto:seyrin.cbs@gmail.com" class="footer-link">seyrin.cbs@gmail.com</a></div>
 </footer>
+
 <script>
 document.getElementById('navBurger').addEventListener('click', () => document.getElementById('navDrawer').classList.toggle('open'));
 function closeDrawer(){ document.getElementById('navDrawer').classList.remove('open'); }
