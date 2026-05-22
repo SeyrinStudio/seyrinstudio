@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Portfolio 03 — Product Design</title>
+<title>Portfolio 02 — Carrousel immersif</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -372,7 +372,7 @@ main{
       <button class="nav-arr right" id="arrRight">&#8594;</button>
 
       <div class="info-strip" id="infoStrip">
-        <div class="s-label" id="infoLabel">Livrable 02</div>
+        <div class="s-label" id="infoLabel">Portfolio 02</div>
         <div class="i-title" id="infoTitle">Prototype <span class="hl">interactif</span></div>
       </div>
 
@@ -385,7 +385,7 @@ main{
     <div class="side-panel-inner">
       <div class="panel-header">
         <div class="panel-meta">
-          <div class="panel-kicker" id="panelKicker">Livrable 02</div>
+          <div class="panel-kicker" id="panelKicker">Portfolio 02</div>
           <div class="panel-title" id="panelTitle">Prototype <span class="hl">interactif</span></div>
         </div>
         <button class="close-btn" id="closeBtn" aria-label="Fermer">✕</button>
@@ -416,11 +416,11 @@ const ITEMS = [
   {
     id:'terrain', icon:'🔍',
     cardTitle:'Enquête\nterrain',
-    tag:'Livrable 01',
-    info:{ label:'Livrable 01', title:'Enquête <span class="hl">terrain</span>' },
+    tag:'Portfolio 01',
+    info:{ label:'Portfolio 01', title:'Enquête <span class="hl">terrain</span>' },
     panel:{
       type:'placeholder', icon:'🔍',
-      kicker:'Livrable 01',
+      kicker:'Portfolio 01',
       title:'Enquête <span class="hl">terrain</span>',
       desc:"Analyse des usages réels sur le terrain pour comprendre les besoins des utilisateurs et poser des bases solides à la conception."
     }
@@ -428,11 +428,11 @@ const ITEMS = [
   {
     id:'etude', icon:'📄',
     cardTitle:'Étude de\nmarché',
-    tag:'Livrable 03',
-    info:{ label:'Livrable 03', title:'Étude de <span class="hl">marché</span>' },
+    tag:'Portfolio 03',
+    info:{ label:'Portfolio 03', title:'Étude de <span class="hl">marché</span>' },
     panel:{
       type:'placeholder', icon:'📄',
-      kicker:'Livrable 03',
+      kicker:'Portfolio 03',
       title:'Étude de <span class="hl">marché</span>',
       desc:"Analyse concurrentielle et benchmarking pour identifier les opportunités et positionner le projet dans son écosystème."
     }
@@ -440,11 +440,11 @@ const ITEMS = [
   {
     id:'phone', icon:'📱',
     cardTitle:'Prototype\ninteractif',
-    tag:'Livrable 02',
-    info:{ label:'Livrable 02', title:'Prototype <span class="hl">interactif</span>' },
+    tag:'Portfolio 02',
+    info:{ label:'Portfolio 02', title:'Prototype <span class="hl">interactif</span>' },
     panel:{
       type:'phone',
-      kicker:'Livrable 02',
+      kicker:'Portfolio 02',
       title:'Prototype <span class="hl">interactif</span>',
       desc:"Un smartphone 3D rotatif avec le contenu du site intégré dans l'écran. Naviguez librement à l'intérieur de l'interface mobile."
     }
@@ -452,11 +452,11 @@ const ITEMS = [
   {
     id:'pitch', icon:'📊',
     cardTitle:'Pitch Deck &\nPrésentation',
-    tag:'Livrable 04',
-    info:{ label:'Livrable 04', title:'Pitch Deck & <span class="hl">Présentation</span>' },
+    tag:'Portfolio 04',
+    info:{ label:'Portfolio 04', title:'Pitch Deck & <span class="hl">Présentation</span>' },
     panel:{
-      type:'placeholder', icon:'📊',
-      kicker:'Livrable 04',
+      type:'video', src:'Restovideo.mp4',
+      kicker:'Portfolio 04',
       title:'Pitch Deck & <span class="hl">Présentation</span>',
       desc:"Conception de supports de présentation percutants pour pitcher efficacement un projet devant des investisseurs ou clients."
     }
@@ -464,11 +464,11 @@ const ITEMS = [
   {
     id:'workflow', icon:'⚙️',
     cardTitle:'Workflow',
-    tag:'Livrable 05',
-    info:{ label:'Livrable 05', title:'Workflow <span class="hl">design</span>' },
+    tag:'Portfolio 05',
+    info:{ label:'Portfolio 05', title:'Workflow <span class="hl">design</span>' },
     panel:{
-      type:'placeholder', icon:'⚙️',
-      kicker:'Livrable 05',
+      type:'image', src:'DashboardRH.png',
+      kicker:'Portfolio 05',
       title:'Workflow <span class="hl">design</span>',
       desc:"Modélisation des processus et des flux de travail pour optimiser la coordination entre équipes et outiller la conception."
     }
@@ -621,6 +621,16 @@ function openPanel(idx) {
         </div>
       </div>`;
     setupPhoneRotation();
+  } else if (p.type === 'video') {
+    panelContent.innerHTML = `
+      <div class="panel-media">
+        <video src="${p.src}" autoplay muted loop playsinline controls style="width:100%;height:100%;object-fit:contain;border-radius:18px;background:#000;"></video>
+      </div>`;
+  } else if (p.type === 'image') {
+    panelContent.innerHTML = `
+      <div class="panel-media">
+        <img src="${p.src}" alt="${p.kicker}" style="width:100%;height:100%;object-fit:contain;border-radius:18px;background:#000;" />
+      </div>`;
   } else {
     panelContent.innerHTML = `
       <div class="panel-media">
