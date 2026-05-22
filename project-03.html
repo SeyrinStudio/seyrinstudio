@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Portfolio 03 — Product Design</title>
+<title>Portfolio 02 — Carrousel immersif</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=League+Gothic&family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -70,7 +70,6 @@ main{
   inset:var(--nav-h) 0 var(--footer-h) 0;
   display:flex;
   overflow:hidden;
-  transition:all var(--ease);
 }
 
 /* ── CAROUSEL ZONE ── */
@@ -82,7 +81,6 @@ main{
   align-items:center;
   justify-content:center;
   position:relative;
-  transition:transform var(--ease);
 }
 
 /* ── SIDE PANEL ── */
@@ -124,16 +122,13 @@ main{
   margin-bottom:1.2rem;
   flex-shrink:0;
 }
-.panel-meta{}
 .panel-kicker{font-size:.58rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.4rem;display:flex;align-items:center;gap:.5rem}
 .panel-kicker::before{content:'';width:14px;height:1px;background:var(--accent);flex-shrink:0}
 .panel-title{font-family:'Instrument Serif',serif;font-size:1.5rem;font-weight:400;line-height:1.15;letter-spacing:-.01em}
 .panel-title .hl{font-style:italic;color:var(--accent)}
 .close-btn{
-  flex-shrink:0;
-  width:32px;height:32px;border-radius:50%;
-  border:1px solid rgba(255,255,255,.14);
-  background:rgba(255,255,255,.04);
+  flex-shrink:0;width:32px;height:32px;border-radius:50%;
+  border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.04);
   cursor:pointer;color:var(--muted);
   display:flex;align-items:center;justify-content:center;
   font-size:1rem;line-height:1;
@@ -142,7 +137,7 @@ main{
 }
 .close-btn:hover{border-color:rgba(255,255,255,.4);background:rgba(255,255,255,.08);color:#fff}
 
-/* Panel content */
+/* Panel content area */
 .panel-content{
   flex:1;
   min-height:0;
@@ -155,42 +150,33 @@ main{
 .panel-content iframe{
   width:100%;height:100%;border:0;display:block;
 }
-
-
-
-/* Media display (image/video) */
 .panel-media{
   width:100%;height:100%;
   display:flex;align-items:center;justify-content:center;
 }
 .panel-media img,.panel-media video{
-  width:100%;height:100%;object-fit:cover;border-radius:18px;
+  width:100%;height:100%;object-fit:contain;border-radius:18px;background:#000;
 }
 .panel-media-placeholder{
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;
-  color:rgba(255,255,255,.3);
-  font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;
 }
 .panel-media-placeholder .big-icon{font-size:3rem;opacity:.4}
 
 /* Panel description */
 .panel-desc{
-  flex-shrink:0;
-  margin-top:1rem;
+  flex-shrink:0;margin-top:1rem;
   font-size:.78rem;color:var(--muted);opacity:.7;line-height:1.75;
 }
 
 /* ── CAROUSEL ── */
 .carousel-stage{
-  position:relative;
-  width:100%;
-  height:100%;
+  position:relative;width:100%;height:100%;
   perspective:1400px;
   display:flex;align-items:center;justify-content:center;
 }
 .carousel-track{
-  position:relative;
-  width:100%;height:100%;
+  position:relative;width:100%;height:100%;
   transform-style:preserve-3d;
   display:flex;align-items:center;justify-content:center;
 }
@@ -205,36 +191,28 @@ main{
 
 /* ── ITEM CARD ── */
 .c-item{
-  position:absolute;
-  cursor:pointer;
+  position:absolute;cursor:pointer;
   transition:all 600ms cubic-bezier(.16,1,.3,1);
-  transform-style:preserve-3d;
-  user-select:none;
+  transform-style:preserve-3d;user-select:none;
 }
 .c-item.active .item-neon-ring{
-  box-shadow:0 0 10px rgba(108,99,255,.9), 0 0 28px rgba(108,99,255,.5), 0 0 56px rgba(108,99,255,.25);
+  box-shadow:0 0 10px rgba(108,99,255,.9),0 0 28px rgba(108,99,255,.5),0 0 56px rgba(108,99,255,.25);
   border-color:rgba(108,99,255,.7);
 }
 .c-item:not(.active) .item-neon-ring{
-  box-shadow:0 0 7px rgba(255,255,255,.75), 0 0 20px rgba(255,255,255,.35), 0 0 42px rgba(255,255,255,.15);
+  box-shadow:0 0 7px rgba(255,255,255,.75),0 0 20px rgba(255,255,255,.35),0 0 42px rgba(255,255,255,.15);
   border-color:rgba(255,255,255,.3);
 }
 .c-item:not(.active):hover .item-neon-ring{
-  box-shadow:0 0 12px rgba(255,255,255,1), 0 0 30px rgba(255,255,255,.55), 0 0 60px rgba(255,255,255,.28);
+  box-shadow:0 0 12px rgba(255,255,255,1),0 0 30px rgba(255,255,255,.55),0 0 60px rgba(255,255,255,.28);
   border-color:rgba(255,255,255,.7);
 }
-
 .card-item{
-  width:clamp(110px,14vw,180px);
-  aspect-ratio:3/4;
-  border-radius:22px;
+  width:clamp(110px,14vw,180px);aspect-ratio:3/4;border-radius:22px;
   display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.9rem;
-  background:rgba(255,255,255,.03);
-  backdrop-filter:blur(12px);
+  background:rgba(255,255,255,.03);backdrop-filter:blur(12px);
   border:1px solid rgba(255,255,255,.0);
-  padding:1.2rem 1rem;
-  position:relative;
-  overflow:hidden;
+  padding:1.2rem 1rem;position:relative;overflow:hidden;
 }
 .card-item::before{
   content:'';position:absolute;inset:0;border-radius:inherit;
@@ -242,10 +220,8 @@ main{
   pointer-events:none;
 }
 .item-neon-ring{
-  position:absolute;inset:0;border-radius:22px;
-  border:1px solid;
-  pointer-events:none;
-  transition:box-shadow 400ms ease, border-color 400ms ease;
+  position:absolute;inset:0;border-radius:22px;border:1px solid;
+  pointer-events:none;transition:box-shadow 400ms ease,border-color 400ms ease;
 }
 .card-icon{font-size:clamp(1.8rem,3.5vw,2.8rem);line-height:1;transition:transform .3s}
 .c-item:hover .card-icon{transform:scale(1.08)}
@@ -258,20 +234,18 @@ main{
 .card-tag{
   position:absolute;bottom:.6rem;
   font-size:.5rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.25);white-space:nowrap;
-  font-family:'DM Sans',sans-serif;
+  color:rgba(255,255,255,.25);white-space:nowrap;font-family:'DM Sans',sans-serif;
 }
 
-/* ── INFO PANEL (bottom center) ── */
+/* ── INFO STRIP (bottom) ── */
 .info-strip{
   position:absolute;bottom:1.4rem;left:50%;transform:translateX(-50%);
   text-align:center;z-index:20;pointer-events:none;
   width:min(88vw,360px);
-  transition:opacity var(--ease);
 }
 .info-strip .s-label{font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.35rem;display:flex;align-items:center;justify-content:center;gap:.45rem}
 .info-strip .s-label::before,.info-strip .s-label::after{content:'';width:16px;height:1px;background:var(--accent)}
-.info-strip .i-title{font-family:'Instrument Serif',serif;font-size:clamp(.95rem,1.8vw,1.35rem);font-weight:400;letter-spacing:-.01em;margin-bottom:.25rem}
+.info-strip .i-title{font-family:'Instrument Serif',serif;font-size:clamp(.95rem,1.8vw,1.35rem);font-weight:400;letter-spacing:-.01em}
 .info-strip .i-title .hl{font-style:italic;color:var(--accent)}
 
 /* ── ARROWS ── */
@@ -305,12 +279,9 @@ main{
   .nav-burger{display:flex}
   nav{grid-template-columns:1fr auto}
   footer .footer-links{display:none}
-  :root{--panel-w:100vw}
   .side-panel.open{
     position:fixed;inset:var(--nav-h) 0 var(--footer-h) 0;
-    width:100vw !important;
-    z-index:100;
-    border-left:none;
+    width:100vw !important;z-index:100;border-left:none;
   }
   .back-link{left:1rem}
   .nav-arr.left{left:.3rem}
@@ -338,43 +309,34 @@ main{
   <a href="mailto:seyrin.cbs@gmail.com" class="nav-cta" onclick="closeDrawer()">Me contacter</a>
 </div>
 
-<main id="mainEl">
-
-  <!-- CARROUSEL -->
+<main>
   <div class="carousel-zone" id="carouselZone">
     <a class="back-link" href="index.html#portfolio">← Retour</a>
-
     <div class="carousel-stage" id="stage">
       <div class="carousel-track" id="track"></div>
       <button class="nav-arr left" id="arrLeft">&#8592;</button>
       <button class="nav-arr right" id="arrRight">&#8594;</button>
-
-      <div class="info-strip" id="infoStrip">
-        <div class="s-label" id="infoLabel">Portfolio 02</div>
+      <div class="info-strip">
+        <div class="s-label" id="infoLabel">Livrable 02</div>
         <div class="i-title" id="infoTitle">Prototype <span class="hl">interactif</span></div>
       </div>
-
       <div class="dots" id="dots"></div>
     </div>
   </div>
 
-  <!-- SIDE PANEL -->
   <div class="side-panel" id="sidePanel">
     <div class="side-panel-inner">
       <div class="panel-header">
-        <div class="panel-meta">
-          <div class="panel-kicker" id="panelKicker">Portfolio 02</div>
+        <div>
+          <div class="panel-kicker" id="panelKicker">Livrable 02</div>
           <div class="panel-title" id="panelTitle">Prototype <span class="hl">interactif</span></div>
         </div>
         <button class="close-btn" id="closeBtn" aria-label="Fermer">✕</button>
       </div>
-      <div class="panel-content" id="panelContent">
-        <!-- injected by JS -->
-      </div>
+      <div class="panel-content" id="panelContent"></div>
       <p class="panel-desc" id="panelDesc"></p>
     </div>
   </div>
-
 </main>
 
 <footer>
@@ -387,18 +349,15 @@ main{
 </footer>
 
 <script>
-/* ─────────────────────────────────────────
-   DATA
-───────────────────────────────────────── */
 const ITEMS = [
   {
     id:'terrain', icon:'🔍',
     cardTitle:'Enquête\nterrain',
-    tag:'Portfolio 01',
-    info:{ label:'Portfolio 01', title:'Enquête <span class="hl">terrain</span>' },
+    tag:'Livrable 01',
+    info:{ label:'Livrable 01', title:'Enquête <span class="hl">terrain</span>' },
     panel:{
       type:'placeholder', icon:'🔍',
-      kicker:'Portfolio 01',
+      kicker:'Livrable 01',
       title:'Enquête <span class="hl">terrain</span>',
       desc:"Analyse des usages réels sur le terrain pour comprendre les besoins des utilisateurs et poser des bases solides à la conception."
     }
@@ -406,11 +365,11 @@ const ITEMS = [
   {
     id:'etude', icon:'📄',
     cardTitle:'Étude de\nmarché',
-    tag:'Portfolio 03',
-    info:{ label:'Portfolio 03', title:'Étude de <span class="hl">marché</span>' },
+    tag:'Livrable 03',
+    info:{ label:'Livrable 03', title:'Étude de <span class="hl">marché</span>' },
     panel:{
       type:'placeholder', icon:'📄',
-      kicker:'Portfolio 03',
+      kicker:'Livrable 03',
       title:'Étude de <span class="hl">marché</span>',
       desc:"Analyse concurrentielle et benchmarking pour identifier les opportunités et positionner le projet dans son écosystème."
     }
@@ -418,23 +377,23 @@ const ITEMS = [
   {
     id:'phone', icon:'📱',
     cardTitle:'Prototype\ninteractif',
-    tag:'Portfolio 02',
-    info:{ label:'Portfolio 02', title:'Prototype <span class="hl">interactif</span>' },
+    tag:'Livrable 02',
+    info:{ label:'Livrable 02', title:'Prototype <span class="hl">interactif</span>' },
     panel:{
-      type:'phone',
-      kicker:'Portfolio 02',
+      type:'iframe', src:'https://seyrinstudio.github.io/seyrinstudio',
+      kicker:'Livrable 02',
       title:'Prototype <span class="hl">interactif</span>',
-      desc:"Un smartphone 3D rotatif avec le contenu du site intégré dans l'écran. Naviguez librement à l'intérieur de l'interface mobile."
+      desc:"Interface mobile immersive. Naviguez librement à l'intérieur du prototype."
     }
   },
   {
     id:'pitch', icon:'📊',
     cardTitle:'Pitch Deck &\nPrésentation',
-    tag:'Portfolio 04',
-    info:{ label:'Portfolio 04', title:'Pitch Deck & <span class="hl">Présentation</span>' },
+    tag:'Livrable 04',
+    info:{ label:'Livrable 04', title:'Pitch Deck & <span class="hl">Présentation</span>' },
     panel:{
       type:'video', src:'Restovideo.mp4',
-      kicker:'Portfolio 04',
+      kicker:'Livrable 04',
       title:'Pitch Deck & <span class="hl">Présentation</span>',
       desc:"Conception de supports de présentation percutants pour pitcher efficacement un projet devant des investisseurs ou clients."
     }
@@ -442,47 +401,36 @@ const ITEMS = [
   {
     id:'workflow', icon:'⚙️',
     cardTitle:'Workflow',
-    tag:'Portfolio 05',
-    info:{ label:'Portfolio 05', title:'Workflow <span class="hl">design</span>' },
+    tag:'Livrable 05',
+    info:{ label:'Livrable 05', title:'Workflow <span class="hl">design</span>' },
     panel:{
       type:'image', src:'DashboardRH.png',
-      kicker:'Portfolio 05',
+      kicker:'Livrable 05',
       title:'Workflow <span class="hl">design</span>',
       desc:"Modélisation des processus et des flux de travail pour optimiser la coordination entre équipes et outiller la conception."
     }
   },
 ];
 
-/* ─────────────────────────────────────────
-   STATE
-───────────────────────────────────────── */
-let current = 2; // phone centré par défaut
+/* ── STATE ── */
+let current = 2;
 let panelOpen = false;
 let dragging = false;
 let swipeStartX = 0, swipeAxis = null;
 
+/* ── ELEMENTS ── */
+const track      = document.getElementById('track');
+const dotsEl     = document.getElementById('dots');
+const infoLabel  = document.getElementById('infoLabel');
+const infoTitle  = document.getElementById('infoTitle');
+const sidePanel  = document.getElementById('sidePanel');
+const panelContent = document.getElementById('panelContent');
+const panelKicker  = document.getElementById('panelKicker');
+const panelTitle   = document.getElementById('panelTitle');
+const panelDesc    = document.getElementById('panelDesc');
 
-
-/* ─────────────────────────────────────────
-   ELEMENTS
-───────────────────────────────────────── */
-const track    = document.getElementById('track');
-const dotsEl   = document.getElementById('dots');
-const infoLabel= document.getElementById('infoLabel');
-const infoTitle= document.getElementById('infoTitle');
-const infoStrip= document.getElementById('infoStrip');
-const sidePanel= document.getElementById('sidePanel');
-const panelContent=document.getElementById('panelContent');
-const panelKicker =document.getElementById('panelKicker');
-const panelTitle  =document.getElementById('panelTitle');
-const panelDesc   =document.getElementById('panelDesc');
-const carouselZone=document.getElementById('carouselZone');
-
-/* ─────────────────────────────────────────
-   BUILD DOM
-───────────────────────────────────────── */
+/* ── BUILD DOM ── */
 const elements = [];
-
 ITEMS.forEach((item, i) => {
   const el = document.createElement('div');
   el.className = 'c-item';
@@ -503,7 +451,6 @@ ITEMS.forEach((item, i) => {
   elements.push(el);
 });
 
-/* Dots */
 ITEMS.forEach((_, i) => {
   const d = document.createElement('div');
   d.className = 'dot';
@@ -511,9 +458,7 @@ ITEMS.forEach((_, i) => {
   dotsEl.appendChild(d);
 });
 
-/* ─────────────────────────────────────────
-   LAYOUT
-───────────────────────────────────────── */
+/* ── LAYOUT ── */
 function getGaps() {
   const W = window.innerWidth;
   const isMobile = W < 640;
@@ -535,34 +480,30 @@ function layout() {
     const abs = Math.abs(rel);
     const isActive = rel === 0;
     const isVisible = abs <= 2;
-
     const tx = offsets[rel+2] ?? (rel > 0 ? g2+300 : -g2-300);
-    const scale = isActive ? 1 : abs===1 ? 0.65 : 0.48;
-    const opacity = isActive ? 1 : abs===1 ? 0.52 : 0.25;
-    const tz = isActive ? 0 : abs===1 ? -100 : -180;
-    const ry = isActive ? 0 : rel>0 ? -16 : 16;
-    const blur = isActive ? 0 : abs===1 ? 2 : 5;
+    const scale   = isActive ? 1   : abs===1 ? 0.65 : 0.48;
+    const opacity = isActive ? 1   : abs===1 ? 0.52 : 0.25;
+    const tz      = isActive ? 0   : abs===1 ? -100 : -180;
+    const ry      = isActive ? 0   : rel>0   ? -16  : 16;
+    const blur    = isActive ? 0   : abs===1 ? 2    : 5;
 
     el.classList.toggle('active', isActive);
-    el.style.visibility = isVisible ? 'visible' : 'hidden';
-    el.style.transform = `translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg) scale(${scale})`;
-    el.style.opacity = opacity;
-    el.style.filter = blur ? `blur(${blur}px)` : 'none';
-    el.style.zIndex = isActive ? 10 : abs===1 ? 5 : 2;
+    el.style.visibility  = isVisible ? 'visible' : 'hidden';
+    el.style.transform   = `translateX(${tx}px) translateZ(${tz}px) rotateY(${ry}deg) scale(${scale})`;
+    el.style.opacity     = opacity;
+    el.style.filter      = blur ? `blur(${blur}px)` : 'none';
+    el.style.zIndex      = isActive ? 10 : abs===1 ? 5 : 2;
     el.style.pointerEvents = isVisible ? 'auto' : 'none';
   });
 
-  const item = ITEMS[current];
-  infoLabel.textContent = item.info.label;
-  infoTitle.innerHTML = item.info.title;
-  dotsEl.querySelectorAll('.dot').forEach((d,i)=>d.classList.toggle('active',i===current));
+  infoLabel.textContent = ITEMS[current].info.label;
+  infoTitle.innerHTML   = ITEMS[current].info.title;
+  dotsEl.querySelectorAll('.dot').forEach((d,i) => d.classList.toggle('active', i===current));
 }
 
-/* ─────────────────────────────────────────
-   NAVIGATE
-───────────────────────────────────────── */
+/* ── NAVIGATE ── */
 function goTo(idx) {
-  current = ((idx % ITEMS.length)+ITEMS.length) % ITEMS.length;
+  current = ((idx % ITEMS.length) + ITEMS.length) % ITEMS.length;
   layout();
 }
 function prev(){ goTo(current-1); }
@@ -571,116 +512,68 @@ function next(){ goTo(current+1); }
 document.getElementById('arrLeft').addEventListener('click', prev);
 document.getElementById('arrRight').addEventListener('click', next);
 
-/* ─────────────────────────────────────────
-   SIDE PANEL
-───────────────────────────────────────── */
+/* ── SIDE PANEL ── */
 function openPanel(idx) {
-  const item = ITEMS[idx];
-  const p = item.panel;
-
+  const p = ITEMS[idx].panel;
   panelKicker.textContent = p.kicker;
-  panelTitle.innerHTML = p.title;
-  panelDesc.textContent = p.desc;
+  panelTitle.innerHTML    = p.title;
+  panelDesc.textContent   = p.desc;
 
-  // Build content
-  if (p.type === 'phone') {
-    panelContent.innerHTML = `
-      <iframe
-        src="https://seyrinstudio.github.io/seyrinstudio"
-        title="Interface mobile immersive"
-        loading="lazy"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-        style="width:100%;height:100%;border:0;display:block;border-radius:18px;"
-      ></iframe>`;
+  if (p.type === 'iframe') {
+    panelContent.innerHTML = `<iframe src="${p.src}" title="${p.kicker}" loading="lazy" sandbox="allow-scripts allow-same-origin allow-forms allow-popups"></iframe>`;
   } else if (p.type === 'video') {
-    panelContent.innerHTML = `
-      <div class="panel-media">
-        <video src="${p.src}" autoplay muted loop playsinline controls style="width:100%;height:100%;object-fit:contain;border-radius:18px;background:#000;"></video>
-      </div>`;
+    panelContent.innerHTML = `<div class="panel-media"><video src="${p.src}" autoplay muted loop playsinline controls></video></div>`;
   } else if (p.type === 'image') {
-    panelContent.innerHTML = `
-      <div class="panel-media">
-        <img src="${p.src}" alt="${p.kicker}" style="width:100%;height:100%;object-fit:contain;border-radius:18px;background:#000;" />
-      </div>`;
+    panelContent.innerHTML = `<div class="panel-media"><img src="${p.src}" alt="${p.kicker}" /></div>`;
   } else {
-    panelContent.innerHTML = `
-      <div class="panel-media">
-        <div class="panel-media-placeholder">
-          <div class="big-icon">${p.icon}</div>
-          <div>Contenu à venir</div>
-        </div>
-      </div>`;
+    panelContent.innerHTML = `<div class="panel-media"><div class="panel-media-placeholder"><div class="big-icon">${p.icon}</div><div>Contenu à venir</div></div></div>`;
   }
 
   sidePanel.classList.add('open');
   panelOpen = true;
-  // Subtle shift of carousel (visual only, no layout change on desktop)
 }
 
 function closePanel() {
   sidePanel.classList.remove('open');
   panelOpen = false;
-  phoneRx = 0; phoneRy = 0;
-  // clear iframe to stop loading
-  setTimeout(()=>{ panelContent.innerHTML=''; }, 650);
+  setTimeout(() => { panelContent.innerHTML = ''; }, 650);
 }
 
 document.getElementById('closeBtn').addEventListener('click', closePanel);
 
-/* ─────────────────────────────────────────
-   PHONE 3D ROTATION (inside panel)
-───────────────────────────────────────── */
-
-
-deg) rotateY(${phoneRy}deg)`;
-}
-
-
-
-/* ─────────────────────────────────────────
-   CAROUSEL SWIPE
-───────────────────────────────────────── */
+/* ── SWIPE ── */
 const stage = document.getElementById('stage');
 stage.addEventListener('pointerdown', e => { swipeStartX=e.clientX; swipeAxis=null; dragging=false; }, {passive:true});
 stage.addEventListener('pointermove', e => {
-  const dx = e.clientX-swipeStartX;
-  const dy = e.clientY-(window.innerHeight/2);
-  if (!swipeAxis && Math.abs(dx)>8) swipeAxis='x';
-  if (swipeAxis==='x' && Math.abs(dx)>14) dragging=true;
+  const dx = e.clientX - swipeStartX;
+  if (!swipeAxis && Math.abs(dx) > 8) swipeAxis='x';
+  if (swipeAxis==='x' && Math.abs(dx) > 14) dragging=true;
 }, {passive:true});
 stage.addEventListener('pointerup', e => {
   if (!dragging) return;
-  const dx = e.clientX-swipeStartX;
+  const dx = e.clientX - swipeStartX;
   if (dx < -40) next();
   else if (dx > 40) prev();
-  setTimeout(()=>{ dragging=false; }, 60);
+  setTimeout(() => { dragging=false; }, 60);
 }, {passive:true});
 
-/* ─────────────────────────────────────────
-   KEYBOARD
-───────────────────────────────────────── */
+/* ── KEYBOARD ── */
 document.addEventListener('keydown', e => {
-  if (e.key==='ArrowLeft' && !panelOpen) prev();
+  if (e.key==='ArrowLeft'  && !panelOpen) prev();
   if (e.key==='ArrowRight' && !panelOpen) next();
-  if (e.key==='Escape' && panelOpen) closePanel();
+  if (e.key==='Escape'     &&  panelOpen) closePanel();
   if ((e.key==='Enter'||e.key===' ') && !panelOpen) openPanel(current);
 });
 
-/* ─────────────────────────────────────────
-   NAV BURGER
-───────────────────────────────────────── */
-document.getElementById('navBurger').addEventListener('click',()=>document.getElementById('navDrawer').classList.toggle('open'));
+/* ── NAV BURGER ── */
+document.getElementById('navBurger').addEventListener('click', () => document.getElementById('navDrawer').classList.toggle('open'));
 function closeDrawer(){ document.getElementById('navDrawer').classList.remove('open'); }
 
-/* ─────────────────────────────────────────
-   RESIZE
-───────────────────────────────────────── */
+/* ── RESIZE ── */
 let rt;
-window.addEventListener('resize',()=>{ clearTimeout(rt); rt=setTimeout(layout,80); });
+window.addEventListener('resize', () => { clearTimeout(rt); rt=setTimeout(layout,80); });
 
-/* ─────────────────────────────────────────
-   INIT
-───────────────────────────────────────── */
+/* ── INIT ── */
 layout();
 </script>
 </body>
