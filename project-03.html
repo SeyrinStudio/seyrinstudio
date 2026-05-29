@@ -310,60 +310,11 @@ main{position:fixed;inset:var(--nav-h) 0 var(--footer-h) 0;display:flex;overflow
 
 <script>
 /* ═══════════════════════════════════════
-   CONFIGURATION — modifiez uniquement ici
+   CONFIGURATION
 ═══════════════════════════════════════ */
-const SECRET_KEY = 'seyrin2026'; // Votre clé secrète — changez-la à votre guise
+// ⬇ Collez ici l'URL de votre Cloudflare Worker après déploiement
+const WORKER_URL = 'https://VOTRE-WORKER.VOTRE-COMPTE.workers.dev';
 const PROTECTED_IDS = ['phone', 'Wireframe']; // IDs des livrables protégés
-
-/* ═══════════════════════════════════════
-   GÉNÉRATION DU MOT DE PASSE HEBDOMADAIRE
-   Algorithme : numéro de semaine ISO + clé secrète → hash simple → 6 chars alphanums
-═══════════════════════════════════════ */
-function getISOWeek(date) {
-  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
-  const dayNum = d.getUTCDay() || 7;
-  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
-  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
-  return { week: Math.ceil((((d - yearStart) / 86400000) + 1) / 7), year: d.getUTCFullYear() };
-}
-
-function simpleHash(str) {
-  let h = 0x811c9dc5;
-  for (let i = 0; i < str.length; i++) {
-    h ^= str.charCodeAt(i);
-    h = (h * 0x01000193) >>> 0;
-  }
-  return h;
-}
-
-function generateWeeklyPassword() {
-  const { week, year } = getISOWeek(new Date());
-  const seed = `${SECRET_KEY}-${year}-W${week}`;
-  const hash = simpleHash(seed);
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // sans I, O, 0, 1
-  let pw = '';
-  let h = hash;
-  for (let i = 0; i < 6; i++) {
-    pw += chars[h % chars.length];
-    h = simpleHash(pw + seed);
-  }
-  return pw;
-}
-
-function getWeekInfo() {
-  const { week, year } = getISOWeek(new Date());
-  // Date de fin de la semaine (dimanche)
-  const now = new Date();
-  const day = now.getDay() || 7;
-  const sunday = new Date(now);
-  sunday.setDate(now.getDate() + (7 - day));
-  return {
-    label: `Semaine ${week} — valide jusqu'au ${sunday.toLocaleDateString('fr-FR', { weekday:'long', day:'numeric', month:'long' })}`,
-    week, year
-  };
-}
-
-const WEEKLY_PW = generateWeeklyPassword();
 
 /* ═══════════════════════════════════════
    DONNÉES
@@ -539,23 +490,44 @@ function hidePasswordModal() {
   pendingPanelIdx = null;
 }
 
-function checkPassword() {
+async function checkPassword() {
   const val = pwInput.value.trim().toUpperCase();
-  if (val === WEEKLY_PW) {
-    // Déverrouille pour cette session
-    if (pendingPanelIdx !== null) {
-      unlocked.add(ITEMS[pendingPanelIdx].id);
-      const idx = pendingPanelIdx;
-      hidePasswordModal();
-      setTimeout(() => openPanel(idx), 200);
+  if (!val) return;
+
+  // Désactiver le bouton pendant la requête
+  const btn = document.getElementById('pwSubmit');
+  btn.disabled = true;
+  btn.textContent = 'Vérification…';
+
+  try {
+    const res = await fetch(WORKER_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code: val }),
+    });
+    const data = await res.json();
+
+    if (data.ok) {
+      if (pendingPanelIdx !== null) {
+        unlocked.add(ITEMS[pendingPanelIdx].id);
+        const idx = pendingPanelIdx;
+        hidePasswordModal();
+        setTimeout(() => openPanel(idx), 200);
+      }
+    } else {
+      pwError.classList.add('show');
+      pwInput.classList.remove('shake');
+      void pwInput.offsetWidth;
+      pwInput.classList.add('shake');
+      pwInput.value = '';
+      setTimeout(() => pwInput.focus(), 50);
     }
-  } else {
+  } catch (e) {
+    pwError.textContent = 'Erreur de connexion. Réessayez.';
     pwError.classList.add('show');
-    pwInput.classList.remove('shake');
-    void pwInput.offsetWidth; // reflow pour relancer l'animation
-    pwInput.classList.add('shake');
-    pwInput.value = '';
-    setTimeout(() => pwInput.focus(), 50);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Accéder au livrable';
   }
 }
 
@@ -605,11 +577,11 @@ document.getElementById('closeBtn').addEventListener('click', closePanel);
 
 /* ═══════════════════════════════════════
    ADMIN TOAST — raccourci Ctrl/Cmd + Shift + P
-   Affiche le mot de passe de la semaine
+   Affiche un rappel vers le Worker pour récupérer le code du jour
 ═══════════════════════════════════════ */
 function showAdminToast() {
-  document.getElementById('adminToastPw').textContent = WEEKLY_PW;
-  document.getElementById('adminToastInfo').textContent = getWeekInfo().label;
+  document.getElementById('adminToastPw').textContent = '→ Worker';
+  document.getElementById('adminToastInfo').textContent = 'Consultez votre Cloudflare Worker Dashboard pour le code de la semaine.';
   adminToast.classList.add('show');
 }
 document.getElementById('adminToastClose').addEventListener('click', () => adminToast.classList.remove('show'));
