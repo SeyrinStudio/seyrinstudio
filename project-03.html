@@ -494,21 +494,24 @@ async function checkPassword() {
   const val = pwInput.value.trim().toUpperCase();
   if (!val) return;
 
-  // Désactiver le bouton pendant la requête
   const btn = document.getElementById('pwSubmit');
   btn.disabled = true;
   btn.textContent = 'Vérification…';
 
   try {
-const res = await fetch(`${WORKER_URL}verify`, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  credentials: 'include',
-  body: JSON.stringify({ code: val }),
-});
-    const data = await res.json();
+    const res = await fetch(`${WORKER_URL}verify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ code: val }),
+    });
 
-    if (data.ok) {
+    const contentType = res.headers.get('content-type') || '';
+    const data = contentType.includes('application/json')
+      ? await res.json()
+      : { ok: false, error: await res.text() };
+
+    if (res.ok && data.ok) {
       if (pendingPanelIdx !== null) {
         unlocked.add(ITEMS[pendingPanelIdx].id);
         const idx = pendingPanelIdx;
@@ -516,6 +519,7 @@ const res = await fetch(`${WORKER_URL}verify`, {
         setTimeout(() => openPanel(idx), 200);
       }
     } else {
+      pwError.textContent = 'Code incorrect ou accès indisponible.';
       pwError.classList.add('show');
       pwInput.classList.remove('shake');
       void pwInput.offsetWidth;
