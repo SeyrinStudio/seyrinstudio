@@ -554,16 +554,16 @@ pwOverlay.addEventListener('click', e => { if (e.target === pwOverlay) hidePassw
 function openPanel(idx) {
   const p = ITEMS[idx].panel;
   panelKicker.textContent = p.kicker;
-  panelTitle.innerHTML    = p.title;
-  panelDesc.textContent   = p.desc;
+  panelTitle.innerHTML = p.title;
+  panelDesc.textContent = p.desc;
+
   if (p.type === 'iframe-protected') {
-  panelContent.innerHTML = `<iframe
-    src="${p.src}"
-    title="${p.kicker}"
-    loading="lazy"
-    sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
-  </iframe>`;
-}
+    panelContent.innerHTML = `<iframe
+      src="${p.src}"
+      title="${p.kicker}"
+      loading="lazy"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups">
+    </iframe>`;
   } else if (p.type === 'video') {
     panelContent.innerHTML = `<div class="panel-media"><video src="${p.src}" autoplay muted loop playsinline controls></video></div>`;
   } else if (p.type === 'image') {
@@ -571,6 +571,7 @@ function openPanel(idx) {
   } else {
     panelContent.innerHTML = `<div class="panel-media"><div class="panel-media-placeholder"><div class="big-icon">${p.icon}</div><div>Contenu à venir</div></div></div>`;
   }
+
   sidePanel.classList.add('open');
   panelOpen = true;
 }
