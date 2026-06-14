@@ -59,6 +59,27 @@ nav {
 .nav-cta { font-size:1rem; padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color .18s, background .18s; }
 .nav-cta:hover { border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.05); }
 
+/* Adding color to Title */
+.nav-left.logo-text{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  font-family:'League Gothic', sans-serif;
+  text-transform:uppercase;
+  line-height:0.9;
+  letter-spacing:0.03em;
+  font-size:clamp(1rem, 2vw, 1.8rem);
+}
+
+.nav-left.logo-text .blue{
+  color:var(--blue);
+}
+
+.nav-left.logo-text .white{
+  color:var(--text);
+}
+  
 /* ── FOOTER ── */
 footer {
   position:fixed; inset:auto 0 0 0;
