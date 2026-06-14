@@ -46,7 +46,15 @@ nav {
 }
 .nav-left:hover { color:var(--accent); }
 .nav-center { display:flex; gap:0.25rem; }
-.nav-link { position:relative; font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; }
+.nav-link { 
+  position:relative; 
+  font-family:'League Gothic',sans-serif; 
+  font-size:clamp(1.05rem, 1.2vw, 1.15rem); 
+  text-transform:uppercase; color:var(--muted); 
+  text-decoration:none; 
+  padding:0.35rem 0.9rem; 
+  border-radius:100px; 
+  transition:color .18s, background .18s; }
 .nav-link::after { content:""; position:absolute; left:50%; bottom:-6px; transform:translateX(-50%); width:0; height:2px; background:var(--text); border-radius:999px; transition:width 0.25s ease; }
 .nav-link.active::after { width:22px; }
 .nav-link:hover { color:var(--text); background:rgba(255,255,255,0.06); }
