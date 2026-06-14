@@ -54,6 +54,27 @@ nav {
 .nav-cta { font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text); text-decoration:none; padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color 0.18s, background 0.18s, color 0.18s; }
 .nav-cta:hover { border-color:rgba(255,255,255,0.45); background:rgba(255,255,255,0.05); }
 
+/* Adding color to Title */
+.nav-left.logo-text{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  font-family:'League Gothic', sans-serif;
+  text-transform:uppercase;
+  line-height:0.9;
+  letter-spacing:0.02em;
+  font-size:clamp(1.4rem, 2.8vw, 2.4rem);
+}
+
+.nav-left.logo-text .blue{
+  color:#2d4fff;
+}
+
+.nav-left.logo-text .white{
+  color:#f3f4f6;
+}
+
 /* Burger mobile */
 .nav-burger { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:4px; margin-left:auto; -webkit-tap-highlight-color:transparent; }
 .nav-burger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:all .25s; }
