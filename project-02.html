@@ -20,7 +20,28 @@
   --nav-h: 60px;
   --footer-h: 64px;
 }
- 
+
+.nav-left.logo-text{
+  text-decoration:none;
+  display:inline-flex;
+  align-items:center;
+  gap:0;
+  font-family:'League Gothic', sans-serif;
+  text-transform:uppercase;
+  line-height:0.9;
+  letter-spacing:0.03em;
+  font-size:clamp(0.95rem, 1.8vw, 1.65rem);
+}
+
+.nav-left.logo-text .blue{
+  color:var(--blue);
+}
+
+.nav-left.logo-text .white{
+  color:var(--text);
+}
+
+/* CONTAIN */
   html,body{height:100%;overflow:hidden}
   body{font-family:'Inter',sans-serif;font-weight:300;color:var(--text);-webkit-tap-highlight-color:transparent;background:radial-gradient(circle at 76% 18%, rgba(46,102,255,.18), transparent 28%),radial-gradient(circle at 66% 30%, rgba(116,147,215,.08), transparent 22%),linear-gradient(180deg,#0a1223 0%,#09111f 100%)}
   a{color:inherit;text-decoration:none}
