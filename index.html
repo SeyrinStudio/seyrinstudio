@@ -37,7 +37,17 @@ nav {
   background:rgba(16,30,48,0.92); backdrop-filter:blur(20px); 
   border-bottom:1px solid var(--border); 
 }
-.nav-left { font-family:'League Gothic',sans-serif; font-size:1.1rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--text); text-decoration:none; transition:color 0.18s; }
+.nav-left { 
+  font-family:'League Gothic',sans-serif; 
+  font-size:1.1rem; letter-spacing:0.08em; 
+  text-transform:uppercase; color:var(--text); 
+  text-decoration:none; 
+  transition:color 0.18s; 
+}
+  .nav-left.logo-text span{
+  margin-left:0.02em;
+}
+  
 .nav-left:hover { color:var(--accent); }
 .nav-center { display:flex; gap:0.25rem; }
 .nav-link { position:relative; font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; }
