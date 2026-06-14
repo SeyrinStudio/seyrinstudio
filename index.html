@@ -44,10 +44,6 @@ nav {
   text-decoration:none; 
   transition:color 0.18s; 
 }
-  .nav-left.logo-text span{
-  margin-left:0.02em;
-}
-  
 .nav-left:hover { color:var(--accent); }
 .nav-center { display:flex; gap:0.25rem; }
 .nav-link { position:relative; font-family:'League Gothic',sans-serif; font-size:1rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--muted); text-decoration:none; padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; }
@@ -257,7 +253,9 @@ footer { border-top:1px solid var(--border); padding:2rem 3.5rem; display:flex; 
 <body>
 
 <nav>
-  <a href="#" class="nav-left logo-text">IMPULSE<span>STUDIO</span></a>
+  <a href="#" class="nav-left logo-text">
+  <span class="blue">IMPULSE</span><span class="white">STUDIO</span>
+</a>
   <div class="nav-center">
     <a href="#portfolio" class="nav-link">Projets</a>
     <a href="#about" class="nav-link">À propos</a>
