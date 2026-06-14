@@ -76,11 +76,32 @@ nav {
 .nav-left { font-size:1.1rem; color:var(--text); transition:color .18s; }
 .nav-left:hover { color:var(--accent); }
 .nav-center { display:flex; gap:0.25rem; }
-.nav-link { font-size:1rem; color:var(--muted); padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; }
+.nav-link { 
+  position:relative;
+  font-family:'League Gothic',sans-serif;
+  font-size:var(--nav-link-size);
+  letter-spacing:var(--nav-link-spacing);
+  text-transform:uppercase;
+  color:var(--muted);
+  text-decoration:none;
+  padding:var(--nav-link-py) var(--nav-link-px);
+  border-radius:100px;
+  transition:color .18s, background .18s;
+  
+  /*font-size:1rem; color:var(--muted); padding:0.35rem 0.9rem; border-radius:100px; transition:color .18s, background .18s; */
+}
 .nav-link:hover { color:var(--text); background:rgba(255,255,255,0.06); }
 .nav-right { display:flex; justify-content:flex-end; }
 .nav-cta { font-size:1rem; padding:0.4rem 1.1rem; border:1px solid rgba(255,255,255,0.2); border-radius:100px; transition:border-color .18s, background .18s; }
 .nav-cta:hover { border-color:rgba(255,255,255,0.4); background:rgba(255,255,255,0.05); }
+
+/*ROOT*/
+:root{
+  --nav-link-size: clamp(1.12rem, 1.3vw, 1.22rem);
+  --nav-link-spacing: 0.02em;
+  --nav-link-py: 0.35rem;
+  --nav-link-px: 0.9rem;
+}
   
 /* ── FOOTER ── */
 footer {
